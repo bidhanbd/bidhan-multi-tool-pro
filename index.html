@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bidhan Multi-Tool Pro - v18.4</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@otplib/preset-browser@latest/buffer.js"></script>
+    <script src="https://unpkg.com/@otplib/preset-browser@latest/index.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --accent: #3b82f6; --deep-blue: #1e3a8a; --fire: #ff4500; --gold: #ffcc00; --bg: #05070a; --success: #22c55e;
+            --gemini-start: #8b5cf6; --gemini-end: #3b82f6;
+            --glass: rgba(255, 255, 255, 0.03); --glass-border: rgba(255, 255, 255, 0.08);
+        }
+        .light-mode { --bg: #f3f4f6; --glass: rgba(0, 0, 0, 0.03); --glass-border: rgba(0, 0, 0, 0.1); }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Segoe UI', sans-serif; transition: 0.4s; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; }
+
+        /* BRANDING & LOGO */
+        .logo-shield { width: 55px; height: 60px; background: var(--deep-blue); clip-path: polygon(50% 0%, 100% 15%, 100% 85%, 50% 100%, 0% 85%, 0% 15%); display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(255,255,255,0.1); }
+        .logo-shield::after { content: '🔑'; font-size: 20px; color: var(--gold); }
+        .brand-title { font-size: clamp(1.5rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; font-family: 'Roboto', sans-serif; letter-spacing: -1px; }
+        .pro-box { font-size: 12px; background: var(--gold); color: #000; padding: 2px 8px; border-radius: 6px; margin-left: 10px; vertical-align: middle; }
+
+        /* TOP CTRLS */
+        .top-ctrl-bar { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 12px; z-index: 100; }
+        .ctrl-btn { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 12px; border-radius: 15px; transition: 0.3s; cursor: pointer; }
+
+        /* BANNER */
+        .banner-wrapper { width: 100%; height: 45px; background: #000; margin: 2rem 0; display: flex; align-items: center; border-top: 1px solid var(--fire); border-bottom: 1px solid var(--fire); overflow: hidden; }
+        .scrolling-msg { white-space: nowrap; animation: scroll-text 18s linear infinite; font-size: 14px; color: var(--gold); text-transform: uppercase; font-weight: 900; }
+        @keyframes scroll-text { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        /* NAVIGATION */
+        .nav-container { width: 100%; max-width: 800px; margin: 0 auto 3rem; display: flex; gap: 10px; padding: 5px; }
+        .nav-segment { flex: 1; }
+        .nav-btn { width: 100%; font-size: 11px; font-weight: 900; text-transform: uppercase; padding: 16px 0; color: #64748b; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; transition: 0.4s; cursor: pointer; }
+        .nav-active { color: #3b82f6 !important; background: rgba(59, 130, 246, 0.1) !important; border: 2px solid #3b82f6 !important; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); transform: translateY(-2px); }
+
+        /* DEV PROFILE HOVER */
+        .dev-card-wrapper { position: relative; padding-bottom: 20px; }
+        .dev-icon-container { width: 50px; height: 50px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, var(--gemini-start), var(--gemini-end)); cursor: pointer; z-index: 101; }
+        .dev-icon-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #05070a; }
+        .dev-card-wrapper:hover #devCard { opacity: 1; visibility: visible; transform: translateY(0); }
+        #devCard { position: absolute; top: 100%; right: 0; width: 280px; opacity: 0; visibility: hidden; transform: translateY(-15px); transition: 0.4s; z-index: 200; padding: 30px; text-align: center; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
+        .pro-avatar { width: 85px; height: 85px; border-radius: 50%; padding: 4px; background: linear-gradient(135deg, var(--gemini-start), var(--gemini-end)); margin: 0 auto 15px; box-shadow: 0 0 20px rgba(139,92,246,0.5); }
+        .pro-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #05070a; }
+
+        /* UI PANELS */
+        .glass-panel { background: var(--glass); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 24px; }
+        input, select, button { background: rgba(255,255,255,0.05) !important; color: white !important; border: 1px solid var(--glass-border) !important; outline: none; }
+        select option { background: #111; color: white; }
+
+        /* EMAIL STATUS */
+        .email-card.used { background: rgba(239, 68, 68, 0.1) !important; border-color: rgba(239, 68, 68, 0.3) !important; opacity: 0.7; }
+        .email-card.used span { color: #ef4444 !important; text-decoration: line-through; }
+
+        /* COPY ANIMATION */
+        .copy-wrapper { position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 12px; background: rgba(128,128,128,0.1); overflow: hidden; }
+        .copy-circle { position: absolute; inset: 0; background: var(--success); transform: scale(0); opacity: 0; transition: 0.4s; border-radius: 12px; }
+        .copy-wrapper.copied .copy-circle { transform: scale(1); opacity: 1; }
+        .check-svg { position: absolute; opacity: 0; transform: scale(0.5); transition: 0.4s; color: white; z-index: 2; }
+        .copy-wrapper.copied .check-svg { opacity: 1; transform: scale(1); }
+
+        .hidden-tool { display: none !important; }
+        .log-trigger { position: absolute; top: -15px; right: 10px; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #3b82f6; cursor: pointer; }
+        .pro-footer { margin-top: auto; padding: 40px 0; width: 100%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="p-4">
+
+    <div class="top-ctrl-bar">
+        <button onclick="toggleTheme()" class="ctrl-btn"><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0z"/></svg></button>
+        <button onclick="toggleSound()" class="ctrl-btn"><svg id="sOn" class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M6.343 17.657l-.707.707a2 2 0 01-2.828 0 2 2 0 010-2.828l.707-.707m2.828-9.9l-.707-.707a2 2 0 00-2.828 0 2 2 0 000 2.828l.707.707m2.828 9.9a5 5 0 010-7.072" /></svg></button>
+        
+        <div class="dev-card-wrapper">
+            <div class="dev-icon-container"><img src="https://i.postimg.cc/BnRkPcSg/Whats-App-Image-2026-03-26-at-10-40-48-AM.jpg" alt="Bidhan"></div>
+            <div id="devCard">
+                <div class="pro-avatar"><img src="https://i.postimg.cc/BnRkPcSg/Whats-App-Image-2026-03-26-at-10-40-48-AM.jpg"></div>
+                <h4 class="text-white font-black uppercase tracking-wider">Bidhan</h4>
+                <p class="text-[10px] text-blue-400 font-bold uppercase mt-1">Lead Developer</p>
+                <div class="mt-6 pt-6 border-t border-white/5"><a href="https://github.com/bidhanbd" target="_blank" style="display:block; background:rgba(255,255,255,0.05); padding:12px; border-radius:12px; font-size:10px; font-weight:900; color:white; text-transform:uppercase; border:1px solid var(--glass-border);">GitHub Profile</a></div>
+            </div>
+        </div>
+    </div>
+
+    <header class="text-center mt-12 cursor-pointer w-full" onclick="showHome()">
+        <div class="flex items-center justify-center gap-4"><div class="logo-shield"></div><h1 class="brand-title"><span class="text-blue-500">Bidhan</span> Multi-Tool<span class="pro-box">PRO</span></h1></div>
+        <div class="mt-4 text-[11px] font-black text-gray-500 tracking-[0.2em] uppercase">Your All-in-One Digital Toolkit.</div>
+    </header>
+
+    <div class="banner-wrapper w-full"><div class="scrolling-msg">🚀 BIDHAN MULTI-TOOL PRO — CRYPTOGRAPHIC AUTHENTICATION • SECURE GENERATION • IDENTITY PROTOCOL — DEVELOPED BY BIDHAN SECURITY LAB 🚀</div></div>
+
+    <nav id="mainNav" class="nav-container hidden-tool">
+        <div class="nav-segment"><button onclick="switchTool('2fa')" id="btn-2fa" class="nav-btn nav-active">2FA</button></div>
+        <div class="nav-segment"><button onclick="switchTool('pass')" id="btn-pass" class="nav-btn">Pass Pro</button></div>
+        <div class="nav-segment"><button onclick="switchTool('email')" id="btn-email" class="nav-btn">Email Gen</button></div>
+    </nav>
+
+    <div id="homeDashboard" class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-8 px-4 mt-8">
+        <div onclick="switchTool('2fa')" class="glass-panel p-12 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-5xl mb-6">🛡️</div><h3 class="font-black text-blue-500 uppercase">2FA Scan</h3></div>
+        <div onclick="switchTool('pass')" class="glass-panel p-12 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-5xl mb-6">🔑</div><h3 class="font-black text-orange-500 uppercase">Pass Pro</h3></div>
+        <div onclick="switchTool('email')" class="glass-panel p-12 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-5xl mb-6">📧</div><h3 class="font-black text-green-500 uppercase">Email Gen</h3></div>
+    </div>
+
+    <main class="max-w-4xl w-full flex flex-col gap-8 mb-20 px-4">
+        <section id="tool-2fa" class="glass-panel p-10 flex flex-col items-center gap-8 hidden-tool relative">
+            <button onclick="toggleHistory()" class="log-trigger">Activity Log</button>
+            <input type="text" id="secretInput" placeholder="ENTER 2FA SECRET" class="w-full p-5 rounded-2xl text-center text-blue-500 font-mono text-xl uppercase">
+            <div class="flex items-center gap-8"><div id="otpBox" class="text-6xl font-black text-white tracking-[10px]">------</div><div onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+            <div class="w-full max-w-sm"><div style="height:5px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;"><div id="timerBar" style="height:100%; width:100%; background:#3b82f6; transition:width 1s linear;"></div></div><div class="flex justify-between mt-3 text-[10px] font-black text-gray-500 uppercase"><span>Active Sync</span><span><span id="timerText" class="text-white">30</span>s</span></div></div>
+        </section>
+
+        <section id="tool-pass" class="glass-panel p-10 flex flex-col items-center gap-8 hidden-tool relative">
+            <button onclick="toggleHistory()" class="log-trigger">Activity Log</button>
+            <div class="w-full flex items-center justify-center gap-8 bg-black/40 p-10 rounded-[30px] border border-white/5"><div id="passOutput" class="text-2xl md:text-4xl font-mono font-bold text-green-500">Ready...</div><div onclick="copyAction(document.getElementById('passOutput').innerText, 'pass', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+            <button onclick="genPass(true)" class="w-full max-w-sm py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition">Generate Password</button>
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6"><div class="flex flex-col gap-6 glass-panel p-8 text-[10px] font-bold uppercase"><div class="flex justify-between items-center"><label>Size: <span id="lenV" class="text-blue-500">16</span></label><input type="range" id="length" min="8" max="50" value="16" oninput="document.getElementById('lenV').innerText = this.value" class="w-1/2"></div><label class="flex justify-between items-center cursor-pointer">Uppercase <input type="checkbox" id="upper" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Numbers <input type="checkbox" id="num" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Symbols <input type="checkbox" id="sym" checked class="w-4 h-4"></label></div><div id="h-list-pass" class="glass-panel p-8 flex flex-col gap-3 overflow-y-auto max-h-[160px] text-[9px] uppercase font-black text-gray-500"><p>Copy History</p></div></div>
+        </section>
+
+        <section id="tool-email" class="glass-panel p-10 flex flex-col items-center gap-8 hidden-tool">
+            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Qty</label><input type="number" id="eqty" value="10" min="1" max="100" class="p-4 rounded-xl"></div>
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Country</label><select id="ecountry" class="p-4 rounded-xl"><option value="bd">Bangladesh</option><option value="usa">USA</option><option value="india">India</option><option value="pak">Pakistan</option></select></div>
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Domain</label><select id="edomain" class="p-4 rounded-xl"><option value="gmail.com">gmail.com</option><option value="yahoo.com">yahoo.com</option><option value="outlook.com">outlook.com</option><option value="random">Random Mix</option></select></div>
+            </div>
+            <button onclick="generateEmails()" class="w-full max-w-sm py-5 bg-orange-600 hover:bg-orange-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition">Generate Email</button>
+            <div id="emailContainer" class="w-full flex flex-col gap-3 mt-4"></div>
+        </section>
+    </main>
+
+    <div id="historySidebar" class="fixed top-0 right-[-340px] w-[320px] h-full glass-panel rounded-none p-8 z-[3000] transition-all overflow-y-auto"><h2 class="text-sm font-black uppercase text-blue-500 mb-8 border-b border-white/5 pb-4">Activity Log</h2><div id="historyList"></div></div>
+    <div id="overlay" onclick="toggleHistory()" class="fixed inset-0 bg-black/60 hidden z-[2500] backdrop-blur-sm"></div>
+
+    <footer class="pro-footer w-full">
+        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Designed & Developed by <a href="https://github.com/bidhanbd" target="_blank" style="color:#3b82f6; text-decoration:none;">BIDHAN</a></p>
+    </footer>
+
+    <script>
+        const { authenticator } = otplib;
+        let isS = localStorage.getItem('bidhan_s') !== 'off', h2fa = JSON.parse(localStorage.getItem('bidhan_2fa_v25') || '[]'), hPass = [];
+        const ding = new Audio('https://www.fesliyanstudios.com/play-mp3/387');
+
+        function showHome() { document.getElementById('homeDashboard').classList.remove('hidden-tool'); document.getElementById('mainNav').classList.add('hidden-tool'); document.getElementById('tool-2fa').classList.add('hidden-tool'); document.getElementById('tool-pass').classList.add('hidden-tool'); document.getElementById('tool-email').classList.add('hidden-tool'); }
+        function switchTool(t) { document.getElementById('homeDashboard').classList.add('hidden-tool'); document.getElementById('mainNav').classList.remove('hidden-tool'); document.getElementById('tool-2fa').classList.toggle('hidden-tool', t !== '2fa'); document.getElementById('tool-pass').classList.toggle('hidden-tool', t !== 'pass'); document.getElementById('tool-email').classList.toggle('hidden-tool', t !== 'email'); document.getElementById('btn-2fa').className = t === '2fa' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-pass').className = t === 'pass' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-email').className = t === 'email' ? 'nav-btn nav-active' : 'nav-btn'; }
+        
+        function genPass(play) { if(play && isS) { ding.currentTime = 0; ding.play(); } const len = parseInt(document.getElementById('length').value), l="abcdefghijklmnopqrstuvwxyz", u="ABCDEFGHIJKLMNOPQRSTUVWXYZ", n="0123456789", s="!@#$%^&*()_+"; let c = l, m = []; if(document.getElementById('upper').checked) { c+=u; m.push(u[Math.floor(Math.random()*u.length)]); } if(document.getElementById('num').checked) { c+=n; m.push(n[Math.floor(Math.random()*n.length)]); } if(document.getElementById('sym').checked) { c+=s; m.push(s[Math.floor(Math.random()*s.length)]); } let p = m.join(''); for(let i=p.length; i<len; i++) p += c.charAt(Math.floor(Math.random()*c.length)); document.getElementById('passOutput').innerText = p.split('').sort(()=>0.5-Math.random()).join(''); }
+        function generateEmails() { const qty = document.getElementById('eqty').value, country = document.getElementById('ecountry').value, domSel = document.getElementById('edomain').value, container = document.getElementById('emailContainer'); container.innerHTML = ""; const data = { bd: [{f:["sadia","orthi","nusrat"],l:["islam","jahan"]}], usa: [{f:["olivia","emma"],l:["smith","davis"]}], india: [{f:["navya","vihaan"],l:["sharma","singh"]}], pak: [{f:["hooriya","iman"],l:["khan","bibi"]}], viet: [{f:["linh","huong"],l:["nguyen","tran"]}], indo: [{f:["aura","citra"],l:["sari","putri"]}] }; for(let i=0; i<qty; i++) { const cat = data[country][Math.floor(Math.random()*data[country].length)]; let email = cat.f[Math.floor(Math.random()*cat.f.length)] + "." + cat.l[Math.floor(Math.random()*cat.l.length)] + Math.floor(Math.random()*9999) + "@" + (domSel === "random" ? "gmail.com" : domSel); const div = document.createElement('div'); div.innerHTML = `<div class="email-card bg-white/5 p-4 rounded-xl flex justify-between items-center mb-2 border border-white/5"><span class="text-green-400 font-mono text-sm">${email}</span><div onclick="copyAction('${email}', 'email', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>`; container.appendChild(div); } }
+        async function copyAction(txt, type, btn) { if(!txt || txt.includes("-") || txt === "Ready...") return; try { await navigator.clipboard.writeText(txt); if(isS) { ding.currentTime = 0; ding.play(); } btn.classList.add('copied'); if(type === 'email') { btn.closest('.email-card').classList.add('used'); } setTimeout(() => btn.classList.remove('copied'), 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 3) hPass.pop(); document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + hPass.map((p, i) => `<div class="bg-white/5 p-2 rounded-lg text-[10px] flex justify-between border border-white/5 mt-1"><span>${p}</span><span class="text-orange-500">#${i+1}</span></div>`).join(''); } if(type === 'otp') save2fa(document.getElementById('secretInput').value.trim()); } catch (e) { } }
+        function save2fa(k) { if(!k || k.length < 5) return; h2fa = h2fa.filter(i => i !== k); h2fa.unshift(k); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
+        function render2fa() { document.getElementById('historyList').innerHTML = h2fa.map((k, i) => `<div class="bg-white/5 p-4 rounded-xl mb-3 border border-white/5 text-[10px] font-mono flex justify-between"><span>${k}</span><button class="text-blue-500 font-black" onclick="copyAction('${k}', 'otp', this.parentElement)">COPY</button></div>`).join(''); }
+        function toggleHistory() { document.getElementById('historySidebar').style.right = document.getElementById('historySidebar').style.right === '0px' ? '-340px' : '0px'; document.getElementById('overlay').classList.toggle('hidden'); render2fa(); }
+        function toggleTheme() { document.body.classList.toggle('light-mode'); }
+        function toggleSound() { isS = !isS; localStorage.setItem('bidhan_s', isS ? 'on' : 'off'); document.getElementById('sOn').style.color = isS ? '#3b82f6' : '#6b7280'; }
+        function update2FA() { const k = document.getElementById('secretInput').value.trim().replace(/\s/g, ''), r = authenticator.timeRemaining(); document.getElementById('timerText').innerText = r; document.getElementById('timerBar').style.width = (r/30)*100 + "%"; if(!k) { document.getElementById('otpBox').innerText = "------"; return; } try { document.getElementById('otpBox').innerText = authenticator.generate(k); if(r === 30) save2fa(k); } catch {} }
+        document.getElementById('secretInput').addEventListener('input', update2FA);
+        setInterval(update2FA, 1000);
+        window.onload = () => { showHome(); update2FA(); genPass(false); };
+    </script>
+</body>
+</html>
