@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bidhan Multi-Tool Pro - v18.4</title>
+    <title>Multi-Tool Pro - v18.4</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@otplib/preset-browser@latest/buffer.js"></script>
     <script src="https://unpkg.com/@otplib/preset-browser@latest/index.js"></script>
@@ -19,7 +19,8 @@
 
         /* BRANDING & LOGO */
         .logo-shield { width: 55px; height: 60px; background: var(--deep-blue); clip-path: polygon(50% 0%, 100% 15%, 100% 85%, 50% 100%, 0% 85%, 0% 15%); display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(255,255,255,0.1); }
-        .logo-shield::after { content: '🔑'; font-size: 20px; color: var(--gold); }
+        .logo-shield::after { content: ""; display: none; }
+        .logo-shield svg { width: 26px; height: 26px; color: var(--gold); }
         .brand-title { font-size: clamp(1.5rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; font-family: 'Roboto', sans-serif; letter-spacing: -1px; }
         .pro-box { font-size: 12px; background: var(--gold); color: #000; padding: 2px 8px; border-radius: 6px; margin-left: 10px; vertical-align: middle; }
 
@@ -28,19 +29,19 @@
         .ctrl-btn { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 12px; border-radius: 15px; transition: 0.3s; cursor: pointer; }
 
         /* BANNER */
-        .banner-wrapper { width: 100%; height: 45px; background: #000; margin: 2rem 0; display: flex; align-items: center; border-top: 1px solid var(--fire); border-bottom: 1px solid var(--fire); overflow: hidden; }
-        .scrolling-msg { white-space: nowrap; animation: scroll-text 18s linear infinite; font-size: 14px; color: var(--gold); text-transform: uppercase; font-weight: 900; }
+        .banner-wrapper { width: 100%; height: 45px; background: #000; margin: 1rem 0 0.75rem; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--fire); border-bottom: 1px solid var(--fire); overflow: hidden; }
+        .scrolling-msg { white-space: nowrap; animation: scroll-text 18s linear infinite; font-size: 14px; color: var(--gold); text-transform: uppercase; font-weight: 900; text-align: center; }
         @keyframes scroll-text { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         /* NAVIGATION */
-        .nav-container { width: 100%; max-width: 800px; margin: 0 auto 3rem; display: flex; gap: 10px; padding: 5px; }
+        .nav-container { position: sticky; top: 8px; z-index: 250; width: 100%; max-width: 800px; margin: 0 auto 0.75rem; display: flex; gap: 10px; padding: 8px; background: rgba(5, 7, 10, 0.82); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; }
         .nav-segment { flex: 1; }
         .nav-btn { width: 100%; font-size: 11px; font-weight: 900; text-transform: uppercase; padding: 16px 0; color: #64748b; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; transition: 0.4s; cursor: pointer; }
         .nav-active { color: #3b82f6 !important; background: rgba(59, 130, 246, 0.1) !important; border: 2px solid #3b82f6 !important; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); transform: translateY(-2px); }
 
         /* DEV PROFILE HOVER */
         .dev-card-wrapper { position: relative; padding-bottom: 20px; }
-        .dev-icon-container { width: 50px; height: 50px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, var(--gemini-start), var(--gemini-end)); cursor: pointer; z-index: 101; }
+        .dev-icon-container { width: 60px; height: 60px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, var(--gemini-start), var(--gemini-end)); cursor: pointer; z-index: 101; }
         .dev-icon-container img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #05070a; }
         .dev-card-wrapper:hover #devCard { opacity: 1; visibility: visible; transform: translateY(0); }
         #devCard { position: absolute; top: 100%; right: 0; width: 280px; opacity: 0; visibility: hidden; transform: translateY(-15px); transition: 0.4s; z-index: 200; padding: 30px; text-align: center; background: rgba(13, 17, 23, 0.95); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); }
@@ -63,9 +64,14 @@
         .check-svg { position: absolute; opacity: 0; transform: scale(0.5); transition: 0.4s; color: white; z-index: 2; }
         .copy-wrapper.copied .check-svg { opacity: 1; transform: scale(1); }
 
+        .input-action-btn { width: 56px; height: 56px; display: inline-flex; align-items: center; justify-content: center; padding: 0; border-radius: 16px; font-size: 11px; font-weight: 900; text-transform: uppercase; transition: 0.3s; box-shadow: 0 10px 25px rgba(0,0,0,0.22); }
+        .input-action-btn svg { opacity: 0.95; }
+        .input-action-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,0,0,0.3); }
+        .input-action-btn:active { transform: scale(0.96); }
         .hidden-tool { display: none !important; }
         .log-trigger { position: absolute; top: -15px; right: 10px; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #3b82f6; cursor: pointer; }
         .pro-footer { margin-top: auto; padding: 40px 0; width: 100%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.1); }
+        #homeDashboard .glass-panel { min-height: 160px; justify-content: center; }
     </style>
 </head>
 <body class="p-4">
@@ -85,29 +91,33 @@
         </div>
     </div>
 
-    <header class="text-center mt-12 cursor-pointer w-full" onclick="showHome()">
-        <div class="flex items-center justify-center gap-4"><div class="logo-shield"></div><h1 class="brand-title"><span class="text-blue-500">Bidhan</span> Multi-Tool<span class="pro-box">PRO</span></h1></div>
-        <div class="mt-4 text-[11px] font-black text-gray-500 tracking-[0.2em] uppercase">Your All-in-One Digital Toolkit.</div>
+    <header class="mt-3 cursor-pointer w-full px-4" onclick="showHome()">
+        <div class="w-full flex items-start justify-start pr-[190px]"><div class="flex flex-col items-start gap-2 min-w-[520px] max-w-[940px]"><div class="flex items-center gap-4"><div class="logo-shield"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M6 11h12v9H6z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2"></path></svg></div><h1 class="brand-title">Multi-Tool<span class="pro-box">PRO</span></h1></div>
+        <div class="text-[9px] font-black text-gray-500 tracking-[0.16em] uppercase text-left ml-[70px]">Your All-in-One Digital Toolkit.</div></div></div>
     </header>
 
-    <div class="banner-wrapper w-full"><div class="scrolling-msg">🚀 BIDHAN MULTI-TOOL PRO — CRYPTOGRAPHIC AUTHENTICATION • SECURE GENERATION • IDENTITY PROTOCOL — DEVELOPED BY BIDHAN SECURITY LAB 🚀</div></div>
+    <div class="banner-wrapper w-full"><div class="scrolling-msg">MULTI-TOOL PRO | CRYPTOGRAPHIC AUTHENTICATION | SECURE GENERATION | IDENTITY PROTOCOL</div></div>
 
     <nav id="mainNav" class="nav-container hidden-tool">
         <div class="nav-segment"><button onclick="switchTool('2fa')" id="btn-2fa" class="nav-btn nav-active">2FA</button></div>
-        <div class="nav-segment"><button onclick="switchTool('pass')" id="btn-pass" class="nav-btn">Pass Pro</button></div>
-        <div class="nav-segment"><button onclick="switchTool('email')" id="btn-email" class="nav-btn">Email Gen</button></div>
+        <div class="nav-segment"><button onclick="switchTool('pass')" id="btn-pass" class="nav-btn">Password</button></div>
+        <div class="nav-segment"><button onclick="switchTool('email')" id="btn-email" class="nav-btn">Email Generator</button></div>
     </nav>
 
-    <div id="homeDashboard" class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-8 px-4 mt-8">
-        <div onclick="switchTool('2fa')" class="glass-panel p-12 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-5xl mb-6">🛡️</div><h3 class="font-black text-blue-500 uppercase">2FA Scan</h3></div>
-        <div onclick="switchTool('pass')" class="glass-panel p-12 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-5xl mb-6">🔑</div><h3 class="font-black text-orange-500 uppercase">Pass Pro</h3></div>
-        <div onclick="switchTool('email')" class="glass-panel p-12 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-5xl mb-6">📧</div><h3 class="font-black text-green-500 uppercase">Email Gen</h3></div>
+    <div id="homeDashboard" class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-6 px-4 mt-3">
+        <div onclick="switchTool('2fa')" class="glass-panel p-6 md:p-8 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-4xl mb-3"><svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l1.7 1.7 3.3-3.4"></path></svg></div><h3 class="font-black text-blue-500 uppercase">2FA</h3></div>
+        <div onclick="switchTool('pass')" class="glass-panel p-6 md:p-8 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-4xl mb-3"><svg class="w-12 h-12 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a5 5 0 10-9.6 2H4v4h3v3h3v3h4l1.8-1.8A5 5 0 0015 7z"></path><circle cx="10" cy="7" r="1.2" fill="currentColor" stroke="none"></circle></svg></div><h3 class="font-black text-orange-500 uppercase">Password</h3></div>
+        <div onclick="switchTool('email')" class="glass-panel p-6 md:p-8 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-4xl mb-3"><svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg></div><h3 class="font-black text-green-500 uppercase">Email Generator</h3></div>
     </div>
 
-    <main class="max-w-4xl w-full flex flex-col gap-8 mb-20 px-4">
+    <main class="max-w-4xl w-full flex flex-col gap-6 mb-20 px-4">
         <section id="tool-2fa" class="glass-panel p-10 flex flex-col items-center gap-8 hidden-tool relative">
             <button onclick="toggleHistory()" class="log-trigger">Activity Log</button>
-            <input type="text" id="secretInput" placeholder="ENTER 2FA SECRET" class="w-full p-5 rounded-2xl text-center text-blue-500 font-mono text-xl uppercase">
+            <div class="w-full flex flex-col md:flex-row items-stretch gap-3">
+                <input type="text" id="secretInput" placeholder="ENTER 2FA SECRET" class="flex-1 p-5 rounded-2xl text-center text-blue-500 font-mono text-xl uppercase">
+                <button type="button" onclick="paste2FA()" class="input-action-btn bg-blue-600 hover:bg-blue-500 text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 11h8M8 15h5"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 3h6l2 2h3a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1h3V3z"></path></svg></button>
+                <button type="button" onclick="clear2FA()" class="input-action-btn bg-red-600 hover:bg-red-500 text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 7V4h6v3"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 7l1 12h6l1-12"></path></svg></button>
+            </div>
             <div class="flex items-center gap-8"><div id="otpBox" class="text-6xl font-black text-white tracking-[10px]">------</div><div onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
             <div class="w-full max-w-sm"><div style="height:5px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;"><div id="timerBar" style="height:100%; width:100%; background:#3b82f6; transition:width 1s linear;"></div></div><div class="flex justify-between mt-3 text-[10px] font-black text-gray-500 uppercase"><span>Active Sync</span><span><span id="timerText" class="text-white">30</span>s</span></div></div>
         </section>
@@ -121,9 +131,9 @@
 
         <section id="tool-email" class="glass-panel p-10 flex flex-col items-center gap-8 hidden-tool">
             <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Qty</label><input type="number" id="eqty" value="10" min="1" max="100" class="p-4 rounded-xl"></div>
-                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Country</label><select id="ecountry" class="p-4 rounded-xl"><option value="bd">Bangladesh</option><option value="usa">USA</option><option value="india">India</option><option value="pak">Pakistan</option></select></div>
-                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Domain</label><select id="edomain" class="p-4 rounded-xl"><option value="gmail.com">gmail.com</option><option value="yahoo.com">yahoo.com</option><option value="outlook.com">outlook.com</option><option value="random">Random Mix</option></select></div>
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Qty</label><input type="number" id="eqty" value="10" min="1" max="100" class="p-4 rounded-xl"><div class="flex items-center gap-2 pt-2 text-[9px] font-black uppercase"><span class="text-gray-500">Suggested</span><button type="button" onclick="setEmailQty(50)" class="px-3 py-2 rounded-lg bg-white/5 text-orange-400">50</button><button type="button" onclick="setEmailQty(100)" class="px-3 py-2 rounded-lg bg-white/5 text-orange-400">100</button></div></div>
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Country</label><select id="ecountry" class="p-4 rounded-xl"><option value="bd">Bangladesh</option><option value="india">India</option><option value="usa">USA</option><option value="uk">United Kingdom</option><option value="can">Canada</option><option value="aus">Australia</option><option value="pak">Pakistan</option><option value="uae">UAE</option><option value="saudi">Saudi Arabia</option><option value="malaysia">Malaysia</option><option value="singapore">Singapore</option><option value="nepal">Nepal</option><option value="srilanka">Sri Lanka</option><option value="germany">Germany</option></select></div>
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Domain</label><select id="edomain" class="p-4 rounded-xl"><option value="gmail.com">gmail.com</option><option value="yahoo.com">yahoo.com</option><option value="outlook.com">outlook.com</option><option value="hotmail.com">hotmail.com</option><option value="icloud.com">icloud.com</option><option value="me.com">me.com</option><option value="mac.com">mac.com</option><option value="live.com">live.com</option><option value="msn.com">msn.com</option><option value="aol.com">aol.com</option><option value="proton.me">proton.me</option><option value="protonmail.com">protonmail.com</option><option value="zoho.com">zoho.com</option><option value="zohomail.com">zohomail.com</option><option value="yandex.com">yandex.com</option><option value="yandex.ru">yandex.ru</option><option value="gmx.com">gmx.com</option><option value="gmx.us">gmx.us</option><option value="mail.com">mail.com</option><option value="email.com">email.com</option><option value="fastmail.com">fastmail.com</option><option value="hey.com">hey.com</option><option value="random">Random Mix</option></select></div>
             </div>
             <button onclick="generateEmails()" class="w-full max-w-sm py-5 bg-orange-600 hover:bg-orange-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition">Generate Email</button>
             <div id="emailContainer" class="w-full flex flex-col gap-3 mt-4"></div>
@@ -146,13 +156,153 @@
         function switchTool(t) { document.getElementById('homeDashboard').classList.add('hidden-tool'); document.getElementById('mainNav').classList.remove('hidden-tool'); document.getElementById('tool-2fa').classList.toggle('hidden-tool', t !== '2fa'); document.getElementById('tool-pass').classList.toggle('hidden-tool', t !== 'pass'); document.getElementById('tool-email').classList.toggle('hidden-tool', t !== 'email'); document.getElementById('btn-2fa').className = t === '2fa' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-pass').className = t === 'pass' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-email').className = t === 'email' ? 'nav-btn nav-active' : 'nav-btn'; }
         
         function genPass(play) { if(play && isS) { ding.currentTime = 0; ding.play(); } const len = parseInt(document.getElementById('length').value), l="abcdefghijklmnopqrstuvwxyz", u="ABCDEFGHIJKLMNOPQRSTUVWXYZ", n="0123456789", s="!@#$%^&*()_+"; let c = l, m = []; if(document.getElementById('upper').checked) { c+=u; m.push(u[Math.floor(Math.random()*u.length)]); } if(document.getElementById('num').checked) { c+=n; m.push(n[Math.floor(Math.random()*n.length)]); } if(document.getElementById('sym').checked) { c+=s; m.push(s[Math.floor(Math.random()*s.length)]); } let p = m.join(''); for(let i=p.length; i<len; i++) p += c.charAt(Math.floor(Math.random()*c.length)); document.getElementById('passOutput').innerText = p.split('').sort(()=>0.5-Math.random()).join(''); }
-        function generateEmails() { const qty = document.getElementById('eqty').value, country = document.getElementById('ecountry').value, domSel = document.getElementById('edomain').value, container = document.getElementById('emailContainer'); container.innerHTML = ""; const data = { bd: [{f:["sadia","orthi","nusrat"],l:["islam","jahan"]}], usa: [{f:["olivia","emma"],l:["smith","davis"]}], india: [{f:["navya","vihaan"],l:["sharma","singh"]}], pak: [{f:["hooriya","iman"],l:["khan","bibi"]}], viet: [{f:["linh","huong"],l:["nguyen","tran"]}], indo: [{f:["aura","citra"],l:["sari","putri"]}] }; for(let i=0; i<qty; i++) { const cat = data[country][Math.floor(Math.random()*data[country].length)]; let email = cat.f[Math.floor(Math.random()*cat.f.length)] + "." + cat.l[Math.floor(Math.random()*cat.l.length)] + Math.floor(Math.random()*9999) + "@" + (domSel === "random" ? "gmail.com" : domSel); const div = document.createElement('div'); div.innerHTML = `<div class="email-card bg-white/5 p-4 rounded-xl flex justify-between items-center mb-2 border border-white/5"><span class="text-green-400 font-mono text-sm">${email}</span><div onclick="copyAction('${email}', 'email', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>`; container.appendChild(div); } }
+                const emailDomains = ['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','me.com','mac.com','live.com','msn.com','aol.com','proton.me','protonmail.com','zoho.com','zohomail.com','yandex.com','yandex.ru','gmx.com','gmx.us','mail.com','email.com','fastmail.com','hey.com'];
+        const emailNameData = {
+            bd: {
+                maleFirst: ['rahim','karim','fahim','tamim','naim','mahmud','shakib','rakib','sajid','nadim','adnan','sohan','rayhan','navid','ashiq','sabbir','siyam','anik','emon','asif','mahin','fardin','rahat','rifat','imran','nayeem','labib','rafi','farhan','tahmid','shovon','aniket','soumya','arnab','sagnik','shubho','debjit','rajib','partho','anikesh'],
+                femaleFirst: ['sadia','nusrat','orthi','maria','tabassum','farzana','tanjina','mim','jannat','samira','sumaiya','adrita','bristy','priya','puja','sneha','anannya','madhuri','riti','mehjabin','lamia','nafisa','tasnia','ishrat','arshi','maisha','trisha','moumita','sraboni','payel','rupa','tania','mou','madhumita','sanchita','shreya','pujita','ritu','shila'],
+                lastNames: ['islam','rahman','ahmed','hossain','khan','akter','sultana','jahan','chowdhury','talukdar','sarker','haque','sheikh','molla','bhuiyan','roy','das','saha','dutta','biswas','chakraborty','ghosh','mazumder','debnath','sutradhar','bhowmik','nath','barua','karmakar','pal','shikdar','mondal','sikder','majumdar','kabir','karim']
+            },
+            india: {
+                maleFirst: ['aarav','vihaan','arjun','vivaan','aditya','krishna','rohan','rahul','om','ishaan','kabir','dev','farhan','rehan','ayaan','sameer','anish','sourav','ritwik','manav','amit','raj','vikas','sanjay','abhishek','aniket','shivam','harsh','mohit','yash'],
+                femaleFirst: ['ananya','navya','diya','riya','kiara','saanvi','aadhya','meera','kavya','priya','ishita','tanvi','aliya','sana','zoya','pooja','neha','shruti','kriti','madhuri','sonam','payal','isha','rani','komal','simran','preeti','anushka','vidhi','naina'],
+                lastNames: ['sharma','verma','gupta','singh','mehta','kapoor','iyer','nair','patel','joshi','desai','kulkarni','banerjee','chatterjee','mukherjee','das','thakur','malhotra','khan','ansari','siddiqui','ali','syed','pandey','tiwari','tripathi','reddy','rao','pillai','menon','bhatt','purohit','sarkar','dey']
+            },
+            usa: {
+                maleFirst: ['liam','noah','ethan','mason','logan','jackson','lucas','elijah','henry','owen','carter','wyatt','james','asher','levi'],
+                femaleFirst: ['olivia','emma','amelia','ava','sophia','mia','isabella','charlotte','harper','evelyn','ella','scarlett','abigail','grace','nora'],
+                lastNames: ['smith','johnson','williams','brown','jones','garcia','miller','davis','wilson','moore','taylor','anderson','thomas','martin','lee','clark']
+            },
+            uk: {
+                maleFirst: ['oliver','george','arthur','leo','theo','freddie','jack','charlie','harry','archie','oscar','alfie'],
+                femaleFirst: ['olivia','amelia','isla','ava','ivy','freya','lily','mia','rosie','grace','evie','ella'],
+                lastNames: ['smith','jones','taylor','brown','williams','wilson','johnson','davies','patel','wright','walker','roberts','hall','green']
+            },
+            can: {
+                maleFirst: ['noah','liam','william','benjamin','theodore','jack','levi','hudson','emmett','nathan','logan','caleb'],
+                femaleFirst: ['charlotte','olivia','emma','amelia','sophia','mia','ava','chloe','ella','aria','hannah','zoe'],
+                lastNames: ['smith','brown','martin','roy','wilson','macdonald','gagnon','lee','thompson','clark','white','young','scott','campbell']
+            },
+            aus: {
+                maleFirst: ['oliver','noah','jack','henry','leo','charlie','theodore','lucas','thomas','archie','hudson','jude'],
+                femaleFirst: ['charlotte','olivia','amelia','isla','mia','ava','matilda','harper','grace','willow','ruby','lucy'],
+                lastNames: ['smith','jones','williams','brown','wilson','taylor','nguyen','martin','thompson','white','walker','harris','evans','hall']
+            },
+            pak: {
+                maleFirst: ['hamza','ali','ahsan','umer','bilal','saad','hassan','usman','talha','faisal','daniyal','zayan','arslan','junaid'],
+                femaleFirst: ['aiman','hooriya','iman','fatima','zoya','ayesha','maheen','sania','hira','laiba','noor','minal','saba','mahnoor'],
+                lastNames: ['khan','ahmed','raza','malik','sheikh','awan','mirza','baig','siddiqui','abbasi','chaudhry','butt','bibi','naz','yousafzai','iqbal']
+            },
+            uae: {
+                maleFirst: ['omar','saeed','zayed','khalid','hamdan','rashid','abdullah','faisal','mohammed','tareq','salem','mansoor'],
+                femaleFirst: ['mariam','fatima','noora','alya','hessa','maitha','salma','amna','latifa','shaikha','noura','dana'],
+                lastNames: ['alnahyan','almansoori','almarri','alqasimi','alzaabi','alsuwaidi','alketbi','alameri','alshamsi','alhashmi','alnuaimi']
+            },
+            saudi: {
+                maleFirst: ['fahad','saud','turki','waleed','abdullah','salman','bandar','nawaf','majid','yasser','faisal','mohannad'],
+                femaleFirst: ['reem','lama','joud','noura','dalal','rania','hana','deema','jawahir','rand','amal','sara'],
+                lastNames: ['alotaibi','alharbi','alghamdi','alqahtani','alshehri','aldosari','almutairi','alshammari','alenezi','alzahrani','alqahtan']
+            },
+            malaysia: {
+                maleFirst: ['amir','hakim','danish','hafiz','irfan','akmal','syafiq','haikal','fitri','arman','izzat','faiz'],
+                femaleFirst: ['aisyah','siti','nurin','alya','farah','husna','sarah','nabila','sofea','amelia','balqis','iman'],
+                lastNames: ['rahman','hamid','aziz','ismail','hassan','yahya','fauzi','jalil','karim','nordin','rashid','latif']
+            },
+            singapore: {
+                maleFirst: ['ethan','joshua','ryan','darren','kai','edan','daniel','jeremy','marcus','adrian','aaron','nathan'],
+                femaleFirst: ['grace','chloe','hannah','joanne','megan','sherlyn','celine','rachel','nadia','alyssa','jasmine','vanessa'],
+                lastNames: ['tan','lim','lee','ng','koh','goh','teo','ong','chia','toh','low','neo','seah']
+            },
+            nepal: {
+                maleFirst: ['sabin','sagar','bikash','anish','roshan','aayush','prabin','sudeep','rabin','niraj','sanjog','suman'],
+                femaleFirst: ['priya','samjhana','sneha','asmita','sabina','anusha','riti','sarita','nisha','sushma','samina','kripa'],
+                lastNames: ['sharma','thapa','adhikari','karki','pun','ghimire','basnet','lama','maharjan','shrestha','gurung','rai','kc']
+            },
+            srilanka: {
+                maleFirst: ['kasun','nimal','dilan','charith','supun','lakshan','sandun','tharindu','amal','raveen','dinuka','ashen'],
+                femaleFirst: ['dinushi','ishara','maleesha','piumi','dilani','kavindi','amaya','nethmi','sewmini','udari','tharushi','sashini'],
+                lastNames: ['perera','fernando','silva','jayasinghe','gunawardena','senanayake','weerasinghe','karunaratne','wijesinghe','bandara','ranasinghe']
+            },
+            germany: {
+                maleFirst: ['lukas','felix','jonas','paul','ben','noah','leon','emil','finn','max','anton','nico'],
+                femaleFirst: ['emma','mia','hannah','sophia','emilia','lina','clara','lea','paula','lotte','anna','lara'],
+                lastNames: ['mueller','schmidt','schneider','fischer','weber','meyer','wagner','becker','hoffmann','schulz','koch','bauer']
+            }
+        };
+        function setEmailQty(value) { document.getElementById('eqty').value = value; }
+        function pickNonRepeating(list, lastValue) {
+            const pool = list.filter(item => item !== lastValue);
+            const source = pool.length ? pool : list;
+            return source[Math.floor(Math.random() * source.length)];
+        }
+        function slugifyEmailPart(value) {
+            return value.toLowerCase().replace(/[^a-z0-9]+/g, '.').replace(/\.+/g, '.').replace(/^\.|\.$/g, '');
+        }
+        function generateUniqueSerial(usedLocals, minimumLength) {
+            let serial = '';
+            let attempts = 0;
+            const safeLength = Math.max(2, Math.min(6, minimumLength));
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            do {
+                serial = '';
+                for (let i = 0; i < safeLength; i += 1) {
+                    serial += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                attempts += 1;
+            } while (usedLocals.has(serial) && attempts < 40);
+            usedLocals.add(serial);
+            return serial;
+        }
+        function buildEmailPool(countryKey, qty, domainSelection) {
+            const countryData = emailNameData[countryKey] || emailNameData.bd;
+            const results = [];
+            const usedEmails = new Set();
+            const usedLocals = new Set();
+            let lastFirst = '';
+            let lastLast = '';
+            let attempts = 0;
+            while (results.length < qty && attempts < qty * 80) {
+                attempts += 1;
+                const firstSource = Math.random() < 0.5 ? countryData.maleFirst : countryData.femaleFirst;
+                const first = pickNonRepeating(firstSource, lastFirst);
+                const last = pickNonRepeating(countryData.lastNames, lastLast);
+                const baseLocal = `${slugifyEmailPart(first)}.${slugifyEmailPart(last)}`;
+                const lettersOnlyLength = `${slugifyEmailPart(first)}${slugifyEmailPart(last)}`.length;
+                const randomLength = Math.floor(Math.random() * 5) + 2;
+                const requiredDigits = randomLength;
+                const serial = generateUniqueSerial(usedLocals, requiredDigits);
+                const domain = domainSelection === 'random' ? emailDomains[Math.floor(Math.random() * emailDomains.length)] : domainSelection;
+                const email = `${baseLocal}${serial}@${domain}`;
+                if (usedEmails.has(email) || first === lastFirst || last === lastLast) continue;
+                usedEmails.add(email);
+                lastFirst = first;
+                lastLast = last;
+                results.push(email);
+            }
+            return results;
+        }
+        function generateEmails() {
+            const qty = Math.min(100, Math.max(1, parseInt(document.getElementById('eqty').value || '10', 10)));
+            const country = document.getElementById('ecountry').value;
+            const domSel = document.getElementById('edomain').value;
+            const container = document.getElementById('emailContainer');
+            container.innerHTML = '';
+            document.getElementById('eqty').value = qty;
+            const emails = buildEmailPool(country, qty, domSel);
+            emails.forEach(email => {
+                const div = document.createElement('div');
+                div.innerHTML = `<div class="email-card bg-white/5 p-3 rounded-xl flex justify-between items-center mb-2 border border-white/5"><span class="text-green-400 font-mono text-sm">${email}</span><div onclick="copyAction('${email}', 'email', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>`;
+                container.appendChild(div);
+            });
+        }
         async function copyAction(txt, type, btn) { if(!txt || txt.includes("-") || txt === "Ready...") return; try { await navigator.clipboard.writeText(txt); if(isS) { ding.currentTime = 0; ding.play(); } btn.classList.add('copied'); if(type === 'email') { btn.closest('.email-card').classList.add('used'); } setTimeout(() => btn.classList.remove('copied'), 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 3) hPass.pop(); document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + hPass.map((p, i) => `<div class="bg-white/5 p-2 rounded-lg text-[10px] flex justify-between border border-white/5 mt-1"><span>${p}</span><span class="text-orange-500">#${i+1}</span></div>`).join(''); } if(type === 'otp') save2fa(document.getElementById('secretInput').value.trim()); } catch (e) { } }
         function save2fa(k) { if(!k || k.length < 5) return; h2fa = h2fa.filter(i => i !== k); h2fa.unshift(k); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
         function render2fa() { document.getElementById('historyList').innerHTML = h2fa.map((k, i) => `<div class="bg-white/5 p-4 rounded-xl mb-3 border border-white/5 text-[10px] font-mono flex justify-between"><span>${k}</span><button class="text-blue-500 font-black" onclick="copyAction('${k}', 'otp', this.parentElement)">COPY</button></div>`).join(''); }
         function toggleHistory() { document.getElementById('historySidebar').style.right = document.getElementById('historySidebar').style.right === '0px' ? '-340px' : '0px'; document.getElementById('overlay').classList.toggle('hidden'); render2fa(); }
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function toggleSound() { isS = !isS; localStorage.setItem('bidhan_s', isS ? 'on' : 'off'); document.getElementById('sOn').style.color = isS ? '#3b82f6' : '#6b7280'; }
+        async function paste2FA() { try { const txt = await navigator.clipboard.readText(); document.getElementById('secretInput').value = txt.trim(); update2FA(); } catch {} }
+        function clear2FA() { document.getElementById('secretInput').value = ''; update2FA(); }
         function update2FA() { const k = document.getElementById('secretInput').value.trim().replace(/\s/g, ''), r = authenticator.timeRemaining(); document.getElementById('timerText').innerText = r; document.getElementById('timerBar').style.width = (r/30)*100 + "%"; if(!k) { document.getElementById('otpBox').innerText = "------"; return; } try { document.getElementById('otpBox').innerText = authenticator.generate(k); if(r === 30) save2fa(k); } catch {} }
         document.getElementById('secretInput').addEventListener('input', update2FA);
         setInterval(update2FA, 1000);
@@ -160,3 +310,30 @@
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
