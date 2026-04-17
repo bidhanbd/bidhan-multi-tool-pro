@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -29,14 +29,14 @@
         .ctrl-btn { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 12px; border-radius: 15px; transition: 0.3s; cursor: pointer; }
 
         /* BANNER */
-        .banner-wrapper { width: 100%; height: 45px; background: #000; margin: 1rem 0 0.75rem; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--fire); border-bottom: 1px solid var(--fire); overflow: hidden; }
-        .scrolling-msg { white-space: nowrap; animation: scroll-text 18s linear infinite; font-size: 14px; color: var(--gold); text-transform: uppercase; font-weight: 900; text-align: center; }
+        .banner-wrapper { width: 100%; height: 27px; background: #000; margin: 0.6rem 0 0.45rem; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--fire); border-bottom: 1px solid var(--fire); overflow: hidden; }
+        .scrolling-msg { white-space: nowrap; animation: scroll-text 18s linear infinite; font-size: 9.6px; color: var(--gold); text-transform: uppercase; font-weight: 900; text-align: center; }
         @keyframes scroll-text { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
         /* NAVIGATION */
-        .nav-container { position: sticky; top: 8px; z-index: 250; width: 100%; max-width: 800px; margin: 0 auto 0.75rem; display: flex; gap: 10px; padding: 8px; background: rgba(5, 7, 10, 0.82); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; }
+        .nav-container { position: sticky; top: 8px; z-index: 250; width: 100%; max-width: 960px; margin: 0 auto 0.75rem; display: flex; gap: 10px; padding: 8px; background: rgba(5, 7, 10, 0.82); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; }
         .nav-segment { flex: 1; }
-        .nav-btn { width: 100%; font-size: 11px; font-weight: 900; text-transform: uppercase; padding: 16px 0; color: #64748b; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; transition: 0.4s; cursor: pointer; }
+        .nav-btn { width: 100%; font-size: 11px; font-weight: 900; text-transform: uppercase; padding: 12.8px 0; color: #64748b; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 16px; transition: 0.4s; cursor: pointer; }
         .nav-active { color: #3b82f6 !important; background: rgba(59, 130, 246, 0.1) !important; border: 2px solid #3b82f6 !important; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); transform: translateY(-2px); }
 
         /* DEV PROFILE HOVER */
@@ -102,17 +102,19 @@
         <div class="nav-segment"><button onclick="switchTool('2fa')" id="btn-2fa" class="nav-btn nav-active">2FA</button></div>
         <div class="nav-segment"><button onclick="switchTool('pass')" id="btn-pass" class="nav-btn">Password</button></div>
         <div class="nav-segment"><button onclick="switchTool('email')" id="btn-email" class="nav-btn">Email Generator</button></div>
+        <div class="nav-segment"><button onclick="switchTool('fake')" id="btn-fake" class="nav-btn">Fake Details</button></div>
     </nav>
 
-    <div id="homeDashboard" class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-6 px-4 mt-3">
+    <div id="homeDashboard" class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-4 gap-6 px-4 mt-3">
         <div onclick="switchTool('2fa')" class="glass-panel p-6 md:p-8 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-4xl mb-3"><svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l1.7 1.7 3.3-3.4"></path></svg></div><h3 class="font-black text-blue-500 uppercase">2FA</h3></div>
         <div onclick="switchTool('pass')" class="glass-panel p-6 md:p-8 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-4xl mb-3"><svg class="w-12 h-12 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a5 5 0 10-9.6 2H4v4h3v3h3v3h4l1.8-1.8A5 5 0 0015 7z"></path><circle cx="10" cy="7" r="1.2" fill="currentColor" stroke="none"></circle></svg></div><h3 class="font-black text-orange-500 uppercase">Password</h3></div>
         <div onclick="switchTool('email')" class="glass-panel p-6 md:p-8 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-4xl mb-3"><svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg></div><h3 class="font-black text-green-500 uppercase">Email Generator</h3></div>
+        <div onclick="switchTool('fake')" class="glass-panel p-6 md:p-8 flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="text-4xl mb-3"><svg class="w-12 h-12 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h10M7 16h6"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect></svg></div><h3 class="font-black text-pink-500 uppercase">Fake Details</h3></div>
     </div>
 
-    <main class="max-w-4xl w-full flex flex-col gap-6 mb-20 px-4">
-        <section id="tool-2fa" class="glass-panel p-10 flex flex-col items-center gap-8 hidden-tool relative">
-            <button onclick="toggleHistory()" class="log-trigger">Activity Log</button>
+    <main class="max-w-[44.8rem] w-full flex flex-col gap-4 mb-20 px-4 -mt-2">
+        <section id="tool-2fa" class="glass-panel p-7 flex flex-col items-center gap-6 hidden-tool relative">
+            <button onclick="toggleHistory('otp')" class="log-trigger">Activity Log</button>
             <div class="w-full flex flex-col md:flex-row items-stretch gap-3">
                 <input type="text" id="secretInput" placeholder="ENTER 2FA SECRET" class="flex-1 p-5 rounded-2xl text-center text-blue-500 font-mono text-xl uppercase">
                 <button type="button" onclick="paste2FA()" class="input-action-btn bg-blue-600 hover:bg-blue-500 text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 11h8M8 15h5"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 3h6l2 2h3a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1h3V3z"></path></svg></button>
@@ -122,21 +124,49 @@
             <div class="w-full max-w-sm"><div style="height:5px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;"><div id="timerBar" style="height:100%; width:100%; background:#3b82f6; transition:width 1s linear;"></div></div><div class="flex justify-between mt-3 text-[10px] font-black text-gray-500 uppercase"><span>Active Sync</span><span><span id="timerText" class="text-white">30</span>s</span></div></div>
         </section>
 
-        <section id="tool-pass" class="glass-panel p-10 flex flex-col items-center gap-8 hidden-tool relative">
-            <button onclick="toggleHistory()" class="log-trigger">Activity Log</button>
-            <div class="w-full flex items-center justify-center gap-8 bg-black/40 p-10 rounded-[30px] border border-white/5"><div id="passOutput" class="text-2xl md:text-4xl font-mono font-bold text-green-500">Ready...</div><div onclick="copyAction(document.getElementById('passOutput').innerText, 'pass', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
-            <button onclick="genPass(true)" class="w-full max-w-sm py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition">Generate Password</button>
-            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6"><div class="flex flex-col gap-6 glass-panel p-8 text-[10px] font-bold uppercase"><div class="flex justify-between items-center"><label>Size: <span id="lenV" class="text-blue-500">16</span></label><input type="range" id="length" min="8" max="50" value="16" oninput="document.getElementById('lenV').innerText = this.value" class="w-1/2"></div><label class="flex justify-between items-center cursor-pointer">Uppercase <input type="checkbox" id="upper" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Numbers <input type="checkbox" id="num" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Symbols <input type="checkbox" id="sym" checked class="w-4 h-4"></label></div><div id="h-list-pass" class="glass-panel p-8 flex flex-col gap-3 overflow-y-auto max-h-[160px] text-[9px] uppercase font-black text-gray-500"><p>Copy History</p></div></div>
+        <section id="tool-pass" class="glass-panel p-6 pt-4 flex flex-col items-center gap-5 hidden-tool relative -mt-2">
+            <button onclick="toggleHistory('pass')" class="log-trigger">Activity Log</button>
+            <div class="w-full flex items-center justify-center gap-6 bg-black/40 p-8 rounded-[30px] border border-white/5 -mt-1"><div id="passOutput" class="text-2xl md:text-4xl font-mono font-bold text-green-500">Ready...</div><div onclick="copyAction(document.getElementById('passOutput').innerText, 'pass', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+            <button onclick="genPass(true)" class="w-full max-w-sm py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition -mt-1">Generate Password</button>
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-5 -mt-1"><div class="flex flex-col gap-5 glass-panel p-7 text-[10px] font-bold uppercase"><div class="flex justify-between items-center"><label>Size: <span id="lenV" class="text-blue-500">16</span></label><input type="range" id="length" min="8" max="50" value="16" oninput="document.getElementById('lenV').innerText = this.value" class="w-1/2"></div><label class="flex justify-between items-center cursor-pointer">Uppercase <input type="checkbox" id="upper" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Numbers <input type="checkbox" id="num" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Symbols <input type="checkbox" id="sym" checked class="w-4 h-4"></label></div><div id="h-list-pass" class="glass-panel p-7 flex flex-col gap-3 overflow-y-auto max-h-[160px] text-[9px] uppercase font-black text-gray-500"><p>Copy History</p></div></div>
         </section>
 
-        <section id="tool-email" class="glass-panel p-10 flex flex-col items-center gap-8 hidden-tool">
+        <section id="tool-email" class="glass-panel p-7 flex flex-col items-center gap-6 hidden-tool">
             <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Qty</label><input type="number" id="eqty" value="10" min="1" max="100" class="p-4 rounded-xl"><div class="flex items-center gap-2 pt-2 text-[9px] font-black uppercase"><span class="text-gray-500">Suggested</span><button type="button" onclick="setEmailQty(50)" class="px-3 py-2 rounded-lg bg-white/5 text-orange-400">50</button><button type="button" onclick="setEmailQty(100)" class="px-3 py-2 rounded-lg bg-white/5 text-orange-400">100</button></div></div>
                 <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Country</label><select id="ecountry" class="p-4 rounded-xl"><option value="bd">Bangladesh</option><option value="india">India</option><option value="usa">USA</option><option value="uk">United Kingdom</option><option value="can">Canada</option><option value="aus">Australia</option><option value="pak">Pakistan</option><option value="uae">UAE</option><option value="saudi">Saudi Arabia</option><option value="malaysia">Malaysia</option><option value="singapore">Singapore</option><option value="nepal">Nepal</option><option value="srilanka">Sri Lanka</option><option value="germany">Germany</option></select></div>
-                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Domain</label><select id="edomain" class="p-4 rounded-xl"><option value="gmail.com">gmail.com</option><option value="yahoo.com">yahoo.com</option><option value="outlook.com">outlook.com</option><option value="hotmail.com">hotmail.com</option><option value="icloud.com">icloud.com</option><option value="me.com">me.com</option><option value="mac.com">mac.com</option><option value="live.com">live.com</option><option value="msn.com">msn.com</option><option value="aol.com">aol.com</option><option value="proton.me">proton.me</option><option value="protonmail.com">protonmail.com</option><option value="zoho.com">zoho.com</option><option value="zohomail.com">zohomail.com</option><option value="yandex.com">yandex.com</option><option value="yandex.ru">yandex.ru</option><option value="gmx.com">gmx.com</option><option value="gmx.us">gmx.us</option><option value="mail.com">mail.com</option><option value="email.com">email.com</option><option value="fastmail.com">fastmail.com</option><option value="hey.com">hey.com</option><option value="random">Random Mix</option></select></div>
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Domain</label><select id="edomain" class="p-4 rounded-xl"><option value="gmail.com">gmail.com</option><option value="yahoo.com">yahoo.com</option><option value="outlook.com" selected>outlook.com</option><option value="hotmail.com">hotmail.com</option><option value="icloud.com">icloud.com</option><option value="me.com">me.com</option><option value="mac.com">mac.com</option><option value="live.com">live.com</option><option value="msn.com">msn.com</option><option value="aol.com">aol.com</option><option value="proton.me">proton.me</option><option value="protonmail.com">protonmail.com</option><option value="zoho.com">zoho.com</option><option value="zohomail.com">zohomail.com</option><option value="yandex.com">yandex.com</option><option value="yandex.ru">yandex.ru</option><option value="gmx.com">gmx.com</option><option value="gmx.us">gmx.us</option><option value="mail.com">mail.com</option><option value="email.com">email.com</option><option value="fastmail.com">fastmail.com</option><option value="hey.com">hey.com</option><option value="random">Random Mix</option></select></div>
             </div>
             <button onclick="generateEmails()" class="w-full max-w-sm py-5 bg-orange-600 hover:bg-orange-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition">Generate Email</button>
             <div id="emailContainer" class="w-full flex flex-col gap-3 mt-4"></div>
+        </section>
+        <section id="tool-fake" class="glass-panel p-7 flex flex-col items-center gap-6 hidden-tool">
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Region</label><select id="fregion" class="p-4 rounded-xl"><option value="global">Global Mix</option><option value="bd">Bangladesh</option><option value="india">India</option><option value="usa">USA</option><option value="uk">United Kingdom</option><option value="can">Canada</option><option value="aus">Australia</option><option value="pak">Pakistan</option><option value="uae">UAE</option><option value="saudi">Saudi Arabia</option><option value="malaysia">Malaysia</option><option value="singapore">Singapore</option><option value="nepal">Nepal</option><option value="srilanka">Sri Lanka</option><option value="germany">Germany</option></select></div>
+                <div class="flex flex-col gap-2"><label class="text-[9px] font-black uppercase text-gray-500">Gender</label><select id="fgender" class="p-4 rounded-xl"><option value="male">Male</option><option value="female">Female</option></select></div>
+            </div>
+            <button onclick="generateFakeDetails()" class="w-full max-w-sm py-5 bg-pink-600 hover:bg-pink-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition">Generate Fake Details</button>
+            <div id="fakeDetailsCard" class="w-full glass-panel p-7 flex flex-col gap-4">
+                <div class="flex items-center justify-between gap-4 border-b border-white/5 pb-4">
+                    <div>
+                        <p class="text-[9px] font-black uppercase text-pink-400">Synthetic Details</p>
+                        <h3 id="fakeName" class="text-2xl font-black text-white">Nova Mercer</h3>
+                        <p id="fakeRole" class="text-[11px] uppercase font-black text-gray-500">male</p>
+                    </div>
+                    <button onclick="copyFakeBundle(this)" class="input-action-btn bg-pink-600 hover:bg-pink-500 text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg></button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-[11px] font-black uppercase">
+                    <div class="glass-panel p-5 flex items-center justify-between gap-4"><div><p class="text-gray-500">Street</p><p id="fakeStreet" class="text-white normal-case text-sm">42 Fiction Row</p></div><div onclick="copyAction(document.getElementById('fakeStreet').innerText, 'fake', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+                    <div class="glass-panel p-5 flex items-center justify-between gap-4"><div><p class="text-gray-500">City/Town</p><p id="fakeCity" class="text-white normal-case text-sm">Sample City</p></div><div onclick="copyAction(document.getElementById('fakeCity').innerText, 'fake', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+                    <div class="glass-panel p-5 flex items-center justify-between gap-4"><div><p class="text-gray-500">State/Province/Region</p><p id="fakeState" class="text-white normal-case text-sm">Demo State</p></div><div onclick="copyAction(document.getElementById('fakeState').innerText, 'fake', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+                    <div class="glass-panel p-5 flex items-center justify-between gap-4"><div><p class="text-gray-500">Zip/Postal Code</p><p id="fakeZip" class="text-white font-mono normal-case text-sm">1000</p></div><div onclick="copyAction(document.getElementById('fakeZip').innerText, 'fake', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+                    <div class="glass-panel p-5 flex items-center justify-between gap-4"><div><p class="text-gray-500">Phone Number</p><p id="fakePhone" class="text-white font-mono normal-case text-sm">+999 555 010 4242</p></div><div onclick="copyAction(document.getElementById('fakePhone').innerText, 'fake', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+                    <div class="glass-panel p-5 flex items-center justify-between gap-4"><div><p class="text-gray-500">Country</p><p id="fakeCountry" class="text-white normal-case text-sm">United States</p></div><div onclick="copyAction(document.getElementById('fakeCountry').innerText, 'fake', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+                    <div class="glass-panel p-5 flex items-center justify-between gap-4"><div><p class="text-gray-500">Latitude</p><p id="fakeLat" class="text-white font-mono normal-case text-sm">32.273345</p></div><div onclick="copyAction(document.getElementById('fakeLat').innerText, 'fake', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+                    <div class="glass-panel p-5 flex items-center justify-between gap-4"><div><p class="text-gray-500">Longitude</p><p id="fakeLon" class="text-white font-mono normal-case text-sm">-90.150204</p></div><div onclick="copyAction(document.getElementById('fakeLon').innerText, 'fake', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-5 h-5 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+                </div>
+                <p class="text-[10px] font-black uppercase text-gray-500">Generated for mockups, demos, and testing flows only.</p>
+            </div>
         </section>
     </main>
 
@@ -149,24 +179,42 @@
 
     <script>
         const { authenticator } = otplib;
-        let isS = localStorage.getItem('bidhan_s') !== 'off', h2fa = JSON.parse(localStorage.getItem('bidhan_2fa_v25') || '[]'), hPass = [];
+        let isS = localStorage.getItem('bidhan_s') !== 'off', h2fa = JSON.parse(localStorage.getItem('bidhan_2fa_v25') || '[]'), hPass = [], activeHistoryType = 'otp';
         const ding = new Audio('https://www.fesliyanstudios.com/play-mp3/387');
 
-        function showHome() { document.getElementById('homeDashboard').classList.remove('hidden-tool'); document.getElementById('mainNav').classList.add('hidden-tool'); document.getElementById('tool-2fa').classList.add('hidden-tool'); document.getElementById('tool-pass').classList.add('hidden-tool'); document.getElementById('tool-email').classList.add('hidden-tool'); }
-        function switchTool(t) { document.getElementById('homeDashboard').classList.add('hidden-tool'); document.getElementById('mainNav').classList.remove('hidden-tool'); document.getElementById('tool-2fa').classList.toggle('hidden-tool', t !== '2fa'); document.getElementById('tool-pass').classList.toggle('hidden-tool', t !== 'pass'); document.getElementById('tool-email').classList.toggle('hidden-tool', t !== 'email'); document.getElementById('btn-2fa').className = t === '2fa' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-pass').className = t === 'pass' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-email').className = t === 'email' ? 'nav-btn nav-active' : 'nav-btn'; }
+        function showHome() { document.getElementById('homeDashboard').classList.remove('hidden-tool'); document.getElementById('mainNav').classList.add('hidden-tool'); document.getElementById('tool-2fa').classList.add('hidden-tool'); document.getElementById('tool-pass').classList.add('hidden-tool'); document.getElementById('tool-email').classList.add('hidden-tool'); document.getElementById('tool-fake').classList.add('hidden-tool'); }
+        function switchTool(t) { document.getElementById('homeDashboard').classList.add('hidden-tool'); document.getElementById('mainNav').classList.remove('hidden-tool'); document.getElementById('tool-2fa').classList.toggle('hidden-tool', t !== '2fa'); document.getElementById('tool-pass').classList.toggle('hidden-tool', t !== 'pass'); document.getElementById('tool-email').classList.toggle('hidden-tool', t !== 'email'); document.getElementById('tool-fake').classList.toggle('hidden-tool', t !== 'fake'); document.getElementById('btn-2fa').className = t === '2fa' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-pass').className = t === 'pass' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-email').className = t === 'email' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-fake').className = t === 'fake' ? 'nav-btn nav-active' : 'nav-btn'; }
         
         function genPass(play) { if(play && isS) { ding.currentTime = 0; ding.play(); } const len = parseInt(document.getElementById('length').value), l="abcdefghijklmnopqrstuvwxyz", u="ABCDEFGHIJKLMNOPQRSTUVWXYZ", n="0123456789", s="!@#$%^&*()_+"; let c = l, m = []; if(document.getElementById('upper').checked) { c+=u; m.push(u[Math.floor(Math.random()*u.length)]); } if(document.getElementById('num').checked) { c+=n; m.push(n[Math.floor(Math.random()*n.length)]); } if(document.getElementById('sym').checked) { c+=s; m.push(s[Math.floor(Math.random()*s.length)]); } let p = m.join(''); for(let i=p.length; i<len; i++) p += c.charAt(Math.floor(Math.random()*c.length)); document.getElementById('passOutput').innerText = p.split('').sort(()=>0.5-Math.random()).join(''); }
                 const emailDomains = ['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','me.com','mac.com','live.com','msn.com','aol.com','proton.me','protonmail.com','zoho.com','zohomail.com','yandex.com','yandex.ru','gmx.com','gmx.us','mail.com','email.com','fastmail.com','hey.com'];
         const emailNameData = {
             bd: {
-                maleFirst: ['rahim','karim','fahim','tamim','naim','mahmud','shakib','rakib','sajid','nadim','adnan','sohan','rayhan','navid','ashiq','sabbir','siyam','anik','emon','asif','mahin','fardin','rahat','rifat','imran','nayeem','labib','rafi','farhan','tahmid','shovon','aniket','soumya','arnab','sagnik','shubho','debjit','rajib','partho','anikesh'],
-                femaleFirst: ['sadia','nusrat','orthi','maria','tabassum','farzana','tanjina','mim','jannat','samira','sumaiya','adrita','bristy','priya','puja','sneha','anannya','madhuri','riti','mehjabin','lamia','nafisa','tasnia','ishrat','arshi','maisha','trisha','moumita','sraboni','payel','rupa','tania','mou','madhumita','sanchita','shreya','pujita','ritu','shila'],
-                lastNames: ['islam','rahman','ahmed','hossain','khan','akter','sultana','jahan','chowdhury','talukdar','sarker','haque','sheikh','molla','bhuiyan','roy','das','saha','dutta','biswas','chakraborty','ghosh','mazumder','debnath','sutradhar','bhowmik','nath','barua','karmakar','pal','shikdar','mondal','sikder','majumdar','kabir','karim']
+                groups: [
+                    {
+                        maleFirst: ['rahim','fahim','tamim','naim','mahmud','shakib','rakib','sajid','nadim','adnan','rayhan','navid','ashiq','sabbir','siyam','asif','mahin','fardin','rahat','rifat','imran','nayeem','labib','rafi','farhan','tahmid'],
+                        femaleFirst: ['sadia','nusrat','maria','tabassum','farzana','tanjina','mim','jannat','samira','sumaiya','mehjabin','lamia','nafisa','tasnia','ishrat','arshi','maisha','tania'],
+                        lastNames: ['islam','rahman','ahmed','hossain','khan','chowdhury','talukdar','sarker','haque','sheikh','molla','bhuiyan','sikder','majumdar']
+                    },
+                    {
+                        maleFirst: ['sohan','anik','emon','shovon','aniket','soumya','arnab','sagnik','shubho','debjit','rajib','partho','anikesh'],
+                        femaleFirst: ['orthi','adrita','bristy','priya','puja','sneha','anannya','madhuri','riti','trisha','moumita','sraboni','payel','rupa','mou','madhumita','sanchita','shreya','pujita','ritu','shila'],
+                        lastNames: ['roy','das','saha','dutta','biswas','chakraborty','ghosh','mazumder','debnath','sutradhar','bhowmik','nath','barua','karmakar','pal','shikdar','mondal']
+                    }
+                ]
             },
             india: {
-                maleFirst: ['aarav','vihaan','arjun','vivaan','aditya','krishna','rohan','rahul','om','ishaan','kabir','dev','farhan','rehan','ayaan','sameer','anish','sourav','ritwik','manav','amit','raj','vikas','sanjay','abhishek','aniket','shivam','harsh','mohit','yash'],
-                femaleFirst: ['ananya','navya','diya','riya','kiara','saanvi','aadhya','meera','kavya','priya','ishita','tanvi','aliya','sana','zoya','pooja','neha','shruti','kriti','madhuri','sonam','payal','isha','rani','komal','simran','preeti','anushka','vidhi','naina'],
-                lastNames: ['sharma','verma','gupta','singh','mehta','kapoor','iyer','nair','patel','joshi','desai','kulkarni','banerjee','chatterjee','mukherjee','das','thakur','malhotra','khan','ansari','siddiqui','ali','syed','pandey','tiwari','tripathi','reddy','rao','pillai','menon','bhatt','purohit','sarkar','dey']
+                groups: [
+                    {
+                        maleFirst: ['aarav','vihaan','arjun','vivaan','aditya','krishna','rohan','rahul','om','ishaan','dev','anish','sourav','ritwik','manav','amit','raj','vikas','sanjay','abhishek','aniket','shivam','harsh','mohit','yash'],
+                        femaleFirst: ['ananya','navya','diya','riya','kiara','saanvi','aadhya','meera','kavya','priya','ishita','tanvi','pooja','neha','shruti','kriti','madhuri','sonam','payal','isha','rani','komal','simran','preeti','anushka','vidhi','naina'],
+                        lastNames: ['sharma','verma','gupta','singh','mehta','kapoor','iyer','nair','patel','joshi','desai','kulkarni','banerjee','chatterjee','mukherjee','das','thakur','malhotra','pandey','tiwari','tripathi','reddy','rao','pillai','menon','bhatt','purohit','sarkar','dey']
+                    },
+                    {
+                        maleFirst: ['kabir','farhan','rehan','ayaan','sameer','amir','faizan','arman','danish','zayan'],
+                        femaleFirst: ['aliya','sana','zoya','aisha','hina','maheen','saba','noor','mariam','anam'],
+                        lastNames: ['khan','ansari','siddiqui','ali','syed','shaikh','mirza','qureshi','farooqui','nadeem']
+                    }
+                ]
             },
             usa: {
                 maleFirst: ['liam','noah','ethan','mason','logan','jackson','lucas','elijah','henry','owen','carter','wyatt','james','asher','levi'],
@@ -191,7 +239,7 @@
             pak: {
                 maleFirst: ['hamza','ali','ahsan','umer','bilal','saad','hassan','usman','talha','faisal','daniyal','zayan','arslan','junaid'],
                 femaleFirst: ['aiman','hooriya','iman','fatima','zoya','ayesha','maheen','sania','hira','laiba','noor','minal','saba','mahnoor'],
-                lastNames: ['khan','ahmed','raza','malik','sheikh','awan','mirza','baig','siddiqui','abbasi','chaudhry','butt','bibi','naz','yousafzai','iqbal']
+                lastNames: ['khan','ahmed','raza','malik','sheikh','awan','mirza','baig','siddiqui','abbasi','chaudhry','butt','yousafzai','iqbal']
             },
             uae: {
                 maleFirst: ['omar','saeed','zayed','khalid','hamdan','rashid','abdullah','faisal','mohammed','tareq','salem','mansoor'],
@@ -263,14 +311,13 @@
             let attempts = 0;
             while (results.length < qty && attempts < qty * 80) {
                 attempts += 1;
-                const firstSource = Math.random() < 0.5 ? countryData.maleFirst : countryData.femaleFirst;
+                const profile = countryData.groups ? countryData.groups[Math.floor(Math.random() * countryData.groups.length)] : countryData;
+                const firstSource = Math.random() < 0.5 ? profile.maleFirst : profile.femaleFirst;
                 const first = pickNonRepeating(firstSource, lastFirst);
-                const last = pickNonRepeating(countryData.lastNames, lastLast);
+                const last = pickNonRepeating(profile.lastNames, lastLast);
                 const baseLocal = `${slugifyEmailPart(first)}.${slugifyEmailPart(last)}`;
-                const lettersOnlyLength = `${slugifyEmailPart(first)}${slugifyEmailPart(last)}`.length;
                 const randomLength = Math.floor(Math.random() * 5) + 2;
-                const requiredDigits = randomLength;
-                const serial = generateUniqueSerial(usedLocals, requiredDigits);
+                const serial = generateUniqueSerial(usedLocals, randomLength);
                 const domain = domainSelection === 'random' ? emailDomains[Math.floor(Math.random() * emailDomains.length)] : domainSelection;
                 const email = `${baseLocal}${serial}@${domain}`;
                 if (usedEmails.has(email) || first === lastFirst || last === lastLast) continue;
@@ -295,10 +342,74 @@
                 container.appendChild(div);
             });
         }
-        async function copyAction(txt, type, btn) { if(!txt || txt.includes("-") || txt === "Ready...") return; try { await navigator.clipboard.writeText(txt); if(isS) { ding.currentTime = 0; ding.play(); } btn.classList.add('copied'); if(type === 'email') { btn.closest('.email-card').classList.add('used'); } setTimeout(() => btn.classList.remove('copied'), 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 3) hPass.pop(); document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + hPass.map((p, i) => `<div class="bg-white/5 p-2 rounded-lg text-[10px] flex justify-between border border-white/5 mt-1"><span>${p}</span><span class="text-orange-500">#${i+1}</span></div>`).join(''); } if(type === 'otp') save2fa(document.getElementById('secretInput').value.trim()); } catch (e) { } }
+        const fakeAddressData = {
+            global: { country: 'Global Mix', states: ['Central Region','Metro Region','North Region','South Region'], cities: ['Sample City','Demo Point','Fiction Bay','Mock Harbor'], streets: ['Fiction Row','Demo Avenue','Sample Lane','Prototype Street'], zips: ['1000','2100','3300','4400'], lat: [12, 48], lon: [-96, 104] },
+            bd: { country: 'Bangladesh', states: ['Dhaka','Chattogram','Sylhet','Khulna'], cities: ['Dhaka Demo','Chattogram Bay','Sylhet Point','Khulna Park'], streets: ['Lake View Road','Model Town Lane','Metro Link','Garden Street'], zips: ['1207','4000','3100','9000'], lat: [20.7, 26.6], lon: [88.0, 92.7] },
+            india: { country: 'India', states: ['Maharashtra','Delhi','West Bengal','Karnataka'], cities: ['Mumbai Heights','Delhi Vista','Kolkata Park','Bengaluru Point'], streets: ['Lotus Avenue','Station Road','Palm Street','Silver Lane'], zips: ['400001','110001','700001','560001'], lat: [8.0, 34.0], lon: [68.0, 97.0] },
+            usa: { country: 'United States', states: ['California','Texas','Florida','Mississippi'], cities: ['Sunset Ridge','Delta View','Pine Harbor','Canyon Point'], streets: ['Westline Drive','Harbor Street','Juniper Court','Summit Avenue'], zips: ['90210','73301','33101','39208'], lat: [25.0, 48.8], lon: [-124.5, -66.9] },
+            uk: { country: 'United Kingdom', states: ['England','Scotland','Wales','Northern Ireland'], cities: ['Riverford','Oakbridge','Silver Heath','Northfield'], streets: ['Bridge Street','Maple Court','Kingfisher Lane','Station Rise'], zips: ['SW1A 1AA','EH1 1YZ','CF10 1AA','BT1 5GS'], lat: [50.0, 58.7], lon: [-8.2, 1.8] },
+            can: { country: 'Canada', states: ['Ontario','Quebec','British Columbia','Alberta'], cities: ['Aurora Bay','Maple Point','North Creek','Lakeside'], streets: ['Cedar Avenue','Harbor Line','Willow Road','Forest Court'], zips: ['M5H 2N2','H2Y 1C6','V6B 1A1','T5J 0N3'], lat: [42.0, 62.0], lon: [-140.0, -52.0] },
+            aus: { country: 'Australia', states: ['New South Wales','Victoria','Queensland','Western Australia'], cities: ['Coral View','Harbor Glen','Sunridge','Blue Coast'], streets: ['Banksia Street','Ocean Road','Eucalypt Lane','Sunset Drive'], zips: ['2000','3000','4000','6000'], lat: [-43.7, -10.0], lon: [113.0, 153.6] },
+            pak: { country: 'Pakistan', states: ['Punjab','Sindh','Khyber Pakhtunkhwa','Balochistan'], cities: ['Karachi Heights','Lahore View','Islamabad Park','Multan Point'], streets: ['Garden Road','Canal Street','Model Avenue','City Walk'], zips: ['54000','74200','44000','60000'], lat: [23.5, 37.1], lon: [60.8, 77.8] },
+            uae: { country: 'United Arab Emirates', states: ['Dubai','Abu Dhabi','Sharjah','Ajman'], cities: ['Dubai Vista','Abu Dhabi Point','Sharjah Gate','Marina Bay'], streets: ['Palm Crescent','Skyline Drive','Harbor Walk','Oasis Avenue'], zips: ['00000','11111','22222','33333'], lat: [22.6, 26.1], lon: [51.5, 56.5] },
+            saudi: { country: 'Saudi Arabia', states: ['Riyadh','Makkah','Eastern Province','Madinah'], cities: ['Riyadh Gate','Jeddah Bay','Dammam View','Medina Park'], streets: ['Desert Road','Pearl Avenue','Central Walk','Palm Street'], zips: ['11564','21577','31411','42311'], lat: [16.0, 32.2], lon: [34.5, 55.7] },
+            malaysia: { country: 'Malaysia', states: ['Kuala Lumpur','Selangor','Penang','Johor'], cities: ['Kuala Vista','Penang Bay','Johor Point','Metro Garden'], streets: ['Lagoon Drive','Cedar Walk','Palm Avenue','Market Street'], zips: ['50000','40000','10000','80000'], lat: [1.0, 7.4], lon: [99.6, 119.3] },
+            singapore: { country: 'Singapore', states: ['Central Region','North East','North West','East Region'], cities: ['Marina View','Harbor Point','City Garden','Bayfront'], streets: ['Orchid Street','Civic Lane','Skyline Walk','River Road'], zips: ['018956','038983','048623','049145'], lat: [1.2, 1.5], lon: [103.6, 104.1] },
+            nepal: { country: 'Nepal', states: ['Bagmati','Gandaki','Lumbini','Koshi'], cities: ['Kathmandu Heights','Pokhara Bay','Lalitpur Point','Hillside'], streets: ['Temple Road','Valley Lane','Summit Street','Garden Walk'], zips: ['44600','33700','44700','00977'], lat: [26.3, 30.5], lon: [80.0, 88.2] },
+            srilanka: { country: 'Sri Lanka', states: ['Western Province','Central Province','Southern Province','Northern Province'], cities: ['Colombo Bay','Kandy Point','Galle View','Lagoon Park'], streets: ['Palm Road','Harbor Lane','Temple Street','Coast Avenue'], zips: ['00100','20000','80000','40000'], lat: [5.9, 9.9], lon: [79.5, 81.9] },
+            germany: { country: 'Germany', states: ['Berlin','Bavaria','Hamburg','Hesse'], cities: ['Berlin Park','Munich Point','Hamburg View','River Markt'], streets: ['Linden Street','Stone Way','Central Platz','Forest Road'], zips: ['10115','80331','20095','60311'], lat: [47.2, 55.1], lon: [5.8, 15.1] }
+        };
+        function pickFrom(list) { return list[Math.floor(Math.random() * list.length)]; }
+        function randomCoord(min, max) { return (Math.random() * (max - min) + min).toFixed(6); }
+        function generateFakeDetails() {
+            const region = document.getElementById('fregion').value;
+            const gender = document.getElementById('fgender').value;
+            const countryData = region === 'global' ? pickFrom([emailNameData.bd, emailNameData.india, emailNameData.usa, emailNameData.uk, emailNameData.can, emailNameData.aus, emailNameData.pak, emailNameData.uae, emailNameData.saudi, emailNameData.malaysia, emailNameData.singapore, emailNameData.nepal, emailNameData.srilanka, emailNameData.germany]) : (emailNameData[region] || emailNameData.usa);
+            const profileData = countryData.groups ? pickFrom(countryData.groups) : countryData;
+            const firstSource = gender === 'female' ? profileData.femaleFirst : profileData.maleFirst;
+            const first = pickFrom(firstSource);
+            const last = pickFrom(profileData.lastNames);
+            const addressPool = region === 'global' ? fakeAddressData.global : (fakeAddressData[region] || fakeAddressData.global);
+            const city = pickFrom(addressPool.cities);
+            const street = `${Math.floor(Math.random() * 900) + 100} ${pickFrom(addressPool.streets)}`;
+            const state = pickFrom(addressPool.states);
+            const zip = pickFrom(addressPool.zips);
+            const country = addressPool.country;
+            const latitude = randomCoord(addressPool.lat[0], addressPool.lat[1]);
+            const longitude = randomCoord(addressPool.lon[0], addressPool.lon[1]);
+            const serial = Math.floor(Math.random() * 9000) + 1000;
+            const name = `${first.charAt(0).toUpperCase()}${first.slice(1)} ${last.charAt(0).toUpperCase()}${last.slice(1)}`;
+            const phone = `+999 ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 900 + 100)} ${Math.floor(Math.random() * 9000 + 1000)}`;
+            document.getElementById('fakeName').innerText = name;
+            document.getElementById('fakeRole').innerText = gender;
+            document.getElementById('fakeStreet').innerText = street;
+            document.getElementById('fakeCity').innerText = city;
+            document.getElementById('fakeState').innerText = state;
+            document.getElementById('fakeZip').innerText = zip;
+            document.getElementById('fakePhone').innerText = phone;
+            document.getElementById('fakeCountry').innerText = country;
+            document.getElementById('fakeLat').innerText = latitude;
+            document.getElementById('fakeLon').innerText = longitude;
+        }
+        async function copyFakeBundle(btn) {
+            const bundle = [
+                `Name: ${document.getElementById('fakeName').innerText}`,
+                `Gender: ${document.getElementById('fakeRole').innerText}`,
+                `Street: ${document.getElementById('fakeStreet').innerText}`,
+                `City/Town: ${document.getElementById('fakeCity').innerText}`,
+                `State/Province/Region: ${document.getElementById('fakeState').innerText}`,
+                `Zip/Postal Code: ${document.getElementById('fakeZip').innerText}`,
+                `Phone Number: ${document.getElementById('fakePhone').innerText}`,
+                `Country: ${document.getElementById('fakeCountry').innerText}`,
+                `Latitude: ${document.getElementById('fakeLat').innerText}`,
+                `Longitude: ${document.getElementById('fakeLon').innerText}`
+            ].join('\n');
+            await copyAction(bundle, 'fake', btn);
+        }        async function copyAction(txt, type, btn) { if(!txt || txt === "------" || txt === "Ready...") return; try { await navigator.clipboard.writeText(txt); if(isS) { ding.currentTime = 0; ding.play(); } btn.classList.add('copied'); if(type === 'email') { btn.closest('.email-card').classList.add('used'); } setTimeout(() => btn.classList.remove('copied'), 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 3) hPass.pop(); document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + hPass.map((p, i) => `<div class="bg-white/5 p-2 rounded-lg text-[10px] flex justify-between border border-white/5 mt-1"><span>${p}</span><span class="text-orange-500">#${i+1}</span></div>`).join(''); } if(type === 'otp') save2fa(document.getElementById('secretInput').value.trim()); } catch (e) { } }
         function save2fa(k) { if(!k || k.length < 5) return; h2fa = h2fa.filter(i => i !== k); h2fa.unshift(k); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
-        function render2fa() { document.getElementById('historyList').innerHTML = h2fa.map((k, i) => `<div class="bg-white/5 p-4 rounded-xl mb-3 border border-white/5 text-[10px] font-mono flex justify-between"><span>${k}</span><button class="text-blue-500 font-black" onclick="copyAction('${k}', 'otp', this.parentElement)">COPY</button></div>`).join(''); }
-        function toggleHistory() { document.getElementById('historySidebar').style.right = document.getElementById('historySidebar').style.right === '0px' ? '-340px' : '0px'; document.getElementById('overlay').classList.toggle('hidden'); render2fa(); }
+        function render2fa() { document.getElementById('historyList').innerHTML = h2fa.length ? h2fa.map((k, i) => `<div class="bg-white/5 p-4 rounded-xl mb-3 border border-white/5 text-[10px] font-mono flex justify-between"><span>${k}</span><button class="text-blue-500 font-black" onclick="copyAction('${k}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="text-[10px] uppercase text-gray-500">No 2FA activity yet</p>'; }
+        function renderPassHistory() { document.getElementById('historyList').innerHTML = hPass.length ? hPass.map((p, i) => `<div class="bg-white/5 p-4 rounded-xl mb-3 border border-white/5 text-[10px] font-mono flex justify-between"><span>${p}</span><button class="text-orange-500 font-black" onclick="copyAction('${p}', 'pass', this.parentElement)">COPY</button></div>`).join('') : '<p class="text-[10px] uppercase text-gray-500">No password activity yet</p>'; }
+        function toggleHistory(type = activeHistoryType) { activeHistoryType = type; const sidebar = document.getElementById('historySidebar'); const isOpen = sidebar.style.right === '0px'; sidebar.style.right = isOpen ? '-340px' : '0px'; document.getElementById('overlay').classList.toggle('hidden', isOpen); if (!isOpen) { if (activeHistoryType === 'pass') renderPassHistory(); else render2fa(); } }
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function toggleSound() { isS = !isS; localStorage.setItem('bidhan_s', isS ? 'on' : 'off'); document.getElementById('sOn').style.color = isS ? '#3b82f6' : '#6b7280'; }
         async function paste2FA() { try { const txt = await navigator.clipboard.readText(); document.getElementById('secretInput').value = txt.trim(); update2FA(); } catch {} }
@@ -306,10 +417,30 @@
         function update2FA() { const k = document.getElementById('secretInput').value.trim().replace(/\s/g, ''), r = authenticator.timeRemaining(); document.getElementById('timerText').innerText = r; document.getElementById('timerBar').style.width = (r/30)*100 + "%"; if(!k) { document.getElementById('otpBox').innerText = "------"; return; } try { document.getElementById('otpBox').innerText = authenticator.generate(k); if(r === 30) save2fa(k); } catch {} }
         document.getElementById('secretInput').addEventListener('input', update2FA);
         setInterval(update2FA, 1000);
-        window.onload = () => { showHome(); update2FA(); genPass(false); };
+        window.onload = () => { showHome(); update2FA(); genPass(false); generateFakeDetails(); };
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
