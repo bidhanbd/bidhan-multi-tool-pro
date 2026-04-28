@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,7 +15,26 @@
             --glass: rgba(255, 255, 255, 0.03); --glass-border: rgba(255, 255, 255, 0.08);
         }
         .light-mode { --bg: #f3f4f6; --glass: rgba(0, 0, 0, 0.03); --glass-border: rgba(0, 0, 0, 0.1); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Segoe UI', sans-serif; transition: 0.4s; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; }
+        body { background: var(--bg); color: #e2e8f0; font-family: 'Segoe UI', sans-serif; transition: 0.4s; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; position: relative; }
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            padding: 3px;
+            background: linear-gradient(90deg, #ff0040, #ff7a00, #ffe600, #00d084, #00c2ff, #3b82f6, #8b5cf6, #ff0040);
+            background-size: 220% 100%;
+            animation: border-run 4.5s linear infinite;
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        @keyframes border-run {
+            0% { background-position: 100% 50%; }
+            100% { background-position: -120% 50%; }
+        }
 
         /* BRANDING & LOGO */
         .logo-shield { width: 55px; height: 60px; background: var(--deep-blue); clip-path: polygon(50% 0%, 100% 15%, 100% 85%, 50% 100%, 0% 85%, 0% 15%); display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(255,255,255,0.1); }
@@ -30,13 +49,23 @@
 
         /* BANNER */
         /* NAVIGATION */
-        .tool-nav-row { width: 100%; max-width: 1280px; display: flex; align-items: stretch; gap: 16px; padding: 0 16px; margin: -0.15rem 0 0.35rem; }
-        .nav-container { position: sticky; top: 4px; z-index: 250; width: 100%; max-width: none; margin: 0; display: flex; gap: 12px; padding: 5px; background: rgba(5, 7, 10, 0.82); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 20px; flex: 1; }
-        .nav-segment { flex: 1; }
-        .nav-btn { width: 100%; height: 48px; font-size: 11px; font-weight: 900; text-transform: uppercase; padding: 0 12px; color: #64748b; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 14px; transition: 0.4s; cursor: pointer; }
-        .nav-active { color: #3b82f6 !important; background: rgba(59, 130, 246, 0.1) !important; border: 2px solid #3b82f6 !important; box-shadow: 0 0 20px rgba(59, 130, 246, 0.2); transform: translateY(-2px); }
-        .menu-shortcut { width: 88px; min-width: 88px; height: 58px; display: flex; align-items: center; justify-content: center; border-radius: 20px; color: #60a5fa; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.28); box-shadow: 0 12px 24px rgba(0,0,0,0.2); cursor: pointer; transition: 0.3s; flex: 0 0 auto; }
-        .menu-shortcut:hover { transform: translateY(-2px); border-color: rgba(96,165,250,0.65); color: #93c5fd; background: rgba(59,130,246,0.12); }
+        .tool-nav-row { width: 100%; max-width: 1280px; display: flex; justify-content: center; padding: 0 16px; margin: -0.1rem 0 0.7rem; position: relative; z-index: 260; }
+        .menu-wrap { position: relative; width: 100%; max-width: 760px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
+        .menu-panel { position: relative; width: 100%; padding: 10px 12px; background: rgba(9, 14, 24, 0.94); border: 1px solid rgba(59,130,246,0.18); border-radius: 14px; box-shadow: 0 14px 30px rgba(0,0,0,0.28); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: 1; }
+        .menu-panel-dropdown { width: 165px; padding: 8px; background: rgba(9, 14, 24, 0.96); border: 1px solid rgba(59,130,246,0.18); border-radius: 14px; box-shadow: 0 14px 30px rgba(0,0,0,0.28); }
+        .menu-panel-dropdown.hidden-tool { display: none !important; }
+        .menu-drop-link { width: 100%; height: 40px; display: flex; align-items: center; gap: 9px; padding: 0 12px; border-radius: 10px; font-size: 10px; font-weight: 900; text-transform: uppercase; color: #94a3b8; background: transparent !important; border: 0 !important; cursor: pointer; transition: 0.2s; text-align: left; }
+        .menu-drop-link + .menu-drop-link { margin-top: 4px; }
+        .menu-drop-link:hover { color: #dbeafe; background: rgba(59,130,246,0.1) !important; }
+        .menu-drop-link-active { color: #60a5fa !important; background: rgba(59,130,246,0.12) !important; }
+        .menu-drop-link svg { width: 14px; height: 14px; }
+        .menu-notch { position: absolute; top: -8px; left: 0; width: 16px; height: 16px; background: rgba(9, 14, 24, 0.94); border-left: 1px solid rgba(59,130,246,0.18); border-top: 1px solid rgba(59,130,246,0.18); transform: rotate(45deg); border-top-left-radius: 5px; transition: left 0.28s ease; }
+        .menu-link { flex: 1; min-width: 0; height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0 6px; border-radius: 10px; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #7f8ea3; background: transparent !important; border: 0 !important; cursor: pointer; transition: 0.25s; text-align: center; }
+        .menu-link svg { width: 18px; height: 18px; }
+        .menu-link:hover { color: #dbeafe; transform: translateY(-1px); }
+        .menu-link-active { color: #60a5fa !important; background: rgba(59,130,246,0.1) !important; }
+        .menu-link-active svg { color: #60a5fa; }
+        .menu-link-menu { color: #93c5fd; }
 
         /* DEV PROFILE HOVER */
         .dev-card-wrapper { position: relative; padding-bottom: 20px; }
@@ -68,14 +97,75 @@
         .input-action-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(0,0,0,0.3); }
         .input-action-btn:active { transform: scale(0.96); }
         .hidden-tool { display: none !important; }
-        .log-trigger { position: absolute; top: -15px; right: 10px; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.4); padding: 6px 12px; border-radius: 8px; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #3b82f6; cursor: pointer; }
+        .log-trigger { position: absolute; top: 18px; right: -134px; background: rgba(59, 130, 246, 0.2) !important; border: 1px solid rgba(59, 130, 246, 0.4) !important; padding: 6px 12px; border-radius: 8px; font-size: 9px; font-weight: 900; text-transform: uppercase; color: #3b82f6 !important; cursor: pointer; z-index: 7; }
+        .inline-history {
+            position: absolute;
+            top: 56px;
+            right: -244px;
+            width: 232px;
+            padding: 12px;
+            border-radius: 16px;
+            background: rgba(9, 14, 24, 0.96);
+            border: 1px solid rgba(59,130,246,0.2);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+            z-index: 6;
+            transform-origin: top right;
+            transform: translateY(-8px) scale(0.96);
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.22s ease, opacity 0.22s ease;
+        }
+        @media (max-width: 1100px) {
+            .log-trigger {
+                right: 12px;
+            }
+            .inline-history {
+                right: 12px;
+                top: 58px;
+            }
+        }
+        .inline-history.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .inline-history h3 {
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #60a5fa;
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .inline-history-list { display: flex; flex-direction: column; gap: 8px; max-height: 180px; overflow-y: auto; }
+        .inline-history-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 10px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.05);
+            font-size: 10px;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        }
+        .inline-history-copy {
+            color: #60a5fa;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: transparent !important;
+            border: 0 !important;
+            padding: 0 !important;
+        }
+        .inline-history-empty {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #6b7280;
+        }
         .pro-footer { margin-top: auto; padding: 40px 0; width: 100%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.1); }
-        #homeDashboard { gap: 18px; }
-        #homeDashboard .glass-panel { min-height: 92px; justify-content: center; }
-        .home-nav-card { min-height: 92px; padding: 14px 16px; border-radius: 20px; }
-        .home-nav-card .card-icon { margin-bottom: 8px; }
-        .home-nav-card .card-icon svg { width: 34px; height: 34px; }
-        .home-nav-card h3 { font-size: 13px; }
     </style>
 </head>
 <body class="p-4">
@@ -101,45 +191,47 @@
     </header>
 
     <div id="toolNavRow" class="tool-nav-row">
-        <button onclick="showHome()" class="menu-shortcut" aria-label="Menu">
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
-                <path stroke-linecap="round" d="M4 7h16"></path>
-                <path stroke-linecap="round" d="M4 12h16"></path>
-                <path stroke-linecap="round" d="M4 17h16"></path>
-            </svg>
-        </button>
-        <nav id="mainNav" class="nav-container hidden-tool">
-            <div class="nav-segment"><button onclick="switchTool('2fa')" id="btn-2fa" class="nav-btn nav-active">2FA</button></div>
-            <div class="nav-segment"><button onclick="switchTool('pass')" id="btn-pass" class="nav-btn">Password</button></div>
-            <div class="nav-segment"><button onclick="switchTool('email')" id="btn-email" class="nav-btn">Email Generator</button></div>
-            <div class="nav-segment"><button onclick="switchTool('fake')" id="btn-fake" class="nav-btn">Fake Details</button></div>
-        </nav>
-    </div>
-
-    <div id="homeDashboard" class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-4 px-4 mt-1">
-        <div onclick="switchTool('2fa')" class="home-nav-card glass-panel flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="card-icon text-3xl"><svg class="text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l1.7 1.7 3.3-3.4"></path></svg></div><h3 class="font-black text-blue-500 uppercase">2FA</h3></div>
-        <div onclick="switchTool('pass')" class="home-nav-card glass-panel flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="card-icon text-3xl"><svg class="text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 7a5 5 0 10-9.6 2H4v4h3v3h3v3h4l1.8-1.8A5 5 0 0015 7z"></path><circle cx="10" cy="7" r="1.2" fill="currentColor" stroke="none"></circle></svg></div><h3 class="font-black text-orange-500 uppercase">Password</h3></div>
-        <div onclick="switchTool('email')" class="home-nav-card glass-panel flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="card-icon text-3xl"><svg class="text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg></div><h3 class="font-black text-green-500 uppercase">Email Generator</h3></div>
-        <div onclick="switchTool('fake')" class="home-nav-card glass-panel flex flex-col items-center cursor-pointer hover:-translate-y-2 transition shadow-lg"><div class="card-icon text-3xl"><svg class="text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h10M7 16h6"></path><rect x="4" y="4" width="16" height="16" rx="2"></rect></svg></div><h3 class="font-black text-pink-500 uppercase">Fake Details</h3></div>
+        <div class="menu-wrap">
+            <aside id="mainNav" class="menu-panel">
+                <button id="btn-menu" class="menu-link menu-link-menu" onclick="toggleMenu(event)" aria-label="Menu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path stroke-linecap="round" d="M4 7h16"></path><path stroke-linecap="round" d="M4 12h16"></path><path stroke-linecap="round" d="M4 17h16"></path></svg><span>Menu</span></button>
+                <button onclick="switchTool('2fa')" id="btn-2fa" class="menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l1.7 1.7 3.3-3.4"></path></svg><span>2FA</span></button>
+                <button onclick="switchTool('pass')" id="btn-pass" class="menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10a4.5 4.5 0 10-8.63 1.76H6v3h2.25v2.25h2.25v2.25h3l1.4-1.4A4.5 4.5 0 0016.5 10z"></path><circle cx="11.25" cy="10" r="1.1" fill="currentColor" stroke="none"></circle></svg><span>Password</span></button>
+                <button onclick="switchTool('email')" id="btn-email" class="menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg><span>Email</span></button>
+            </aside>
+            <div id="menuNotch" class="menu-notch hidden-tool"></div>
+            <aside id="dropdownNav" class="menu-panel-dropdown hidden-tool">
+                <button onclick="switchTool('2fa')" id="drop-2fa" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 3v5c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-3z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12l1.7 1.7 3.3-3.4"></path></svg><span>2FA</span></button>
+                <button onclick="switchTool('pass')" id="drop-pass" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10a4.5 4.5 0 10-8.63 1.76H6v3h2.25v2.25h2.25v2.25h3l1.4-1.4A4.5 4.5 0 0016.5 10z"></path><circle cx="11.25" cy="10" r="1.1" fill="currentColor" stroke="none"></circle></svg><span>Password</span></button>
+                <button onclick="switchTool('email')" id="drop-email" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg><span>Email Generator</span></button>
+                <button onclick="switchTool('fake')" id="drop-fake" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4.5h7l3 3V19a1.5 1.5 0 01-1.5 1.5h-8A1.5 1.5 0 016 19V6a1.5 1.5 0 011.5-1.5z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M14 4.5V8h3"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8.5 11h6.5M8.5 14h6.5M8.5 17H13"></path></svg><span>Fake Details</span></button>
+            </aside>
+        </div>
     </div>
 
     <main class="max-w-[44.8rem] w-full flex flex-col gap-4 mb-20 px-4 -mt-6">
         <section id="tool-2fa" class="glass-panel p-6 pt-5 flex flex-col items-center gap-5 hidden-tool relative -mt-2">
             <button onclick="toggleHistory('otp')" class="log-trigger">Activity Log</button>
-            <div class="w-full flex flex-col md:flex-row items-stretch gap-3">
-                <input type="text" id="secretInput" placeholder="ENTER 2FA SECRET" class="flex-1 p-4 rounded-2xl text-center text-blue-500 font-mono text-lg uppercase">
-                <button type="button" onclick="paste2FA()" class="input-action-btn bg-blue-600 hover:bg-blue-500 text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h8M8 11h8M8 15h5"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 3h6l2 2h3a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1h3V3z"></path></svg></button>
+            <div id="otpHistoryCard" class="inline-history">
+                <h3>2FA Activity</h3>
+                <div id="otpHistoryList" class="inline-history-list"></div>
+            </div>
+            <div class="w-full flex flex-col md:flex-row items-stretch gap-3 max-w-[40rem] mx-auto">
+                <input type="text" id="secretInput" placeholder="ENTER 2FA SECRET" class="flex-1 p-3 rounded-2xl text-center text-blue-500 font-mono text-base uppercase">
                 <button type="button" onclick="clear2FA()" class="input-action-btn bg-red-600 hover:bg-red-500 text-white"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 7V4h6v3"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 7l1 12h6l1-12"></path></svg></button>
             </div>
-            <div class="flex items-center gap-6"><div id="otpBox" class="text-5xl font-black text-white tracking-[8px]">------</div><div onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+            <div class="flex items-center gap-5"><div id="otpBox" class="text-4xl font-black text-white tracking-[6px]">------</div><div onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
             <div class="w-full max-w-sm"><div style="height:5px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;"><div id="timerBar" style="height:100%; width:100%; background:#3b82f6; transition:width 1s linear;"></div></div><div class="flex justify-between mt-3 text-[10px] font-black text-gray-500 uppercase"><span>Active Sync</span><span><span id="timerText" class="text-white">30</span>s</span></div></div>
         </section>
 
-        <section id="tool-pass" class="glass-panel p-6 pt-4 flex flex-col items-center gap-5 hidden-tool relative -mt-2">
+        <section id="tool-pass" class="glass-panel p-5 pt-3 flex flex-col items-center gap-4 hidden-tool relative -mt-3">
             <button onclick="toggleHistory('pass')" class="log-trigger">Activity Log</button>
-            <div class="w-full flex items-center justify-center gap-5 bg-black/40 p-7 rounded-[28px] border border-white/5 -mt-1"><div id="passOutput" class="text-xl md:text-[2rem] font-mono font-bold text-green-500">Ready...</div><div onclick="copyAction(document.getElementById('passOutput').innerText, 'pass', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
-            <button onclick="genPass(true)" class="w-full max-w-sm py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition -mt-1">Generate Password</button>
-            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-4 -mt-1"><div class="flex flex-col gap-4 glass-panel p-5 text-[9px] font-bold uppercase"><div class="flex justify-between items-center gap-4"><label>Size: <span id="lenV" class="text-blue-500">16</span></label><input type="range" id="length" min="8" max="50" value="16" oninput="document.getElementById('lenV').innerText = this.value" class="w-[48%]"></div><label class="flex justify-between items-center cursor-pointer">Uppercase <input type="checkbox" id="upper" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Numbers <input type="checkbox" id="num" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Symbols <input type="checkbox" id="sym" checked class="w-4 h-4"></label></div><div id="h-list-pass" class="glass-panel p-6 flex flex-col gap-3 overflow-y-auto max-h-[160px] text-[9px] uppercase font-black text-gray-500"><p>Copy History</p></div></div>
+            <div id="passHistoryCard" class="inline-history">
+                <h3>Password Activity</h3>
+                <div id="passHistoryList" class="inline-history-list"></div>
+            </div>
+            <div class="w-full max-w-[40rem] flex items-center justify-center gap-4 bg-black/40 p-6 rounded-[26px] border border-white/5 -mt-1"><button type="button" onclick="genPass(true)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v6h6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20 20v-6h-6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20 10A8 8 0 007 6l-3 4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 14a8 8 0 0013 4l3-4"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></button><div id="passOutput" class="text-lg md:text-[1.7rem] font-mono font-bold text-green-500">Ready...</div><div onclick="copyAction(document.getElementById('passOutput').innerText, 'pass', this)" class="copy-wrapper"><div class="copy-circle"></div><svg class="copy-svg w-6 h-6 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
+            <button onclick="genPass(true)" class="w-full max-w-[22rem] py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-black uppercase text-xs active:scale-95 transition -mt-1">Generate Password</button>
+            <div class="w-full max-w-[40rem] grid grid-cols-1 md:grid-cols-2 gap-3 -mt-1"><div class="flex flex-col gap-3 glass-panel p-4 text-[8.5px] font-bold uppercase"><div class="flex justify-between items-center gap-3"><label>Size: <span id="lenV" class="text-blue-500">16</span></label><input type="range" id="length" min="8" max="50" value="16" oninput="document.getElementById('lenV').innerText = this.value" class="w-[46%]"></div><label class="flex justify-between items-center cursor-pointer">Uppercase <input type="checkbox" id="upper" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Numbers <input type="checkbox" id="num" checked class="w-4 h-4"></label><label class="flex justify-between items-center cursor-pointer">Symbols <input type="checkbox" id="sym" checked class="w-4 h-4"></label></div><div id="h-list-pass" class="glass-panel p-5 flex flex-col gap-3 overflow-y-auto max-h-[150px] text-[9px] uppercase font-black text-gray-500"><p>Copy History</p></div></div>
         </section>
 
         <section id="tool-email" class="glass-panel p-7 flex flex-col items-center gap-6 hidden-tool">
@@ -181,9 +273,6 @@
         </section>
     </main>
 
-    <div id="historySidebar" class="fixed top-0 right-[-340px] w-[320px] h-full glass-panel rounded-none p-8 z-[3000] transition-all overflow-y-auto"><h2 class="text-sm font-black uppercase text-blue-500 mb-8 border-b border-white/5 pb-4">Activity Log</h2><div id="historyList"></div></div>
-    <div id="overlay" onclick="toggleHistory()" class="fixed inset-0 bg-black/60 hidden z-[2500] backdrop-blur-sm"></div>
-
     <footer class="pro-footer w-full">
         <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Designed & Developed by <a href="https://github.com/bidhanbd" target="_blank" style="color:#3b82f6; text-decoration:none;">BIDHAN</a></p>
     </footer>
@@ -193,8 +282,65 @@
         let isS = localStorage.getItem('bidhan_s') !== 'off', h2fa = JSON.parse(localStorage.getItem('bidhan_2fa_v25') || '[]'), hPass = [], activeHistoryType = 'otp';
         const ding = new Audio('https://www.fesliyanstudios.com/play-mp3/387');
 
-        function showHome() { document.getElementById('homeDashboard').classList.remove('hidden-tool'); document.getElementById('mainNav').classList.add('hidden-tool'); document.getElementById('tool-2fa').classList.add('hidden-tool'); document.getElementById('tool-pass').classList.add('hidden-tool'); document.getElementById('tool-email').classList.add('hidden-tool'); document.getElementById('tool-fake').classList.add('hidden-tool'); }
-        function switchTool(t) { document.getElementById('homeDashboard').classList.add('hidden-tool'); document.getElementById('mainNav').classList.remove('hidden-tool'); document.getElementById('tool-2fa').classList.toggle('hidden-tool', t !== '2fa'); document.getElementById('tool-pass').classList.toggle('hidden-tool', t !== 'pass'); document.getElementById('tool-email').classList.toggle('hidden-tool', t !== 'email'); document.getElementById('tool-fake').classList.toggle('hidden-tool', t !== 'fake'); document.getElementById('btn-2fa').className = t === '2fa' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-pass').className = t === 'pass' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-email').className = t === 'email' ? 'nav-btn nav-active' : 'nav-btn'; document.getElementById('btn-fake').className = t === 'fake' ? 'nav-btn nav-active' : 'nav-btn'; }
+        let currentPrimaryNav = null;
+        function hideAllTools() {
+            document.getElementById('tool-2fa').classList.add('hidden-tool');
+            document.getElementById('tool-pass').classList.add('hidden-tool');
+            document.getElementById('tool-email').classList.add('hidden-tool');
+            document.getElementById('tool-fake').classList.add('hidden-tool');
+        }
+        function toggleMenu(event) {
+            if (event) event.stopPropagation();
+            const menu = document.getElementById('dropdownNav');
+            const notch = document.getElementById('menuNotch');
+            const willOpen = menu.classList.contains('hidden-tool');
+            menu.classList.toggle('hidden-tool', !willOpen);
+            notch.classList.toggle('hidden-tool', !willOpen);
+            if (willOpen) {
+                hideAllTools();
+                currentPrimaryNav = null;
+                setActiveMenu('btn-menu', false);
+                updateDropdownNotch();
+            } else {
+                closeMenu();
+            }
+        }
+        function closeMenu() {
+            document.getElementById('dropdownNav').classList.add('hidden-tool');
+            document.getElementById('menuNotch').classList.add('hidden-tool');
+        }
+        function updateDropdownNotch() {
+            const notch = document.getElementById('menuNotch');
+            const menuBtn = document.getElementById('btn-menu');
+            const wrap = document.querySelector('.menu-wrap');
+            if (!notch || !menuBtn || !wrap) return;
+            const menuRect = menuBtn.getBoundingClientRect();
+            const wrapRect = wrap.getBoundingClientRect();
+            notch.style.left = `${menuRect.left - wrapRect.left + (menuRect.width / 2) - 9}px`;
+        }
+        function updateMenuNotch(targetId) {
+            const activeEl = document.getElementById(targetId);
+            const wrap = document.querySelector('.menu-wrap');
+            if (!activeEl || !wrap) return;
+        }
+        function setActiveMenu(target, storePrimary = true) {
+            ['btn-menu', 'btn-2fa', 'btn-pass', 'btn-email', 'btn-fake'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('menu-link-active');
+            });
+            ['drop-2fa', 'drop-pass', 'drop-email', 'drop-fake'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('menu-drop-link-active');
+            });
+            const activeEl = document.getElementById(target);
+            if (activeEl) activeEl.classList.add('menu-link-active');
+            if (storePrimary && target !== 'btn-menu') currentPrimaryNav = target;
+            const dropEl = document.getElementById(target.replace('btn-', 'drop-'));
+            if (dropEl) dropEl.classList.add('menu-drop-link-active');
+            updateMenuNotch(target);
+        }
+        function showHome() { hideAllTools(); currentPrimaryNav = null; ['btn-menu', 'btn-2fa', 'btn-pass', 'btn-email', 'btn-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-link-active'); }); ['drop-2fa', 'drop-pass', 'drop-email', 'drop-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-drop-link-active'); }); }
+        function switchTool(t) { document.getElementById('tool-2fa').classList.toggle('hidden-tool', t !== '2fa'); document.getElementById('tool-pass').classList.toggle('hidden-tool', t !== 'pass'); document.getElementById('tool-email').classList.toggle('hidden-tool', t !== 'email'); document.getElementById('tool-fake').classList.toggle('hidden-tool', t !== 'fake'); setActiveMenu(`btn-${t}`); closeMenu(); }
         
         function genPass(play) { if(play && isS) { ding.currentTime = 0; ding.play(); } const len = parseInt(document.getElementById('length').value), l="abcdefghijklmnopqrstuvwxyz", u="ABCDEFGHIJKLMNOPQRSTUVWXYZ", n="0123456789", s="!@#$%^&*()_+"; let c = l, m = []; if(document.getElementById('upper').checked) { c+=u; m.push(u[Math.floor(Math.random()*u.length)]); } if(document.getElementById('num').checked) { c+=n; m.push(n[Math.floor(Math.random()*n.length)]); } if(document.getElementById('sym').checked) { c+=s; m.push(s[Math.floor(Math.random()*s.length)]); } let p = m.join(''); for(let i=p.length; i<len; i++) p += c.charAt(Math.floor(Math.random()*c.length)); document.getElementById('passOutput').innerText = p.split('').sort(()=>0.5-Math.random()).join(''); }
                 const emailDomains = ['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','me.com','mac.com','live.com','msn.com','aol.com','proton.me','protonmail.com','zoho.com','zohomail.com','yandex.com','yandex.ru','gmx.com','gmx.us','mail.com','email.com','fastmail.com','hey.com'];
@@ -418,9 +564,22 @@
             await copyAction(bundle, 'fake', btn);
         }        async function copyAction(txt, type, btn) { if(!txt || txt === "------" || txt === "Ready...") return; try { await navigator.clipboard.writeText(txt); if(isS) { ding.currentTime = 0; ding.play(); } btn.classList.add('copied'); if(type === 'email') { btn.closest('.email-card').classList.add('used'); } setTimeout(() => btn.classList.remove('copied'), 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 3) hPass.pop(); document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + hPass.map((p, i) => `<div class="bg-white/5 p-2 rounded-lg text-[10px] flex justify-between border border-white/5 mt-1"><span>${p}</span><span class="text-orange-500">#${i+1}</span></div>`).join(''); } if(type === 'otp') save2fa(document.getElementById('secretInput').value.trim()); } catch (e) { } }
         function save2fa(k) { if(!k || k.length < 5) return; h2fa = h2fa.filter(i => i !== k); h2fa.unshift(k); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
-        function render2fa() { document.getElementById('historyList').innerHTML = h2fa.length ? h2fa.map((k, i) => `<div class="bg-white/5 p-4 rounded-xl mb-3 border border-white/5 text-[10px] font-mono flex justify-between"><span>${k}</span><button class="text-blue-500 font-black" onclick="copyAction('${k}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="text-[10px] uppercase text-gray-500">No 2FA activity yet</p>'; }
-        function renderPassHistory() { document.getElementById('historyList').innerHTML = hPass.length ? hPass.map((p, i) => `<div class="bg-white/5 p-4 rounded-xl mb-3 border border-white/5 text-[10px] font-mono flex justify-between"><span>${p}</span><button class="text-orange-500 font-black" onclick="copyAction('${p}', 'pass', this.parentElement)">COPY</button></div>`).join('') : '<p class="text-[10px] uppercase text-gray-500">No password activity yet</p>'; }
-        function toggleHistory(type = activeHistoryType) { activeHistoryType = type; const sidebar = document.getElementById('historySidebar'); const isOpen = sidebar.style.right === '0px'; sidebar.style.right = isOpen ? '-340px' : '0px'; document.getElementById('overlay').classList.toggle('hidden', isOpen); if (!isOpen) { if (activeHistoryType === 'pass') renderPassHistory(); else render2fa(); } }
+        function render2fa() { document.getElementById('otpHistoryList').innerHTML = h2fa.length ? h2fa.map((k, i) => `<div class="inline-history-item"><span>${k}</span><button class="inline-history-copy" onclick="copyAction('${k}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No 2FA activity yet</p>'; }
+        function renderPassHistory() { document.getElementById('passHistoryList').innerHTML = hPass.length ? hPass.map((p, i) => `<div class="inline-history-item"><span>${p}</span><button class="inline-history-copy" onclick="copyAction('${p}', 'pass', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No password activity yet</p>'; }
+        function toggleHistory(type = activeHistoryType) {
+            activeHistoryType = type;
+            const otpCard = document.getElementById('otpHistoryCard');
+            const passCard = document.getElementById('passHistoryCard');
+            const targetCard = type === 'pass' ? passCard : otpCard;
+            const otherCard = type === 'pass' ? otpCard : passCard;
+            otherCard.classList.remove('open');
+            if (targetCard.classList.contains('open')) {
+                targetCard.classList.remove('open');
+                return;
+            }
+            if (type === 'pass') renderPassHistory(); else render2fa();
+            targetCard.classList.add('open');
+        }
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function toggleSound() { isS = !isS; localStorage.setItem('bidhan_s', isS ? 'on' : 'off'); document.getElementById('sOn').style.color = isS ? '#3b82f6' : '#6b7280'; }
         async function paste2FA() { try { const txt = await navigator.clipboard.readText(); document.getElementById('secretInput').value = txt.trim(); update2FA(); } catch {} }
@@ -429,9 +588,23 @@
         document.getElementById('secretInput').addEventListener('input', update2FA);
         setInterval(update2FA, 1000);
         window.onload = () => { showHome(); update2FA(); genPass(false); generateFakeDetails(); };
+        window.addEventListener('resize', () => {
+            updateDropdownNotch();
+        });
+        document.addEventListener('click', (event) => {
+            const wrap = document.querySelector('.menu-wrap');
+            if (wrap && !wrap.contains(event.target)) closeMenu();
+            const otpCard = document.getElementById('otpHistoryCard');
+            const passCard = document.getElementById('passHistoryCard');
+            const otpBtn = document.querySelector('#tool-2fa .log-trigger');
+            const passBtn = document.querySelector('#tool-pass .log-trigger');
+            if (otpCard && !otpCard.contains(event.target) && otpBtn && !otpBtn.contains(event.target)) otpCard.classList.remove('open');
+            if (passCard && !passCard.contains(event.target) && passBtn && !passBtn.contains(event.target)) passCard.classList.remove('open');
+        });
     </script>
 </body>
 </html>
+
 
 
 
