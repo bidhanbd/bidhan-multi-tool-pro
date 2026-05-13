@@ -13,35 +13,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --accent: #3b82f6; --deep-blue: #1e3a8a; --fire: #ff4500; --gold: #ffcc00; --bg: #05070a; --success: #22c55e;
-            --gemini-start: #8b5cf6; --gemini-end: #3b82f6;
-            --glass: rgba(255, 255, 255, 0.03); --glass-border: rgba(255, 255, 255, 0.08);
+            --accent: #63a4ff; --deep-blue: #65a6ff; --fire: #ff6259; --gold: #ffcc00; --bg: #6eb0ff; --success: #22c55e;
+            --gemini-start: #77b2ff; --gemini-end: #7d6eff;
+            --glass: rgba(255, 255, 255, 0.84); --glass-border: rgba(255, 255, 255, 0.38);
+            --glass-shadow: 0 18px 45px rgba(32, 38, 87, 0.18);
+            --panel-ink: #f8fbff;
+            --panel-ink-strong: #13213b;
+            --panel-muted: #66758f;
         }
-        .light-mode { --bg: #f3f4f6; --glass: rgba(255, 255, 255, 0.82); --glass-border: rgba(15, 23, 42, 0.12); }
-        body { background: var(--bg); color: #e2e8f0; font-family: 'Segoe UI', sans-serif; transition: 0.4s; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; position: relative; }
+        .light-mode { --bg: #6eb0ff; --glass: rgba(255, 255, 255, 0.84); --glass-border: rgba(255, 255, 255, 0.38); }
+        body { background: linear-gradient(135deg, #74b4ff 0%, #80b1ff 35%, #7e8cff 68%, #846fe7 100%); color: #0f172a; font-family: 'Segoe UI', sans-serif; transition: 0.4s; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; position: relative; }
         body.light-mode { color: #0f172a; }
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            padding: 3px;
-            background: linear-gradient(90deg, #ff0040, #ff7a00, #ffe600, #00d084, #00c2ff, #3b82f6, #8b5cf6, #ff0040);
-            background-size: 220% 100%;
-            animation: border-run 4.5s linear infinite;
-            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-            -webkit-mask-composite: xor;
-            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-            mask-composite: exclude;
+            background:
+                radial-gradient(circle at 20% 18%, rgba(255,255,255,0.2) 0, rgba(255,255,255,0.2) 1px, transparent 1.6px) 0 0/24px 24px,
+                radial-gradient(ellipse at top left, rgba(255,255,255,0.18), transparent 42%),
+                radial-gradient(ellipse at bottom right, rgba(42,29,84,0.25), transparent 40%);
             pointer-events: none;
-            z-index: 9999;
-        }
-        @keyframes border-run {
-            0% { background-position: 100% 50%; }
-            100% { background-position: -120% 50%; }
+            z-index: -1;
         }
 
         /* BRANDING & LOGO */
-        .logo-shield { width: 55px; height: 60px; background: var(--deep-blue); clip-path: polygon(50% 0%, 100% 15%, 100% 85%, 50% 100%, 0% 85%, 0% 15%); display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(255,255,255,0.1); }
+        .logo-shield { width: 55px; height: 60px; background: var(--deep-blue); clip-path: polygon(50% 0%, 100% 15%, 100% 85%, 50% 100%, 0% 85%, 0% 15%); display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid rgba(255,255,255,0.28); }
         .logo-shield::after { content: ""; display: none; }
         .logo-shield svg { width: 26px; height: 26px; color: var(--gold); }
         .brand-title { font-size: clamp(1.5rem, 5vw, 2.5rem); font-weight: 900; text-transform: uppercase; font-family: 'Roboto', sans-serif; letter-spacing: -1px; }
@@ -49,20 +45,26 @@
 
         /* TOP CTRLS */
         .top-ctrl-bar { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 12px; z-index: 100; }
-        .ctrl-btn { background: var(--glass); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); padding: 12px; border-radius: 15px; transition: 0.3s; cursor: pointer; }
+        .ctrl-btn { background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.42); padding: 12px; border-radius: 15px; transition: 0.3s; cursor: pointer; box-shadow: 0 10px 26px rgba(38,45,92,0.12); }
 
         /* BANNER */
         /* NAVIGATION */
-        .tool-nav-row { width: 100%; max-width: 1280px; display: flex; justify-content: center; padding: 0 16px; margin: -0.1rem 0 0.7rem; position: relative; z-index: 260; }
-        .menu-wrap { position: relative; width: 100%; max-width: 760px; display: flex; flex-direction: column; align-items: stretch; gap: 10px; }
-        .menu-panel { position: relative; width: 100%; padding: 10px 12px; background: rgba(9, 14, 24, 0.94); border: 1px solid rgba(59,130,246,0.18); border-radius: 14px; box-shadow: 0 14px 30px rgba(0,0,0,0.28); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex: 1; }
-        .menu-panel-dropdown { width: 165px; padding: 8px; background: rgba(9, 14, 24, 0.96); border: 1px solid rgba(59,130,246,0.18); border-radius: 14px; box-shadow: 0 14px 30px rgba(0,0,0,0.28); }
+        .tool-nav-row { width: 100%; max-width: 1280px; display: flex; justify-content: flex-end; padding: 0 24px; margin: 0.18rem 0 0.55rem; position: relative; z-index: 260; }
+        .menu-wrap { position: relative; width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+        .menu-panel { position: relative; width: auto; min-width: 340px; padding: 8px 10px; background: rgba(28, 36, 70, 0.42); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.18); border-radius: 16px; box-shadow: 0 18px 40px rgba(27, 34, 74, 0.2); display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
+        .menu-panel-dropdown { position: absolute; top: calc(100% + 10px); right: 0; width: min(860px, calc(100vw - 48px)); padding: 16px; background: rgba(23, 30, 61, 0.72); backdrop-filter: blur(26px); border: 1px solid rgba(255,255,255,0.16); border-radius: 22px; box-shadow: 0 22px 60px rgba(24, 30, 70, 0.3); }
         .menu-panel-dropdown.hidden-tool { display: none !important; }
-        .menu-drop-link { width: 100%; height: 40px; display: flex; align-items: center; gap: 9px; padding: 0 12px; border-radius: 10px; font-size: 13px; font-weight: 900; text-transform: uppercase; color: #94a3b8; background: transparent !important; border: 0 !important; cursor: pointer; transition: 0.2s; text-align: left; }
-        .menu-drop-link + .menu-drop-link { margin-top: 4px; }
-        .menu-drop-link:hover { color: #dbeafe; background: rgba(59,130,246,0.1) !important; }
-        .menu-drop-link-active { color: #60a5fa !important; background: rgba(59,130,246,0.12) !important; }
-        .menu-drop-link svg { width: 14px; height: 14px; }
+        .menu-drop-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 0; }
+        .menu-drop-col { padding: 8px 20px; }
+        .menu-drop-col + .menu-drop-col { border-left: 1px solid rgba(255,255,255,0.08); }
+        .menu-drop-link { width: 100%; min-height: 78px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; padding: 10px 12px; border-radius: 14px; font-size: 13px; font-weight: 900; text-transform: none; color: #f8fbff; background: rgba(255,255,255,0.01) !important; border: 1px solid transparent !important; cursor: pointer; transition: 0.2s; text-align: left; }
+        .menu-drop-link + .menu-drop-link { margin-top: 6px; }
+        .menu-drop-link:hover { color: #ffffff; background: rgba(255,255,255,0.08) !important; border-color: rgba(255,255,255,0.12) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.05); }
+        .menu-drop-link-active { color: #ffffff !important; background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.14) !important; }
+        .menu-drop-link svg { width: 16px; height: 16px; }
+        .menu-drop-head { display: flex; align-items: center; gap: 8px; }
+        .menu-drop-title { font-size: 15px; font-weight: 900; line-height: 1.1; }
+        .menu-drop-desc { font-size: 11px; line-height: 1.35; color: rgba(241,245,249,0.82); font-weight: 700; text-transform: none; }
         .menu-drop-link span,
         .menu-link span {
             display: block;
@@ -72,13 +74,21 @@
             white-space: nowrap;
             text-overflow: ellipsis;
         }
-        .menu-notch { position: absolute; top: -8px; left: 0; width: 16px; height: 16px; background: rgba(9, 14, 24, 0.94); border-left: 1px solid rgba(59,130,246,0.18); border-top: 1px solid rgba(59,130,246,0.18); transform: rotate(45deg); border-top-left-radius: 5px; transition: left 0.28s ease; }
-        .menu-link { flex: 1; min-width: 0; height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0 6px; border-radius: 10px; font-size: 12px; font-weight: 900; text-transform: uppercase; color: #7f8ea3; background: transparent !important; border: 0 !important; cursor: pointer; transition: 0.25s; text-align: center; }
+        .menu-notch { position: absolute; top: calc(100% + 2px); right: 152px; width: 16px; height: 16px; background: rgba(23, 30, 61, 0.76); border-left: 1px solid rgba(255,255,255,0.16); border-top: 1px solid rgba(255,255,255,0.16); transform: rotate(45deg); border-top-left-radius: 5px; transition: opacity 0.2s ease; }
+        .menu-link { min-width: 132px; height: 47px; display: inline-flex; flex-direction: row; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 12px; font-weight: 900; text-transform: none; color: #eef2ff; background: transparent !important; border: 1px solid transparent !important; cursor: pointer; transition: 0.25s; text-align: center; }
         .menu-link svg { width: 18px; height: 18px; }
-        .menu-link:hover { color: #dbeafe; transform: translateY(-1px); }
-        .menu-link-active { color: #60a5fa !important; background: rgba(59,130,246,0.1) !important; }
-        .menu-link-active svg { color: #60a5fa; }
-        .menu-link-menu { color: #93c5fd; }
+        .menu-link:hover { color: #ffffff; transform: translateY(-1px); background: rgba(255,255,255,0.08) !important; border-color: rgba(255,255,255,0.12) !important; }
+        .menu-link-active { color: #ffffff !important; background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.14) !important; }
+        .menu-link-active svg { color: #ffffff; }
+        .menu-link-menu { color: #f8fbff; }
+        @media (hover:hover) and (pointer:fine) {
+            .menu-wrap:hover .menu-panel-dropdown.hidden-tool {
+                display: block !important;
+            }
+            .menu-wrap:hover .menu-notch.hidden-tool {
+                display: block !important;
+            }
+        }
         .light-mode .menu-panel,
         .light-mode .menu-panel-dropdown {
             background: rgba(255,255,255,0.94);
@@ -148,9 +158,9 @@
         .pro-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid #05070a; }
 
         /* UI PANELS */
-        .glass-panel { background: var(--glass); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-radius: 18px; }
-        input, select, button { background: rgba(255,255,255,0.05) !important; color: white !important; border: 1px solid var(--glass-border) !important; outline: none; }
-        select option { background: #111; color: white; }
+        .glass-panel { background: var(--glass); backdrop-filter: blur(22px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: var(--glass-shadow); }
+        input, select, button { background: rgba(255,255,255,0.78) !important; color: #17253f !important; border: 1px solid rgba(255,255,255,0.48) !important; outline: none; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25); }
+        select option { background: #ffffff; color: #0f172a; }
         .light-mode .glass-panel {
             background: rgba(255,255,255,0.9);
             border-color: rgba(15,23,42,0.1);
@@ -179,7 +189,7 @@
         .email-card.used span { color: #ef4444 !important; text-decoration: line-through; }
 
         /* COPY ANIMATION */
-        .copy-wrapper { position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 12px; background: rgba(128,128,128,0.1); overflow: hidden; }
+        .copy-wrapper { position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; border-radius: 12px; background: rgba(255,255,255,0.42); border: 1px solid rgba(255,255,255,0.38); overflow: hidden; }
         .copy-circle { position: absolute; inset: 0; background: var(--success); transform: scale(0); opacity: 0; transition: 0.4s; border-radius: 12px; }
         .copy-wrapper.copied .copy-circle { transform: scale(1); opacity: 1; }
         .check-svg { position: absolute; opacity: 0; transform: scale(0.5); transition: 0.4s; color: white; z-index: 2; }
@@ -282,12 +292,12 @@
         .main-tools.gmail-layout #tool-fake {
             grid-column: 1 / -1;
         }
-        .main-tools.gmail-layout #tool-2fa .recent-history,
+        .main-tools.gmail-layout #tool-2fa #otpHistoryList,
         .main-tools.gmail-layout #tool-pass .inline-history-list,
         .main-tools.gmail-layout #tool-email #emailContainer {
             max-width: 100%;
         }
-        .main-tools.gmail-layout #tool-2fa .recent-history,
+        .main-tools.gmail-layout #tool-2fa #otpHistoryList,
         .main-tools.gmail-layout #tool-pass #h-list-pass {
             margin-top: 8px;
         }
@@ -350,18 +360,49 @@
             text-transform: uppercase;
             color: #6b7280;
         }
-        .pro-footer { margin-top: auto; padding: 40px 0; width: 100%; text-align: center; border-top: 1px solid var(--glass-border); background: rgba(0,0,0,0.1); }
+        .pro-footer { margin-top: auto; padding: 40px 0; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.28); background: rgba(255,255,255,0.2); backdrop-filter: blur(18px); }
+        .pro-footer p { color: #24324a !important; text-shadow: 0 1px 0 rgba(255,255,255,0.18); }
+        .pro-footer a { color: #2563eb !important; font-weight: 900; }
         .light-mode .text-white { color: #0f172a !important; }
+        .light-mode .text-white\/90,
+        .light-mode .text-white\/80,
+        .light-mode .text-white\/70,
+        .light-mode .text-white\/60 { color: #24324a !important; }
         .light-mode .text-gray-500 { color: #64748b !important; }
+        .light-mode .text-gray-400 { color: #718198 !important; }
         .light-mode .text-green-500 { color: #15803d !important; }
+        .light-mode .text-green-400 { color: #15803d !important; }
         .light-mode .text-blue-500,
         .light-mode .text-blue-400,
         .light-mode .text-blue-300 { color: #2563eb !important; }
         .light-mode .text-orange-400,
         .light-mode .text-orange-500 { color: #ea580c !important; }
         .light-mode .text-red-400 { color: #dc2626 !important; }
+        .light-mode .text-pink-400 { color: #db2777 !important; }
         .light-mode .bg-black\/40 { background: rgba(226,232,240,0.75) !important; }
+        .light-mode .bg-white\/5 { background: rgba(255,255,255,0.56) !important; }
+        .light-mode .bg-white\/10 { background: rgba(255,255,255,0.66) !important; }
         .light-mode .border-white\/5 { border-color: rgba(15,23,42,0.08) !important; }
+        .light-mode .border-white\/10 { border-color: rgba(15,23,42,0.1) !important; }
+        .light-mode .font-black.text-gray-500,
+        .light-mode .font-black.text-white\/80,
+        .light-mode .font-black.text-white\/90 { color: #3b4d68 !important; }
+        .light-mode .tracking-widest,
+        .light-mode .tracking-\[0\.16em\] { color: #41536f !important; }
+        .light-mode #mainContent p,
+        .light-mode #mainContent span,
+        .light-mode #mainContent div,
+        .light-mode #mainContent label { color: inherit; }
+        .light-mode header .text-gray-500,
+        .light-mode footer .text-gray-500,
+        .light-mode .pro-footer .text-gray-500 { color: #445671 !important; }
+        .light-mode #mainContent .glass-panel,
+        .light-mode #mainContent .email-card,
+        .light-mode #tool-pass > div:first-child,
+        .light-mode #tool-currency .rounded-\[14px\],
+        .light-mode #tool-2fa #otpCodePanel {
+            color: #17253f !important;
+        }
         #mainContent label { font-size: 9px !important; }
         #mainContent,
         #mainContent * { min-width: 0; }
@@ -390,7 +431,7 @@
             display: block;
             width: 100%;
             min-width: 0;
-            font-size: 12px !important;
+            font-size: 13px !important;
             letter-spacing: 0 !important;
             line-height: 1.1;
             position: relative;
@@ -414,6 +455,29 @@
             padding-top: 11px;
             padding-bottom: 11px;
         }
+        #tool-2fa.browser-light {
+            background: linear-gradient(135deg, #1d2b63 0%, #312650 100%);
+            border: 1px solid rgba(59, 130, 246, 0.9);
+            border-radius: 28px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+        }
+        #tool-2fa.browser-light #otpSecretField {
+            color: #f8fafc !important;
+            caret-color: #f8fafc;
+            background: rgba(21, 29, 66, 0.95) !important;
+            border-color: #ff5a4f !important;
+        }
+        #tool-2fa.browser-light #otpCodePanel {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.9);
+        }
+        #tool-2fa.browser-light #otpTitle,
+        #tool-2fa.browser-light #otpTimerWrap {
+            color: #f8fafc !important;
+        }
+        #tool-2fa.browser-light .copy-wrapper {
+            background: transparent;
+        }
         #mainContent #passOutput {
             font-size: 0.95rem !important;
             white-space: nowrap;
@@ -430,7 +494,7 @@
         }
     </style>
 </head>
-<body class="p-4">
+<body class="p-4 light-mode">
 
     <div class="top-ctrl-bar">
         <button onclick="toggleTheme()" class="ctrl-btn"><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0z"/></svg></button>
@@ -455,37 +519,50 @@
     <div id="toolNavRow" class="tool-nav-row">
         <div class="menu-wrap">
             <aside id="mainNav" class="menu-panel">
-                <button id="btn-menu" class="menu-link menu-link-menu" onclick="toggleMenu(event)" aria-label="Menu"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path stroke-linecap="round" d="M4 7h16"></path><path stroke-linecap="round" d="M4 12h16"></path><path stroke-linecap="round" d="M4 17h16"></path></svg><span>Menu</span></button>
                 <button onclick="switchTool('gmail')" id="btn-gmail" class="menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg><span>Gmail</span></button>
+                <button id="btn-menu" class="menu-link menu-link-menu" onclick="toggleMenu(event)" aria-label="Tools"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 010 1.4l-7 7a1 1 0 01-1.4-1.4l7-7a1 1 0 011.4 0zm-9.4 9.4l-2 4 4-2"></path><path stroke-linecap="round" stroke-linejoin="round" d="M16 4l4 4"></path></svg><span>Tools</span></button>
             </aside>
             <div id="menuNotch" class="menu-notch hidden-tool"></div>
             <aside id="dropdownNav" class="menu-panel-dropdown hidden-tool">
-                <button onclick="switchTool('excel')" id="drop-excel" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 5v14"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 10h16"></path></svg><span>Excel</span></button>
-                <button onclick="switchTool('currency')" id="drop-currency" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18"></path><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 7.5c0-1.9-2-3.5-4.5-3.5S7.5 5.6 7.5 7.5 9.5 11 12 11s4.5 1.6 4.5 3.5S14.5 18 12 18s-4.5-1.6-4.5-3.5"></path></svg><span>Currency Converter</span></button>
-                <button onclick="switchTool('2fa')" id="drop-2fa" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 4v5c0 4.25-2.38 7.91-7 9-4.62-1.09-7-4.75-7-9V7l7-4z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12.5l1.7 1.7 3.3-3.7"></path></svg><span>2FA</span></button>
-                <button onclick="switchTool('pass')" id="drop-pass" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><circle cx="8.5" cy="14.5" r="3.5"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M12 14.5h8"></path><path stroke-linecap="round" stroke-linejoin="round" d="M17 14.5v2.5"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20 14.5v2.5"></path></svg><span>Password</span></button>
-                <button onclick="switchTool('email')" id="drop-email" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg><span>Email</span></button>
-                <button onclick="switchTool('fake')" id="drop-fake" class="menu-drop-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4.5h7l3 3V19a1.5 1.5 0 01-1.5 1.5h-8A1.5 1.5 0 016 19V6a1.5 1.5 0 011.5-1.5z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M14 4.5V8h3"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8.5 11h6.5M8.5 14h6.5M8.5 17H13"></path></svg><span>Fake Details</span></button>
+                <div class="menu-drop-grid">
+                    <div class="menu-drop-col">
+                        <button onclick="switchTool('2fa')" id="drop-2fa" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 4v5c0 4.25-2.38 7.91-7 9-4.62-1.09-7-4.75-7-9V7l7-4z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9.5 12.5l1.7 1.7 3.3-3.7"></path></svg><span class="menu-drop-title">2FA</span></span><span class="menu-drop-desc">Online authenticator code tool</span></button>
+                        <button onclick="switchTool('pass')" id="drop-pass" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><circle cx="8.5" cy="14.5" r="3.5"></circle><path stroke-linecap="round" stroke-linejoin="round" d="M12 14.5h8"></path><path stroke-linecap="round" stroke-linejoin="round" d="M17 14.5v2.5"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20 14.5v2.5"></path></svg><span class="menu-drop-title">Password</span></span><span class="menu-drop-desc">Secure password generation</span></button>
+                    </div>
+                    <div class="menu-drop-col">
+                        <button onclick="switchTool('email')" id="drop-email" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg><span class="menu-drop-title">Email</span></span><span class="menu-drop-desc">Generate email name sets</span></button>
+                        <button onclick="switchTool('fake')" id="drop-fake" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4.5h7l3 3V19a1.5 1.5 0 01-1.5 1.5h-8A1.5 1.5 0 016 19V6a1.5 1.5 0 011.5-1.5z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M14 4.5V8h3"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8.5 11h6.5M8.5 14h6.5M8.5 17H13"></path></svg><span class="menu-drop-title">Fake Details</span></span><span class="menu-drop-desc">Synthetic profile generator</span></button>
+                    </div>
+                    <div class="menu-drop-col">
+                        <button onclick="switchTool('currency')" id="drop-currency" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18"></path><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 7.5c0-1.9-2-3.5-4.5-3.5S7.5 5.6 7.5 7.5 9.5 11 12 11s4.5 1.6 4.5 3.5S14.5 18 12 18s-4.5-1.6-4.5-3.5"></path></svg><span class="menu-drop-title">Currency Converter</span></span><span class="menu-drop-desc">Global rate conversion</span></button>
+                        <button onclick="switchTool('excel')" id="drop-excel" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 5v14"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 10h16"></path></svg><span class="menu-drop-title">Excel</span></span><span class="menu-drop-desc">Edit spreadsheet online</span></button>
+                    </div>
+                </div>
             </aside>
         </div>
     </div>
 
     <main id="mainContent" class="main-tools max-w-[64rem] w-full flex flex-col gap-1.5 mb-20 px-4 -mt-1">
-        <section id="tool-2fa" class="glass-panel p-3 pt-2 flex flex-col items-center gap-2 hidden-tool relative">
-            <div class="w-full max-w-[39rem] flex items-center gap-2">
-                <textarea id="otpSecretField" placeholder="ENTER 2FA SECRET" autocomplete="off" autocapitalize="off" spellcheck="false" tabindex="0" class="flex-1 px-3 rounded-[12px] border border-red-400/70 bg-[#141b37]/90 !border-red-400/70 text-left text-white font-mono"></textarea>
+        <section id="tool-2fa" class="glass-panel browser-light p-5 pt-4 flex flex-col items-center gap-2 hidden-tool relative">
+            <div class="w-full max-w-[34rem] flex items-center gap-2">
+                <textarea id="otpSecretField" placeholder="ENTER 2FA SECRET" autocomplete="off" autocapitalize="off" spellcheck="false" tabindex="0" class="flex-1 px-4 rounded-[12px] border border-red-400/70 bg-[#141b37]/90 !border-red-400/70 text-left text-white font-mono"></textarea>
                 <button type="button" onclick="clear2FA()" class="inline-icon-btn shrink-0" style="width:22px;height:22px;background:transparent;" title="Clear 2FA"><svg fill="none" stroke="currentColor" class="text-red-400" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 7V5h6v2"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 10v6M15 10v6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 7l.6 11a1 1 0 001 .95h4.8a1 1 0 001-.95L16 7"></path></svg></button>
-                <div class="w-[7.4rem] h-10 rounded-[12px] border border-white/70 bg-white/[0.04] flex items-center justify-center px-2">
-                    <div id="otpBox" class="w-full whitespace-nowrap text-center font-black text-white leading-none">------</div>
-                </div>
-                <button type="button" onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper inline-icon-btn shrink-0" style="width:22px;height:22px;background:transparent;" title="Copy 2FA Code"><div class="copy-circle"></div><svg class="copy-svg text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
             </div>
-            <div class="w-full max-w-[39rem] flex items-start justify-between gap-3">
+            <div class="w-full max-w-[34rem] flex items-start justify-start">
                 <p id="otpError" class="min-h-[1rem] flex-1 text-left text-[0.68rem] text-red-400">Enter a valid 2FA secret</p>
-                <p class="shrink-0 text-[0.72rem] text-white/80">(<span id="timerText">30</span> seconds)</p>
+            </div>
+            <div id="otpCodeWrap" class="w-full max-w-[34rem] flex flex-col items-center gap-2 pt-3 hidden-tool">
+                <p id="otpTitle" class="text-[0.9rem] font-black text-white/90">The current 2FA verification code is</p>
+                <div class="flex items-center gap-3">
+                    <div id="otpCodePanel" class="w-[11rem] h-[4.2rem] rounded-[16px] border border-white/70 bg-white/[0.04] flex items-center justify-center px-2">
+                        <div id="otpBox" class="w-full whitespace-nowrap text-center font-black text-white leading-none">------</div>
+                    </div>
+                    <button type="button" onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper inline-icon-btn shrink-0" style="width:28px;height:28px;background:transparent;" title="Copy 2FA Code"><div class="copy-circle"></div><svg class="copy-svg text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+                </div>
+                <p id="otpTimerWrap" class="shrink-0 text-[0.72rem] text-white/80">(<span id="timerText">30</span> seconds)</p>
             </div>
             <div class="hidden"><div id="timerBar"></div></div>
-            <div id="otpHistoryList" class="w-full max-w-[15rem] p-1 flex flex-col items-center gap-1 text-[7px] uppercase font-black text-gray-500 text-center"></div>
+            <div id="otpHistoryList" class="w-full max-w-[17rem] p-1 flex flex-col items-center gap-1 text-[7px] uppercase font-black text-gray-500 text-center"><p>Copy History</p></div>
         </section>
 
         <section id="tool-pass" class="glass-panel p-3 pt-2 flex flex-col items-center gap-2 hidden-tool relative">
@@ -660,11 +737,11 @@
             if (secretInput) {
                 const secretText = secretInput.value || secretInput.placeholder || '';
                 const secretLength = secretText.length;
-                let secretSize = 12;
-                if (secretLength > 20) secretSize = 11.5;
-                if (secretLength > 28) secretSize = 11;
-                if (secretLength > 36) secretSize = 10.5;
-                if (secretLength > 44) secretSize = 10;
+                let secretSize = 13;
+                if (secretLength > 20) secretSize = 12.5;
+                if (secretLength > 28) secretSize = 12;
+                if (secretLength > 36) secretSize = 11.5;
+                if (secretLength > 44) secretSize = 11;
                 secretInput.style.setProperty('font-size', `${secretSize}px`, 'important');
                 secretInput.style.setProperty('letter-spacing', '0px', 'important');
             }
@@ -679,6 +756,12 @@
         }
 
         let currentPrimaryNav = null;
+        function saveCurrentView(view) {
+            localStorage.setItem('bidhan_active_tool_v1', view);
+        }
+        function getCurrentView() {
+            return localStorage.getItem('bidhan_active_tool_v1') || 'home';
+        }
         function hideAllTools() {
             document.getElementById('tool-2fa').classList.add('hidden-tool');
             document.getElementById('tool-pass').classList.add('hidden-tool');
@@ -738,7 +821,7 @@
             if (dropEl) dropEl.classList.add('menu-drop-link-active');
             updateMenuNotch(target);
         }
-        function showHome() { hideAllTools(); currentPrimaryNav = null; ['btn-menu', 'btn-gmail', 'btn-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-link-active'); }); ['drop-excel', 'drop-currency', 'drop-2fa', 'drop-pass', 'drop-email', 'drop-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-drop-link-active'); }); closeMenu(); }
+        function showHome() { hideAllTools(); currentPrimaryNav = null; ['btn-menu', 'btn-gmail', 'btn-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-link-active'); }); ['drop-excel', 'drop-currency', 'drop-2fa', 'drop-pass', 'drop-email', 'drop-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-drop-link-active'); }); closeMenu(); saveCurrentView('home'); }
         function switchTool(t) {
             const showGmail = t === 'gmail';
             document.getElementById('mainContent').classList.toggle('gmail-layout', showGmail);
@@ -750,6 +833,7 @@
             document.getElementById('tool-fake').classList.toggle('hidden-tool', t !== 'fake');
             setActiveMenu(document.getElementById(`btn-${t}`) ? `btn-${t}` : `drop-${t}`);
             closeMenu();
+            saveCurrentView(t);
             if (showGmail || t === '2fa') {
                 setTimeout(() => {
                     const secretInput = document.getElementById('otpSecretField');
@@ -1399,16 +1483,17 @@
             await copyAction(bundle, 'fake', btn);
         }        async function copyAction(txt, type, btn) { if(!txt || txt === "------" || txt === "Ready...") return; try { await writeClipboardText(txt); playDing(); if(btn && btn.classList) btn.classList.add('copied'); if(type === 'email') { const card = btn && typeof btn.closest === 'function' ? btn.closest('.email-card') : null; if(card) card.classList.add('used'); } setTimeout(() => { if(btn && btn.classList) btn.classList.remove('copied'); }, 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 5) hPass.pop(); renderPassHistory(); } if(type === 'otp') save2faCode(txt); } catch (e) { console.error('Copy failed:', e); } }
         function save2faCode(code) { if(!code || code === '------' || code.length < 4) return; h2fa = h2fa.filter(i => i !== code); h2fa.unshift(code); if(h2fa.length > 5) h2fa = h2fa.slice(0, 5); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
-        function render2fa() { document.getElementById('otpHistoryList').innerHTML = '<p>Copy History</p>' + (h2fa.length ? h2fa.slice(0, 5).map((code, i) => `<div class="inline-history-item"><span>${code}</span><button class="inline-history-copy" onclick="copyAction('${code}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
+        function render2fa() { document.getElementById('otpHistoryList').innerHTML = '<p>Copy History</p>' + (h2fa.length ? h2fa.slice(0, 5).map((code) => `<div class="inline-history-item"><span>${code}</span><button class="inline-history-copy" onclick="copyAction('${code}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
         function renderPassHistory() { document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + (hPass.length ? hPass.slice(0, 5).map((p, i) => `<div class="inline-history-item"><span>${p}</span><button class="inline-history-copy" onclick="copyAction('${p}', 'pass', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function toggleSound() { isS = !isS; localStorage.setItem('bidhan_s', isS ? 'on' : 'off'); document.getElementById('sOn').style.color = isS ? '#3b82f6' : '#6b7280'; }
-        async function paste2FA() { try { const txt = await navigator.clipboard.readText(); document.getElementById('otpSecretField').value = txt.trim(); update2FA(); } catch {} }
+        function paste2FA() { const field = document.getElementById('otpSecretField'); if (field) field.focus(); }
         function clear2FA() { document.getElementById('otpSecretField').value = ''; update2FA(); }
         function update2FA() {
             const inputEl = document.getElementById('otpSecretField');
             const errorEl = document.getElementById('otpError');
             const otpEl = document.getElementById('otpBox');
+            const otpWrapEl = document.getElementById('otpCodeWrap');
             const timerEl = document.getElementById('timerText');
             const timerBarEl = document.getElementById('timerBar');
             const k = inputEl.value.trim().replace(/\s/g, '');
@@ -1418,28 +1503,56 @@
             if (!k) {
                 if (otpEl) otpEl.innerText = "------";
                 if (errorEl) errorEl.innerText = "Enter a valid 2FA secret";
+                if (otpWrapEl) otpWrapEl.classList.add('hidden-tool');
                 fit2faFields();
                 return;
             }
             try {
                 if (otpEl) otpEl.innerText = authenticator.generate(k);
                 if (errorEl) errorEl.innerText = "";
+                if (otpWrapEl) otpWrapEl.classList.remove('hidden-tool');
             } catch {
                 if (otpEl) otpEl.innerText = "------";
                 if (errorEl) errorEl.innerText = "The key characters are illegal, please check the key";
+                if (otpWrapEl) otpWrapEl.classList.add('hidden-tool');
             }
             fit2faFields();
         }
         const secretInputEl = document.getElementById('otpSecretField');
         if (secretInputEl) {
             secretInputEl.addEventListener('input', update2FA);
-            secretInputEl.addEventListener('keydown', (event) => event.stopPropagation());
+            secretInputEl.addEventListener('keydown', (event) => {
+                event.stopPropagation();
+            });
             secretInputEl.addEventListener('pointerdown', (event) => event.stopPropagation());
             secretInputEl.addEventListener('mousedown', (event) => event.stopPropagation());
             secretInputEl.addEventListener('click', () => secretInputEl.focus());
+            secretInputEl.addEventListener('paste', (event) => {
+                const pasted = event.clipboardData?.getData('text');
+                if (typeof pasted === 'string') {
+                    event.preventDefault();
+                    secretInputEl.value = pasted.trim();
+                    update2FA();
+                }
+            });
         }
         setInterval(update2FA, 1000);
-        window.onload = () => { showHome(); render2fa(); renderPassHistory(); update2FA(); fit2faFields(); genPass(false); generateFakeDetails(); initCurrencies(); initExcelEditor(); };
+        window.onload = () => {
+            render2fa();
+            renderPassHistory();
+            update2FA();
+            fit2faFields();
+            genPass(false);
+            generateFakeDetails();
+            initCurrencies();
+            initExcelEditor();
+            const savedView = getCurrentView();
+            if (savedView && savedView !== 'home') {
+                switchTool(savedView);
+            } else {
+                showHome();
+            }
+        };
         window.addEventListener('resize', () => {
             updateDropdownNotch();
         });
