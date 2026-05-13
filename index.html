@@ -254,6 +254,16 @@
             box-shadow: none;
             padding: 4px 10px 0;
         }
+        .main-tools.gmail-layout #tool-2fa {
+            position: relative;
+            z-index: 2;
+            overflow: visible;
+            isolation: isolate;
+        }
+        .main-tools.gmail-layout #tool-2fa,
+        .main-tools.gmail-layout #tool-2fa * {
+            pointer-events: auto !important;
+        }
         .main-tools.gmail-layout #tool-pass,
         .main-tools.gmail-layout #tool-email {
             position: relative;
@@ -376,9 +386,33 @@
             overflow: hidden;
             text-overflow: clip;
         }
-        #mainContent #secretInput {
-            font-size: 9px !important;
+        #mainContent #otpSecretField {
+            display: block;
+            width: 100%;
+            min-width: 0;
+            font-size: 12px !important;
             letter-spacing: 0 !important;
+            line-height: 1.1;
+            position: relative;
+            z-index: 50;
+            pointer-events: auto !important;
+            user-select: text;
+            -webkit-user-select: text;
+            cursor: text;
+            caret-color: #ffffff;
+            appearance: none;
+            -webkit-appearance: none;
+            touch-action: manipulation;
+        }
+        #mainContent textarea#otpSecretField {
+            height: 40px;
+            min-height: 40px;
+            max-height: 40px;
+            resize: none;
+            overflow: hidden;
+            white-space: nowrap;
+            padding-top: 11px;
+            padding-bottom: 11px;
         }
         #mainContent #passOutput {
             font-size: 0.95rem !important;
@@ -438,15 +472,19 @@
 
     <main id="mainContent" class="main-tools max-w-[64rem] w-full flex flex-col gap-1.5 mb-20 px-4 -mt-1">
         <section id="tool-2fa" class="glass-panel p-3 pt-2 flex flex-col items-center gap-2 hidden-tool relative">
-            <div class="w-full max-w-[36rem] flex items-center gap-2 mx-auto pl-2">
-                <input type="text" id="secretInput" placeholder="ENTER 2FA SECRET" class="flex-[7.4] min-w-0 h-10 px-2 rounded-2xl text-left text-blue-500 font-mono text-[9px] uppercase tracking-[0px]">
-                <button type="button" onclick="clear2FA()" class="inline-icon-btn self-center md:self-auto" title="Clear 2FA Secret"><svg fill="none" stroke="currentColor" class="text-red-400" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 7V4h6v3"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10 11v6M14 11v6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 7l1 12h6l1-12"></path></svg></button>
-                <div class="w-full md:max-w-[6.8rem] flex items-center gap-1.5 ml-1">
-                    <div class="code-display-box h-10 flex-1 overflow-hidden"><div id="otpBox" class="whitespace-nowrap text-[0.72rem] font-black text-white tracking-[0.1px] leading-none">------</div></div>
-                    <div onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper inline-icon-btn" style="width:24px;height:24px;background:transparent;" title="Copy 2FA Code"><div class="copy-circle"></div><svg class="copy-svg text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+            <div class="w-full max-w-[39rem] flex items-center gap-2">
+                <textarea id="otpSecretField" placeholder="ENTER 2FA SECRET" autocomplete="off" autocapitalize="off" spellcheck="false" tabindex="0" class="flex-1 px-3 rounded-[12px] border border-red-400/70 bg-[#141b37]/90 !border-red-400/70 text-left text-white font-mono"></textarea>
+                <button type="button" onclick="clear2FA()" class="inline-icon-btn shrink-0" style="width:22px;height:22px;background:transparent;" title="Clear 2FA"><svg fill="none" stroke="currentColor" class="text-red-400" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 7V5h6v2"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 10v6M15 10v6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 7l.6 11a1 1 0 001 .95h4.8a1 1 0 001-.95L16 7"></path></svg></button>
+                <div class="w-[7.4rem] h-10 rounded-[12px] border border-white/70 bg-white/[0.04] flex items-center justify-center px-2">
+                    <div id="otpBox" class="w-full whitespace-nowrap text-center font-black text-white leading-none">------</div>
                 </div>
+                <button type="button" onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper inline-icon-btn shrink-0" style="width:22px;height:22px;background:transparent;" title="Copy 2FA Code"><div class="copy-circle"></div><svg class="copy-svg text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
             </div>
-            <div class="w-full max-w-[16rem]"><div style="height:4px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;"><div id="timerBar" style="height:100%; width:100%; background:#3b82f6; transition:width 1s linear;"></div></div><div class="flex justify-between mt-1.5 text-[8px] font-black text-gray-500 uppercase"><span>Active Sync</span><span><span id="timerText" class="text-white">30</span>s</span></div></div>
+            <div class="w-full max-w-[39rem] flex items-start justify-between gap-3">
+                <p id="otpError" class="min-h-[1rem] flex-1 text-left text-[0.68rem] text-red-400">Enter a valid 2FA secret</p>
+                <p class="shrink-0 text-[0.72rem] text-white/80">(<span id="timerText">30</span> seconds)</p>
+            </div>
+            <div class="hidden"><div id="timerBar"></div></div>
             <div id="otpHistoryList" class="w-full max-w-[15rem] p-1 flex flex-col items-center gap-1 text-[7px] uppercase font-black text-gray-500 text-center"></div>
         </section>
 
@@ -617,27 +655,26 @@
             return true;
         }
         function fit2faFields() {
-            const secretInput = document.getElementById('secretInput');
+            const secretInput = document.getElementById('otpSecretField');
             const otpBox = document.getElementById('otpBox');
             if (secretInput) {
                 const secretText = secretInput.value || secretInput.placeholder || '';
                 const secretLength = secretText.length;
-                let secretSize = 9;
-                if (secretLength > 24) secretSize = 8.5;
-                if (secretLength > 32) secretSize = 8;
-                if (secretLength > 40) secretSize = 7.5;
-                if (secretLength > 48) secretSize = 7;
+                let secretSize = 12;
+                if (secretLength > 20) secretSize = 11.5;
+                if (secretLength > 28) secretSize = 11;
+                if (secretLength > 36) secretSize = 10.5;
+                if (secretLength > 44) secretSize = 10;
                 secretInput.style.setProperty('font-size', `${secretSize}px`, 'important');
                 secretInput.style.setProperty('letter-spacing', '0px', 'important');
             }
             if (otpBox) {
                 const otpLength = (otpBox.innerText || '').replace(/\s/g, '').length;
-                let otpSize = 12;
-                if (otpLength > 6) otpSize = 11;
-                if (otpLength > 7) otpSize = 10;
-                if (otpLength > 8) otpSize = 9;
+                let otpSize = 17;
+                if (otpLength > 6) otpSize = 15;
+                if (otpLength > 7) otpSize = 13;
                 otpBox.style.fontSize = `${otpSize}px`;
-                otpBox.style.letterSpacing = otpLength > 6 ? '0px' : '0.1px';
+                otpBox.style.letterSpacing = '0px';
             }
         }
 
@@ -713,6 +750,18 @@
             document.getElementById('tool-fake').classList.toggle('hidden-tool', t !== 'fake');
             setActiveMenu(document.getElementById(`btn-${t}`) ? `btn-${t}` : `drop-${t}`);
             closeMenu();
+            if (showGmail || t === '2fa') {
+                setTimeout(() => {
+                    const secretInput = document.getElementById('otpSecretField');
+                    if (secretInput) {
+                        secretInput.focus();
+                        const len = secretInput.value.length;
+                        if (typeof secretInput.setSelectionRange === 'function') {
+                            secretInput.setSelectionRange(len, len);
+                        }
+                    }
+                }, 30);
+            }
         }
         
         function genPass(play) { if(play) playDing(); const len = parseInt(document.getElementById('length').value), l="abcdefghijklmnopqrstuvwxyz", u="ABCDEFGHIJKLMNOPQRSTUVWXYZ", n="0123456789", s="!@#$%^&*()_+"; let c = l, m = []; if(document.getElementById('upper').checked) { c+=u; m.push(u[Math.floor(Math.random()*u.length)]); } if(document.getElementById('num').checked) { c+=n; m.push(n[Math.floor(Math.random()*n.length)]); } if(document.getElementById('sym').checked) { c+=s; m.push(s[Math.floor(Math.random()*s.length)]); } let p = m.join(''); for(let i=p.length; i<len; i++) p += c.charAt(Math.floor(Math.random()*c.length)); document.getElementById('passOutput').innerText = p.split('').sort(()=>0.5-Math.random()).join(''); }
@@ -1348,16 +1397,47 @@
                 `Longitude: ${document.getElementById('fakeLon').innerText}`
             ].join('\n');
             await copyAction(bundle, 'fake', btn);
-        }        async function copyAction(txt, type, btn) { if(!txt || txt === "------" || txt === "Ready...") return; try { await writeClipboardText(txt); playDing(); if(btn && btn.classList) btn.classList.add('copied'); if(type === 'email') { const card = btn && typeof btn.closest === 'function' ? btn.closest('.email-card') : null; if(card) card.classList.add('used'); } setTimeout(() => { if(btn && btn.classList) btn.classList.remove('copied'); }, 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 5) hPass.pop(); renderPassHistory(); } if(type === 'otp') save2fa(document.getElementById('secretInput').value.trim() || txt); } catch (e) { console.error('Copy failed:', e); } }
-        function save2fa(k) { if(!k || k.length < 5) return; h2fa = h2fa.filter(i => i !== k); h2fa.unshift(k); if(h2fa.length > 5) h2fa = h2fa.slice(0, 5); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
-        function render2fa() { document.getElementById('otpHistoryList').innerHTML = '<p>Copy History</p>' + (h2fa.length ? h2fa.slice(0, 5).map((k, i) => `<div class="inline-history-item"><span>${k}</span><button class="inline-history-copy" onclick="copyAction('${k}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
+        }        async function copyAction(txt, type, btn) { if(!txt || txt === "------" || txt === "Ready...") return; try { await writeClipboardText(txt); playDing(); if(btn && btn.classList) btn.classList.add('copied'); if(type === 'email') { const card = btn && typeof btn.closest === 'function' ? btn.closest('.email-card') : null; if(card) card.classList.add('used'); } setTimeout(() => { if(btn && btn.classList) btn.classList.remove('copied'); }, 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 5) hPass.pop(); renderPassHistory(); } if(type === 'otp') save2faCode(txt); } catch (e) { console.error('Copy failed:', e); } }
+        function save2faCode(code) { if(!code || code === '------' || code.length < 4) return; h2fa = h2fa.filter(i => i !== code); h2fa.unshift(code); if(h2fa.length > 5) h2fa = h2fa.slice(0, 5); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
+        function render2fa() { document.getElementById('otpHistoryList').innerHTML = '<p>Copy History</p>' + (h2fa.length ? h2fa.slice(0, 5).map((code, i) => `<div class="inline-history-item"><span>${code}</span><button class="inline-history-copy" onclick="copyAction('${code}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
         function renderPassHistory() { document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + (hPass.length ? hPass.slice(0, 5).map((p, i) => `<div class="inline-history-item"><span>${p}</span><button class="inline-history-copy" onclick="copyAction('${p}', 'pass', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function toggleSound() { isS = !isS; localStorage.setItem('bidhan_s', isS ? 'on' : 'off'); document.getElementById('sOn').style.color = isS ? '#3b82f6' : '#6b7280'; }
-        async function paste2FA() { try { const txt = await navigator.clipboard.readText(); document.getElementById('secretInput').value = txt.trim(); update2FA(); } catch {} }
-        function clear2FA() { document.getElementById('secretInput').value = ''; update2FA(); }
-        function update2FA() { const k = document.getElementById('secretInput').value.trim().replace(/\s/g, ''), r = authenticator.timeRemaining(); document.getElementById('timerText').innerText = r; document.getElementById('timerBar').style.width = (r/30)*100 + "%"; if(!k) { document.getElementById('otpBox').innerText = "------"; fit2faFields(); return; } try { document.getElementById('otpBox').innerText = authenticator.generate(k); } catch {} fit2faFields(); }
-        document.getElementById('secretInput').addEventListener('input', update2FA);
+        async function paste2FA() { try { const txt = await navigator.clipboard.readText(); document.getElementById('otpSecretField').value = txt.trim(); update2FA(); } catch {} }
+        function clear2FA() { document.getElementById('otpSecretField').value = ''; update2FA(); }
+        function update2FA() {
+            const inputEl = document.getElementById('otpSecretField');
+            const errorEl = document.getElementById('otpError');
+            const otpEl = document.getElementById('otpBox');
+            const timerEl = document.getElementById('timerText');
+            const timerBarEl = document.getElementById('timerBar');
+            const k = inputEl.value.trim().replace(/\s/g, '');
+            const r = authenticator.timeRemaining();
+            if (timerEl) timerEl.innerText = r;
+            if (timerBarEl) timerBarEl.style.width = (r / 30) * 100 + "%";
+            if (!k) {
+                if (otpEl) otpEl.innerText = "------";
+                if (errorEl) errorEl.innerText = "Enter a valid 2FA secret";
+                fit2faFields();
+                return;
+            }
+            try {
+                if (otpEl) otpEl.innerText = authenticator.generate(k);
+                if (errorEl) errorEl.innerText = "";
+            } catch {
+                if (otpEl) otpEl.innerText = "------";
+                if (errorEl) errorEl.innerText = "The key characters are illegal, please check the key";
+            }
+            fit2faFields();
+        }
+        const secretInputEl = document.getElementById('otpSecretField');
+        if (secretInputEl) {
+            secretInputEl.addEventListener('input', update2FA);
+            secretInputEl.addEventListener('keydown', (event) => event.stopPropagation());
+            secretInputEl.addEventListener('pointerdown', (event) => event.stopPropagation());
+            secretInputEl.addEventListener('mousedown', (event) => event.stopPropagation());
+            secretInputEl.addEventListener('click', () => secretInputEl.focus());
+        }
         setInterval(update2FA, 1000);
         window.onload = () => { showHome(); render2fa(); renderPassHistory(); update2FA(); fit2faFields(); genPass(false); generateFakeDetails(); initCurrencies(); initExcelEditor(); };
         window.addEventListener('resize', () => {
