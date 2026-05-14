@@ -13,25 +13,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --accent: #63a4ff; --deep-blue: #65a6ff; --fire: #ff6259; --gold: #ffcc00; --bg: #6eb0ff; --success: #22c55e;
-            --gemini-start: #77b2ff; --gemini-end: #7d6eff;
-            --glass: rgba(255, 255, 255, 0.84); --glass-border: rgba(255, 255, 255, 0.38);
-            --glass-shadow: 0 18px 45px rgba(32, 38, 87, 0.18);
+            --accent: #7eb3ff; --deep-blue: #5d82ff; --fire: #ff6259; --gold: #ffcc00; --bg: #0f1538; --success: #22c55e;
+            --gemini-start: #2f457d; --gemini-end: #33295c;
+            --glass: rgba(25, 32, 63, 0.58); --glass-border: rgba(255, 255, 255, 0.14);
+            --glass-shadow: 0 18px 45px rgba(9, 14, 38, 0.32);
             --panel-ink: #f8fbff;
-            --panel-ink-strong: #13213b;
-            --panel-muted: #66758f;
+            --panel-ink-strong: #f5f7ff;
+            --panel-muted: #b8c2dd;
         }
-        .light-mode { --bg: #6eb0ff; --glass: rgba(255, 255, 255, 0.84); --glass-border: rgba(255, 255, 255, 0.38); }
-        body { background: linear-gradient(135deg, #74b4ff 0%, #80b1ff 35%, #7e8cff 68%, #846fe7 100%); color: #0f172a; font-family: 'Segoe UI', sans-serif; transition: 0.4s; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; position: relative; }
-        body.light-mode { color: #0f172a; }
+        .light-mode { --bg: #0f1538; --glass: rgba(25, 32, 63, 0.58); --glass-border: rgba(255, 255, 255, 0.14); }
+        body { background: linear-gradient(135deg, #141b4a 0%, #1a2559 34%, #241f4d 66%, #2f2550 100%); color: #eef2ff; font-family: 'Segoe UI', sans-serif; transition: 0.4s; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; position: relative; }
+        body.light-mode { color: #eef2ff; }
         body::before {
             content: "";
             position: fixed;
             inset: 0;
             background:
-                radial-gradient(circle at 20% 18%, rgba(255,255,255,0.2) 0, rgba(255,255,255,0.2) 1px, transparent 1.6px) 0 0/24px 24px,
-                radial-gradient(ellipse at top left, rgba(255,255,255,0.18), transparent 42%),
-                radial-gradient(ellipse at bottom right, rgba(42,29,84,0.25), transparent 40%);
+                radial-gradient(circle at 20% 18%, rgba(255,255,255,0.12) 0, rgba(255,255,255,0.12) 1px, transparent 1.6px) 0 0/24px 24px,
+                radial-gradient(ellipse at top left, rgba(89,131,255,0.14), transparent 42%),
+                radial-gradient(ellipse at bottom right, rgba(117,87,196,0.16), transparent 40%);
             pointer-events: none;
             z-index: -1;
         }
@@ -45,14 +45,14 @@
 
         /* TOP CTRLS */
         .top-ctrl-bar { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 12px; z-index: 100; }
-        .ctrl-btn { background: rgba(255,255,255,0.72); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.42); padding: 12px; border-radius: 15px; transition: 0.3s; cursor: pointer; box-shadow: 0 10px 26px rgba(38,45,92,0.12); }
+        .ctrl-btn { background: rgba(33, 40, 77, 0.58); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.16); padding: 12px; border-radius: 15px; transition: 0.3s; cursor: pointer; box-shadow: 0 10px 26px rgba(10,16,40,0.24); }
 
         /* BANNER */
         /* NAVIGATION */
         .tool-nav-row { width: 100%; max-width: 1280px; display: flex; justify-content: flex-end; padding: 0 24px; margin: 0.18rem 0 0.55rem; position: relative; z-index: 260; }
         .menu-wrap { position: relative; width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-        .menu-panel { position: relative; width: auto; min-width: 340px; padding: 8px 10px; background: rgba(28, 36, 70, 0.42); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.18); border-radius: 16px; box-shadow: 0 18px 40px rgba(27, 34, 74, 0.2); display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
-        .menu-panel-dropdown { position: absolute; top: calc(100% + 10px); right: 0; width: min(860px, calc(100vw - 48px)); padding: 16px; background: rgba(23, 30, 61, 0.72); backdrop-filter: blur(26px); border: 1px solid rgba(255,255,255,0.16); border-radius: 22px; box-shadow: 0 22px 60px rgba(24, 30, 70, 0.3); }
+        .menu-panel { position: relative; width: auto; min-width: 340px; padding: 8px 10px; background: rgba(28, 36, 70, 0.38); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; box-shadow: 0 18px 40px rgba(9, 14, 38, 0.28); display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
+        .menu-panel-dropdown { position: absolute; top: calc(100% + 10px); right: 0; width: min(860px, calc(100vw - 48px)); padding: 16px; background: rgba(21, 28, 58, 0.86); backdrop-filter: blur(26px); border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; box-shadow: 0 22px 60px rgba(9, 14, 38, 0.34); }
         .menu-panel-dropdown.hidden-tool { display: none !important; }
         .menu-drop-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 0; }
         .menu-drop-col { padding: 8px 20px; }
@@ -74,21 +74,13 @@
             white-space: nowrap;
             text-overflow: ellipsis;
         }
-        .menu-notch { position: absolute; top: calc(100% + 2px); right: 152px; width: 16px; height: 16px; background: rgba(23, 30, 61, 0.76); border-left: 1px solid rgba(255,255,255,0.16); border-top: 1px solid rgba(255,255,255,0.16); transform: rotate(45deg); border-top-left-radius: 5px; transition: opacity 0.2s ease; }
+        .menu-notch { position: absolute; top: calc(100% + 2px); right: 152px; width: 16px; height: 16px; background: rgba(21, 28, 58, 0.9); border-left: 1px solid rgba(255,255,255,0.12); border-top: 1px solid rgba(255,255,255,0.12); transform: rotate(45deg); border-top-left-radius: 5px; transition: opacity 0.2s ease; }
         .menu-link { min-width: 132px; height: 47px; display: inline-flex; flex-direction: row; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 12px; font-weight: 900; text-transform: none; color: #eef2ff; background: transparent !important; border: 1px solid transparent !important; cursor: pointer; transition: 0.25s; text-align: center; }
         .menu-link svg { width: 18px; height: 18px; }
         .menu-link:hover { color: #ffffff; transform: translateY(-1px); background: rgba(255,255,255,0.08) !important; border-color: rgba(255,255,255,0.12) !important; }
         .menu-link-active { color: #ffffff !important; background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.14) !important; }
         .menu-link-active svg { color: #ffffff; }
         .menu-link-menu { color: #f8fbff; }
-        @media (hover:hover) and (pointer:fine) {
-            .menu-wrap:hover .menu-panel-dropdown.hidden-tool {
-                display: block !important;
-            }
-            .menu-wrap:hover .menu-notch.hidden-tool {
-                display: block !important;
-            }
-        }
         .light-mode .menu-panel,
         .light-mode .menu-panel-dropdown {
             background: rgba(255,255,255,0.94);
@@ -159,8 +151,8 @@
 
         /* UI PANELS */
         .glass-panel { background: var(--glass); backdrop-filter: blur(22px); border: 1px solid var(--glass-border); border-radius: 24px; box-shadow: var(--glass-shadow); }
-        input, select, button { background: rgba(255,255,255,0.78) !important; color: #17253f !important; border: 1px solid rgba(255,255,255,0.48) !important; outline: none; box-shadow: inset 0 1px 0 rgba(255,255,255,0.25); }
-        select option { background: #ffffff; color: #0f172a; }
+        input, select, button { background: rgba(33, 40, 77, 0.5) !important; color: #eef2ff !important; border: 1px solid rgba(255,255,255,0.14) !important; outline: none; box-shadow: inset 0 1px 0 rgba(255,255,255,0.04); }
+        select option { background: #161d43; color: #eef2ff; }
         .light-mode .glass-panel {
             background: rgba(255,255,255,0.9);
             border-color: rgba(15,23,42,0.1);
@@ -494,7 +486,7 @@
         }
     </style>
 </head>
-<body class="p-4 light-mode">
+<body class="p-4">
 
     <div class="top-ctrl-bar">
         <button onclick="toggleTheme()" class="ctrl-btn"><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0z"/></svg></button>
@@ -756,6 +748,7 @@
         }
 
         let currentPrimaryNav = null;
+        let menuHoverTimer = null;
         function saveCurrentView(view) {
             localStorage.setItem('bidhan_active_tool_v1', view);
         }
@@ -790,6 +783,28 @@
         function closeMenu() {
             document.getElementById('dropdownNav').classList.add('hidden-tool');
             document.getElementById('menuNotch').classList.add('hidden-tool');
+        }
+        function openMenuHover() {
+            clearTimeout(menuHoverTimer);
+            document.getElementById('dropdownNav').classList.remove('hidden-tool');
+            document.getElementById('menuNotch').classList.remove('hidden-tool');
+            setActiveMenu('btn-menu', false);
+            updateDropdownNotch();
+        }
+        function closeMenuHoverSoon() {
+            clearTimeout(menuHoverTimer);
+            menuHoverTimer = setTimeout(() => {
+                if (getCurrentView() !== 'home') {
+                    closeMenu();
+                    if (currentPrimaryNav) setActiveMenu(currentPrimaryNav, false);
+                } else {
+                    closeMenu();
+                    ['btn-menu', 'btn-gmail', 'btn-fake'].forEach(id => {
+                        const el = document.getElementById(id);
+                        if (el) el.classList.remove('menu-link-active');
+                    });
+                }
+            }, 140);
         }
         function updateDropdownNotch() {
             const notch = document.getElementById('menuNotch');
@@ -848,7 +863,7 @@
             }
         }
         
-        function genPass(play) { if(play) playDing(); const len = parseInt(document.getElementById('length').value), l="abcdefghijklmnopqrstuvwxyz", u="ABCDEFGHIJKLMNOPQRSTUVWXYZ", n="0123456789", s="!@#$%^&*()_+"; let c = l, m = []; if(document.getElementById('upper').checked) { c+=u; m.push(u[Math.floor(Math.random()*u.length)]); } if(document.getElementById('num').checked) { c+=n; m.push(n[Math.floor(Math.random()*n.length)]); } if(document.getElementById('sym').checked) { c+=s; m.push(s[Math.floor(Math.random()*s.length)]); } let p = m.join(''); for(let i=p.length; i<len; i++) p += c.charAt(Math.floor(Math.random()*c.length)); document.getElementById('passOutput').innerText = p.split('').sort(()=>0.5-Math.random()).join(''); }
+        function genPass(play) { if(play) playDing(); const len = parseInt(document.getElementById('length').value), l="abcdefghijklmnopqrstuvwxyz", u="ABCDEFGHIJKLMNOPQRSTUVWXYZ", n="0123456789", s="!@#$%^&*()_"; let c = l, m = []; if(document.getElementById('upper').checked) { c+=u; m.push(u[Math.floor(Math.random()*u.length)]); } if(document.getElementById('num').checked) { c+=n; m.push(n[Math.floor(Math.random()*n.length)]); } if(document.getElementById('sym').checked) { c+=s; m.push(s[Math.floor(Math.random()*s.length)]); } let p = m.join(''); for(let i=p.length; i<len; i++) p += c.charAt(Math.floor(Math.random()*c.length)); document.getElementById('passOutput').innerText = p.split('').sort(()=>0.5-Math.random()).join(''); }
                 const emailDomains = ['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','me.com','mac.com','live.com','msn.com','aol.com','proton.me','protonmail.com','zoho.com','zohomail.com','yandex.com','yandex.ru','gmx.com','gmx.us','mail.com','email.com','fastmail.com','hey.com'];
         const emailNameData = {
             bd: {
@@ -1481,7 +1496,7 @@
                 `Longitude: ${document.getElementById('fakeLon').innerText}`
             ].join('\n');
             await copyAction(bundle, 'fake', btn);
-        }        async function copyAction(txt, type, btn) { if(!txt || txt === "------" || txt === "Ready...") return; try { await writeClipboardText(txt); playDing(); if(btn && btn.classList) btn.classList.add('copied'); if(type === 'email') { const card = btn && typeof btn.closest === 'function' ? btn.closest('.email-card') : null; if(card) card.classList.add('used'); } setTimeout(() => { if(btn && btn.classList) btn.classList.remove('copied'); }, 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 5) hPass.pop(); renderPassHistory(); } if(type === 'otp') save2faCode(txt); } catch (e) { console.error('Copy failed:', e); } }
+        }        async function copyAction(txt, type, btn) { if(!txt || txt === "------" || txt === "Ready...") return; try { await writeClipboardText(txt); playDing(); if(btn && btn.classList) btn.classList.add('copied'); if(type === 'email') { const card = btn && typeof btn.closest === 'function' ? btn.closest('.email-card') : null; if(card) card.classList.add('used'); } setTimeout(() => { if(btn && btn.classList) btn.classList.remove('copied'); }, 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 5) hPass.pop(); renderPassHistory(); genPass(false); } if(type === 'otp') save2faCode(txt); } catch (e) { console.error('Copy failed:', e); } }
         function save2faCode(code) { if(!code || code === '------' || code.length < 4) return; h2fa = h2fa.filter(i => i !== code); h2fa.unshift(code); if(h2fa.length > 5) h2fa = h2fa.slice(0, 5); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
         function render2fa() { document.getElementById('otpHistoryList').innerHTML = '<p>Copy History</p>' + (h2fa.length ? h2fa.slice(0, 5).map((code) => `<div class="inline-history-item"><span>${code}</span><button class="inline-history-copy" onclick="copyAction('${code}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
         function renderPassHistory() { document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + (hPass.length ? hPass.slice(0, 5).map((p, i) => `<div class="inline-history-item"><span>${p}</span><button class="inline-history-copy" onclick="copyAction('${p}', 'pass', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
@@ -1535,6 +1550,14 @@
                     update2FA();
                 }
             });
+        }
+        const toolsBtnEl = document.getElementById('btn-menu');
+        const toolsMenuEl = document.getElementById('dropdownNav');
+        if (toolsBtnEl && toolsMenuEl) {
+            toolsBtnEl.addEventListener('mouseenter', openMenuHover);
+            toolsBtnEl.addEventListener('mouseleave', closeMenuHoverSoon);
+            toolsMenuEl.addEventListener('mouseenter', () => clearTimeout(menuHoverTimer));
+            toolsMenuEl.addEventListener('mouseleave', closeMenuHoverSoon);
         }
         setInterval(update2FA, 1000);
         window.onload = () => {
