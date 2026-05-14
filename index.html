@@ -20,6 +20,8 @@
             --panel-ink: #f8fbff;
             --panel-ink-strong: #f5f7ff;
             --panel-muted: #b8c2dd;
+            --excel-font-family: 'Segoe UI', sans-serif;
+            --excel-font-size: 13px;
         }
         .light-mode { --bg: #0f1538; --glass: rgba(25, 32, 63, 0.58); --glass-border: rgba(255, 255, 255, 0.14); }
         body { background: linear-gradient(135deg, #141b4a 0%, #1a2559 34%, #241f4d 66%, #2f2550 100%); color: #eef2ff; font-family: 'Segoe UI', sans-serif; transition: 0.4s; min-height: 100vh; overflow-x: hidden; display: flex; flex-direction: column; align-items: center; position: relative; }
@@ -44,14 +46,14 @@
         .pro-box { font-size: 12px; background: var(--gold); color: #000; padding: 2px 8px; border-radius: 6px; margin-left: 10px; vertical-align: middle; }
 
         /* TOP CTRLS */
-        .top-ctrl-bar { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 12px; z-index: 100; }
+        .top-ctrl-bar { position: absolute; top: 20px; right: 20px; display: flex; align-items: center; gap: 12px; z-index: 260; }
         .ctrl-btn { background: rgba(33, 40, 77, 0.58); backdrop-filter: blur(18px); border: 1px solid rgba(255,255,255,0.16); padding: 12px; border-radius: 15px; transition: 0.3s; cursor: pointer; box-shadow: 0 10px 26px rgba(10,16,40,0.24); }
 
         /* BANNER */
         /* NAVIGATION */
-        .tool-nav-row { width: 100%; max-width: 1280px; display: flex; justify-content: flex-end; padding: 0 24px; margin: 0.18rem 0 0.55rem; position: relative; z-index: 260; }
-        .menu-wrap { position: relative; width: 100%; max-width: 900px; display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
-        .menu-panel { position: relative; width: auto; min-width: 340px; padding: 8px 10px; background: rgba(28, 36, 70, 0.38); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.14); border-radius: 16px; box-shadow: 0 18px 40px rgba(9, 14, 38, 0.28); display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
+        .tool-nav-row { display: none; }
+        .menu-wrap { position: relative; display: flex; flex-direction: column; align-items: flex-end; }
+        .menu-panel { position: relative; width: auto; min-width: 0; padding: 0; background: transparent; backdrop-filter: none; border: 0; border-radius: 0; box-shadow: none; display: inline-flex; align-items: center; justify-content: flex-end; gap: 8px; }
         .menu-panel-dropdown { position: absolute; top: calc(100% + 10px); right: 0; width: min(860px, calc(100vw - 48px)); padding: 16px; background: rgba(21, 28, 58, 0.86); backdrop-filter: blur(26px); border: 1px solid rgba(255,255,255,0.12); border-radius: 22px; box-shadow: 0 22px 60px rgba(9, 14, 38, 0.34); }
         .menu-panel-dropdown.hidden-tool { display: none !important; }
         .menu-drop-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px 0; }
@@ -75,10 +77,10 @@
             text-overflow: ellipsis;
         }
         .menu-notch { position: absolute; top: calc(100% + 2px); right: 152px; width: 16px; height: 16px; background: rgba(21, 28, 58, 0.9); border-left: 1px solid rgba(255,255,255,0.12); border-top: 1px solid rgba(255,255,255,0.12); transform: rotate(45deg); border-top-left-radius: 5px; transition: opacity 0.2s ease; }
-        .menu-link { min-width: 132px; height: 47px; display: inline-flex; flex-direction: row; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; border-radius: 12px; font-size: 12px; font-weight: 900; text-transform: none; color: #eef2ff; background: transparent !important; border: 1px solid transparent !important; cursor: pointer; transition: 0.25s; text-align: center; }
+        .menu-link { min-width: 0; height: 24px; display: inline-flex; flex-direction: row; align-items: center; justify-content: center; gap: 8px; padding: 0 6px; border-radius: 0; font-size: 12px; font-weight: 900; text-transform: none; color: #eef2ff; background: transparent !important; border: 0 !important; cursor: pointer; transition: 0.25s; text-align: center; box-shadow: none !important; }
         .menu-link svg { width: 18px; height: 18px; }
-        .menu-link:hover { color: #ffffff; transform: translateY(-1px); background: rgba(255,255,255,0.08) !important; border-color: rgba(255,255,255,0.12) !important; }
-        .menu-link-active { color: #ffffff !important; background: rgba(255,255,255,0.1) !important; border-color: rgba(255,255,255,0.14) !important; }
+        .menu-link:hover { color: #ffffff; transform: translateY(-1px); background: transparent !important; }
+        .menu-link-active { color: #ffffff !important; background: transparent !important; border-color: transparent !important; }
         .menu-link-active svg { color: #ffffff; }
         .menu-link-menu { color: #f8fbff; }
         .light-mode .menu-panel,
@@ -111,23 +113,80 @@
         }
         #excelEditorHost .x-spreadsheet {
             background: transparent;
+            font-family: var(--excel-font-family);
+            font-size: var(--excel-font-size);
         }
         #excelEditorHost .x-spreadsheet-toolbar,
         #excelEditorHost .x-spreadsheet-sheet,
         #excelEditorHost .x-spreadsheet-bottombar {
-            background: rgba(7, 11, 18, 0.92);
-            border-color: rgba(255,255,255,0.06);
+            background: linear-gradient(180deg, rgba(30,41,87,0.92), rgba(36,48,95,0.88));
+            border-color: rgba(255,255,255,0.08);
         }
         #excelEditorHost .x-spreadsheet-toolbar .x-spreadsheet-toolbar-btn,
         #excelEditorHost .x-spreadsheet-bottombar .x-spreadsheet-bottombar-btn {
-            color: #dbeafe;
+            color: #eaf2ff;
+        }
+        #excelEditorHost .x-spreadsheet-toolbar {
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        #excelEditorHost .x-spreadsheet-toolbar .x-spreadsheet-toolbar-btn:hover,
+        #excelEditorHost .x-spreadsheet-bottombar .x-spreadsheet-bottombar-btn:hover {
+            background: rgba(255,255,255,0.08);
         }
         #excelEditorHost .x-spreadsheet-editor {
-            background: #0b1120;
+            background: rgba(17,24,39,0.96);
             color: #e2e8f0;
+        }
+        #excelEditorHost .x-spreadsheet-editor textarea {
+            font-family: var(--excel-font-family) !important;
+            font-size: var(--excel-font-size) !important;
         }
         #excelEditorHost .x-spreadsheet-selector {
             border-color: rgba(59,130,246,0.75);
+        }
+        #excelEditorHost .x-spreadsheet-table {
+            background: rgba(248,250,252,0.98);
+        }
+        #excelEditorHost .x-spreadsheet-sheet table {
+            color: #17253f;
+        }
+        #excelEditorHost .x-spreadsheet-cell {
+            color: #17253f;
+            font-family: var(--excel-font-family);
+            font-size: var(--excel-font-size);
+        }
+        #excelEditorHost .x-spreadsheet-sheet .x-spreadsheet-row-header,
+        #excelEditorHost .x-spreadsheet-sheet .x-spreadsheet-col-header {
+            background: rgba(226,232,240,0.98);
+            color: #334155;
+        }
+        #excelEditorHost .x-spreadsheet-formula,
+        #excelEditorHost .x-spreadsheet-dropdown-content,
+        #excelEditorHost .x-spreadsheet-contextmenu {
+            background: rgba(248,250,252,0.98);
+            color: #17253f;
+            border-color: rgba(148,163,184,0.28);
+            box-shadow: 0 18px 38px rgba(15,23,42,0.12);
+        }
+        #excelEditorHost .x-spreadsheet-formula input,
+        #excelEditorHost .x-spreadsheet-formula textarea {
+            font-family: var(--excel-font-family) !important;
+            font-size: var(--excel-font-size) !important;
+            color: #17253f;
+        }
+        #excelEditorHost .x-spreadsheet-item {
+            color: #17253f;
+        }
+        #excelEditorHost .x-spreadsheet-item:hover,
+        #excelEditorHost .x-spreadsheet-item.active {
+            background: rgba(96,165,250,0.12);
+        }
+        #excelEditorHost .x-spreadsheet-bottombar {
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        #excelEditorHost .x-spreadsheet-bottombar .x-spreadsheet-bottombar-btn.active {
+            background: rgba(96,165,250,0.18);
+            color: #f8fbff;
         }
         .light-mode #excelEditorHost .x-spreadsheet-toolbar,
         .light-mode #excelEditorHost .x-spreadsheet-sheet,
@@ -236,11 +295,312 @@
         .input-action-btn:active { transform: scale(0.96); }
         .hidden-tool { display: none !important; }
         .main-tools.gmail-layout {
-            max-width: 78rem;
+            max-width: 90rem;
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 12px;
+            grid-template-columns: 1.2fr 0.95fr 1.15fr;
+            gap: 22px;
             align-items: start;
+            margin-top: 44px;
+        }
+        .main-tools.single-tool-layout {
+            margin-top: 42px;
+            align-items: center;
+        }
+        .main-tools.single-tool-layout > section:not(.hidden-tool) {
+            width: min(100%, 38rem);
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .main-tools.single-tool-layout #tool-2fa,
+        .main-tools.single-tool-layout #tool-pass,
+        .main-tools.single-tool-layout #tool-email {
+            width: min(100%, 38rem);
+        }
+        .main-tools.single-tool-layout #tool-currency {
+            width: min(100%, 38rem);
+        }
+        .main-tools.single-tool-layout #tool-excel {
+            width: min(calc(100vw - 56px), 96rem);
+        }
+        .main-tools.single-tool-layout #tool-fake {
+            width: min(100%, 40rem);
+        }
+        .tool-section-title {
+            width: 100%;
+            margin: 0 0 10px;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #f8fbff;
+            text-align: left;
+        }
+        .light-mode .tool-section-title {
+            color: #17253f;
+        }
+        .excel-shell {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        #tool-excel.excel-fullscreen {
+            position: fixed;
+            inset: 16px;
+            z-index: 600;
+            width: auto !important;
+            max-width: none !important;
+            margin: 0 !important;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(18,25,49,0.96), rgba(37,34,82,0.94));
+            box-shadow: 0 24px 70px rgba(2,6,23,0.42);
+        }
+        #tool-excel.excel-fullscreen .excel-shell {
+            height: calc(100vh - 64px);
+        }
+        .excel-topbar {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: linear-gradient(135deg, rgba(31,41,73,0.72), rgba(49,46,129,0.42));
+            box-shadow: 0 10px 24px rgba(15,23,42,0.16);
+        }
+        .excel-toolbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .excel-toolbar-actions::-webkit-scrollbar {
+            display: none;
+        }
+        .excel-action-btn {
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.08);
+            color: #f8fbff;
+            border-radius: 9px;
+            padding: 7px 11px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .excel-toolbar-prefs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .excel-pref-select {
+            height: 34px;
+            min-width: 110px;
+            padding: 0 10px;
+            border-radius: 9px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.08);
+            color: #f8fbff;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        .excel-meta-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            font-size: 9px;
+            text-transform: uppercase;
+            color: #cbd5e1;
+        }
+        .light-mode .excel-topbar {
+            background: rgba(255,255,255,0.86);
+            border-color: rgba(59,130,246,0.12);
+        }
+        .light-mode .excel-action-btn {
+            background: rgba(59,130,246,0.08);
+            color: #17253f;
+            border-color: rgba(59,130,246,0.14);
+        }
+        .light-mode .excel-pref-select {
+            background: rgba(59,130,246,0.08);
+            color: #17253f;
+            border-color: rgba(59,130,246,0.14);
+        }
+        .main-tools.single-tool-layout .tool-section-title {
+            text-align: center;
+        }
+        .home-welcome {
+            width: min(100%, 62rem);
+            min-height: 28rem;
+            margin: 38px auto 0;
+            padding: 26px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background:
+                radial-gradient(circle at 15% 18%, rgba(96,165,250,0.24), transparent 24%),
+                radial-gradient(circle at 82% 24%, rgba(196,132,252,0.18), transparent 20%),
+                linear-gradient(135deg, rgba(31,41,73,0.64), rgba(49,46,129,0.38), rgba(30,41,59,0.54));
+            box-shadow: 0 22px 58px rgba(15,23,42,0.22), inset 0 0 0 1px rgba(255,255,255,0.04);
+            backdrop-filter: blur(14px);
+        }
+        .home-welcome::before,
+        .home-welcome::after {
+            content: "";
+            position: absolute;
+            inset: auto;
+            border-radius: 999px;
+            filter: blur(0.4px);
+            opacity: 0.9;
+        }
+        .home-welcome::before {
+            top: 20%;
+            left: -18%;
+            width: 52%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(125,211,252,0.95), transparent);
+            animation: techSweep 5s linear infinite;
+        }
+        .home-welcome::after {
+            top: 62%;
+            right: -20%;
+            width: 58%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(244,114,182,0.75), transparent);
+            animation: techSweepReverse 5.4s linear infinite;
+        }
+        .welcome-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(circle at center, rgba(0,0,0,1), rgba(0,0,0,0.15) 88%);
+            opacity: 0.32;
+        }
+        .welcome-pulse-ring {
+            position: absolute;
+            inset: 50% auto auto 50%;
+            width: 18rem;
+            height: 18rem;
+            transform: translate(-50%, -50%);
+            border-radius: 999px;
+            border: 1px solid rgba(96,165,250,0.16);
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+            animation: welcomeRing 3s ease-in-out infinite;
+        }
+        .welcome-pulse-ring.ring-2 {
+            width: 26rem;
+            height: 26rem;
+            animation-delay: -1.2s;
+        }
+        .welcome-copy {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .welcome-inline-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(255,255,255,0.06);
+            color: #dbeafe;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            animation: welcomeFloat 2.6s ease-in-out infinite;
+        }
+        .welcome-inline-badge span {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, #60a5fa, #c084fc);
+            box-shadow: 0 0 14px rgba(96,165,250,0.72);
+        }
+        .home-welcome-title {
+            margin-top: 18px;
+            font-size: clamp(2rem, 4vw, 3.3rem);
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: #f8fbff;
+            text-shadow: 0 0 28px rgba(147,197,253,0.16);
+        }
+        .home-welcome-subtitle {
+            margin-top: 12px;
+            max-width: 42rem;
+            font-size: 0.98rem;
+            line-height: 1.7;
+            color: #dbe4ff;
+        }
+        .home-welcome-meter {
+            width: min(100%, 24rem);
+            height: 4px;
+            margin-top: 26px;
+            border-radius: 999px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.08);
+        }
+        .home-welcome-meter::after {
+            content: "";
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6, #facc15);
+            animation: welcomeLoad 5s linear forwards;
+            transform-origin: left center;
+        }
+        .home-welcome-meta {
+            margin-top: 14px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #cbd5e1;
+        }
+        @keyframes welcomePulse {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-2px) scale(1.01); }
+        }
+        @keyframes techSweep {
+            0% { transform: translateX(0); opacity: 0; }
+            12% { opacity: 0.9; }
+            100% { transform: translateX(140%); opacity: 0; }
+        }
+        @keyframes techSweepReverse {
+            0% { transform: translateX(0); opacity: 0; }
+            12% { opacity: 0.78; }
+            100% { transform: translateX(-140%); opacity: 0; }
+        }
+        @keyframes welcomeRing {
+            0%, 100% { transform: translate(-50%, -50%) scale(0.96); opacity: 0.26; }
+            50% { transform: translate(-50%, -50%) scale(1.04); opacity: 0.44; }
+        }
+        @keyframes welcomeFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+        @keyframes welcomeLoad {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
         }
         .main-tools.gmail-layout #tool-2fa,
         .main-tools.gmail-layout #tool-pass,
@@ -249,12 +609,12 @@
             min-width: 0;
             overflow: hidden;
             margin-top: 0;
-            background: transparent;
-            backdrop-filter: none;
-            border: 0;
-            border-radius: 0;
-            box-shadow: none;
-            padding: 4px 10px 0;
+            background: rgba(24, 31, 61, 0.34);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 22px;
+            box-shadow: 0 14px 34px rgba(9, 14, 38, 0.22);
+            padding: 16px 18px 14px;
         }
         .main-tools.gmail-layout #tool-2fa {
             position: relative;
@@ -271,15 +631,43 @@
             position: relative;
         }
         .main-tools.gmail-layout #tool-pass::before,
-        .main-tools.gmail-layout #tool-email::before {
-            content: "";
-            position: absolute;
-            left: -7px;
-            top: 4px;
-            bottom: 4px;
-            width: 2px;
-            background: linear-gradient(180deg, rgba(59,130,246,0), rgba(96,165,250,0.95), rgba(59,130,246,0));
-            box-shadow: 0 0 10px rgba(59,130,246,0.45);
+        .main-tools.gmail-layout #tool-email::before { display: none; }
+        .main-tools.gmail-layout #tool-2fa > div,
+        .main-tools.gmail-layout #tool-pass > div,
+        .main-tools.gmail-layout #tool-email > div,
+        .main-tools.gmail-layout #tool-email #emailContainer,
+        .main-tools.gmail-layout #tool-pass #h-list-pass,
+        .main-tools.gmail-layout #tool-2fa #otpHistoryList {
+            max-width: 100% !important;
+        }
+        .main-tools.gmail-layout #tool-pass .w-full.max-w-\[17rem\],
+        .main-tools.gmail-layout #tool-email .w-full.max-w-\[24rem\],
+        .main-tools.gmail-layout #tool-2fa .w-full.max-w-\[34rem\] {
+            max-width: 100% !important;
+        }
+        .main-tools.gmail-layout #tool-email .flex.flex-col.gap-1,
+        .main-tools.gmail-layout #tool-email .flex.flex-col.gap-2 {
+            min-width: 0;
+        }
+        .main-tools.gmail-layout #tool-email {
+            align-items: center;
+        }
+        .main-tools.gmail-layout #tool-email .tool-section-title {
+            width: min(100%, 20rem);
+            text-align: center;
+        }
+        .main-tools.gmail-layout #tool-email > div,
+        .main-tools.gmail-layout #tool-email #emailContainer {
+            width: min(100%, 20rem) !important;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .main-tools.gmail-layout #tool-email #emailContainer {
+            margin-top: 8px;
+        }
+        .main-tools.gmail-layout #tool-pass #passOutput,
+        .main-tools.gmail-layout #tool-2fa #otpBox {
+            text-align: center;
         }
         .main-tools.gmail-layout #tool-fake {
             grid-column: 1 / -1;
@@ -292,6 +680,15 @@
         .main-tools.gmail-layout #tool-2fa #otpHistoryList,
         .main-tools.gmail-layout #tool-pass #h-list-pass {
             margin-top: 8px;
+            width: 100%;
+            max-width: 15.8rem;
+            align-self: center;
+        }
+        .main-tools.gmail-layout .inline-history-list {
+            align-items: stretch;
+        }
+        .main-tools.gmail-layout .inline-history-item {
+            width: 100%;
         }
         .recent-history {
             background: transparent;
@@ -299,7 +696,7 @@
         @media (max-width: 1100px) {
             .main-tools.gmail-layout {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 8px;
+                gap: 12px;
             }
             .menu-link {
                 font-size: 10px;
@@ -312,49 +709,127 @@
             .main-tools.gmail-layout #tool-2fa,
             .main-tools.gmail-layout #tool-pass,
             .main-tools.gmail-layout #tool-email {
-                padding: 2px 6px 0;
-            }
-            .main-tools.gmail-layout #tool-pass::before,
-            .main-tools.gmail-layout #tool-email::before {
-                display: block;
+                padding: 12px 12px 10px;
             }
         }
-        .inline-history-list { display: flex; flex-direction: column; gap: 6px; overflow: visible; }
+        .inline-history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            overflow: hidden;
+            width: 100%;
+            align-items: center;
+        }
         .inline-history-item {
             display: flex;
+            flex-direction: row;
             align-items: center;
             justify-content: space-between;
             gap: 8px;
-            padding: 0;
+            padding: 0 0 4px;
             border-radius: 0;
             background: transparent;
             border: 0;
             font-size: 9px;
             font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-            width: 100%;
+            width: min(100%, 18rem);
+            overflow: hidden;
+        }
+        .inline-history-item span {
+            display: block;
+            flex: 1;
+            min-width: 0;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: none;
+            letter-spacing: 0;
+        }
+        .inline-history-time {
+            font-size: 8px;
+            line-height: 1.2;
+            color: #8ea0c8;
+            text-transform: none;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 500;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         .light-mode .inline-history-item {
             background: transparent;
             border-color: transparent;
             color: #0f172a;
         }
-        .inline-history-copy {
-            color: #60a5fa;
-            font-size: 10px;
-            font-weight: 900;
-            text-transform: uppercase;
-            background: transparent !important;
-            border: 0 !important;
-            padding: 0 !important;
+        .light-mode .inline-history-time {
+            color: #64748b;
         }
         .inline-history-empty {
             font-size: 10px;
             text-transform: uppercase;
             color: #6b7280;
         }
-        .pro-footer { margin-top: auto; padding: 40px 0; width: 100%; text-align: center; border-top: 1px solid rgba(255,255,255,0.28); background: rgba(255,255,255,0.2); backdrop-filter: blur(18px); }
-        .pro-footer p { color: #24324a !important; text-shadow: 0 1px 0 rgba(255,255,255,0.18); }
-        .pro-footer a { color: #2563eb !important; font-weight: 900; }
+        .pro-footer { margin-top: auto; padding: 34px 0 26px; width: 100%; text-align: center; border-top: 0; background: transparent; backdrop-filter: none; }
+        .pro-footer p {
+            color: transparent !important;
+            background: linear-gradient(90deg, #7dd3fc 0%, #60a5fa 22%, #a78bfa 44%, #f472b6 72%, #facc15 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            text-shadow: 0 0 18px rgba(125,211,252,0.24), 0 0 26px rgba(244,114,182,0.18);
+            filter: saturate(1.2) brightness(1.14);
+        }
+        .pro-footer a {
+            color: #f8fbff !important;
+            font-weight: 900;
+            background: transparent;
+            padding: 0;
+            text-shadow: 0 0 12px rgba(147,197,253,0.42), 0 0 22px rgba(196,132,252,0.22);
+        }
+        .footer-socials {
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+        }
+        .footer-social-link {
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 24px rgba(15,23,42,0.18);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+        }
+        .footer-social-link:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 14px 28px rgba(15,23,42,0.24);
+            border-color: rgba(255,255,255,0.28);
+        }
+        .footer-social-link svg {
+            width: 16px;
+            height: 16px;
+            display: block;
+        }
+        .footer-social-link.facebook {
+            color: #1877f2;
+            background: linear-gradient(135deg, rgba(24,119,242,0.16), rgba(96,165,250,0.12));
+        }
+        .footer-social-link.instagram {
+            color: #f472b6;
+            background: linear-gradient(135deg, rgba(245,96,64,0.16), rgba(217,70,239,0.14), rgba(251,191,36,0.12));
+        }
+        .light-mode .footer-social-link {
+            border-color: rgba(59,130,246,0.14);
+            background: rgba(255,255,255,0.72);
+            box-shadow: 0 10px 22px rgba(59,130,246,0.08);
+        }
         .light-mode .text-white { color: #0f172a !important; }
         .light-mode .text-white\/90,
         .light-mode .text-white\/80,
@@ -414,7 +889,7 @@
         }
         #mainContent button { font-size: 10px !important; }
         #mainContent #otpBox {
-            font-size: 0.76rem !important;
+            font-size: 0.68rem !important;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: clip;
@@ -487,28 +962,7 @@
     </style>
 </head>
 <body class="p-4">
-
     <div class="top-ctrl-bar">
-        <button onclick="toggleTheme()" class="ctrl-btn"><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0z"/></svg></button>
-        <button onclick="toggleSound()" class="ctrl-btn"><svg id="sOn" class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M6.343 17.657l-.707.707a2 2 0 01-2.828 0 2 2 0 010-2.828l.707-.707m2.828-9.9l-.707-.707a2 2 0 00-2.828 0 2 2 0 000 2.828l.707.707m2.828 9.9a5 5 0 010-7.072" /></svg></button>
-        
-        <div class="dev-card-wrapper">
-            <div class="dev-icon-container"><img src="https://i.postimg.cc/BnRkPcSg/Whats-App-Image-2026-03-26-at-10-40-48-AM.jpg" alt="Bidhan"></div>
-            <div id="devCard">
-                <div class="pro-avatar"><img src="https://i.postimg.cc/BnRkPcSg/Whats-App-Image-2026-03-26-at-10-40-48-AM.jpg"></div>
-                <h4 class="text-white font-black uppercase tracking-wider">Bidhan</h4>
-                <p class="text-[10px] text-blue-400 font-bold uppercase mt-1">Lead Developer</p>
-                <div class="mt-6 pt-6 border-t border-white/5"><a href="https://github.com/bidhanbd" target="_blank" style="display:block; background:rgba(255,255,255,0.05); padding:12px; border-radius:12px; font-size:10px; font-weight:900; color:white; text-transform:uppercase; border:1px solid var(--glass-border);">GitHub Profile</a></div>
-            </div>
-        </div>
-    </div>
-
-    <header class="mt-1 cursor-pointer w-full px-4" onclick="showHome()">
-        <div class="w-full flex items-start justify-start pr-[190px]"><div class="flex flex-col items-start gap-2 min-w-[520px] max-w-[940px]"><div class="flex items-center gap-4"><div class="logo-shield"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M6 11h12v9H6z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2"></path></svg></div><h1 class="brand-title">Multi-Tool<span class="pro-box">PRO</span></h1></div>
-        <div class="text-[9px] font-black text-gray-500 tracking-[0.16em] uppercase text-left ml-[70px]">Your All-in-One Digital Toolkit.</div></div></div>
-    </header>
-
-    <div id="toolNavRow" class="tool-nav-row">
         <div class="menu-wrap">
             <aside id="mainNav" class="menu-panel">
                 <button onclick="switchTool('gmail')" id="btn-gmail" class="menu-link"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path stroke-linecap="round" stroke-linejoin="round" d="M4 8l8 6 8-6"></path></svg><span>Gmail</span></button>
@@ -532,10 +986,40 @@
                 </div>
             </aside>
         </div>
+        <button onclick="toggleTheme()" class="ctrl-btn"><svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0z"/></svg></button>
+        <button onclick="toggleSound()" class="ctrl-btn"><svg id="sOn" class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M6.343 17.657l-.707.707a2 2 0 01-2.828 0 2 2 0 010-2.828l.707-.707m2.828-9.9l-.707-.707a2 2 0 00-2.828 0 2 2 0 000 2.828l.707.707m2.828 9.9a5 5 0 010-7.072" /></svg></button>
+        
+        <div class="dev-card-wrapper">
+            <div class="dev-icon-container"><img src="https://i.postimg.cc/BnRkPcSg/Whats-App-Image-2026-03-26-at-10-40-48-AM.jpg" alt="Bidhan"></div>
+            <div id="devCard">
+                <div class="pro-avatar"><img src="https://i.postimg.cc/BnRkPcSg/Whats-App-Image-2026-03-26-at-10-40-48-AM.jpg"></div>
+                <h4 class="text-white font-black uppercase tracking-wider">Bidhan</h4>
+                <p class="text-[10px] text-blue-400 font-bold uppercase mt-1">Lead Developer</p>
+                <div class="mt-6 pt-6 border-t border-white/5"><a href="https://github.com/bidhanbd" target="_blank" style="display:block; background:rgba(255,255,255,0.05); padding:12px; border-radius:12px; font-size:10px; font-weight:900; color:white; text-transform:uppercase; border:1px solid var(--glass-border);">GitHub Profile</a></div>
+            </div>
+        </div>
     </div>
 
-    <main id="mainContent" class="main-tools max-w-[64rem] w-full flex flex-col gap-1.5 mb-20 px-4 -mt-1">
-        <section id="tool-2fa" class="glass-panel browser-light p-5 pt-4 flex flex-col items-center gap-2 hidden-tool relative">
+    <header class="mt-1 cursor-pointer w-full px-4" onclick="showHome()">
+        <div class="w-full flex items-start justify-start pr-[190px]"><div class="flex flex-col items-start gap-2 min-w-[520px] max-w-[940px]"><div class="flex items-center gap-4"><div class="logo-shield"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0v4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M6 11h12v9H6z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2"></path></svg></div><h1 class="brand-title">Multi-Tool<span class="pro-box">PRO</span></h1></div>
+        <div class="text-[9px] font-black text-gray-500 tracking-[0.16em] uppercase text-left ml-[70px]">Your All-in-One Digital Toolkit.</div></div></div>
+    </header>
+
+    <main id="mainContent" class="main-tools max-w-[64rem] w-full flex flex-col gap-1.5 mb-12 px-4 -mt-1">
+        <section id="homeWelcome" class="home-welcome">
+            <div class="welcome-grid"></div>
+            <div class="welcome-pulse-ring"></div>
+            <div class="welcome-pulse-ring ring-2"></div>
+            <div class="welcome-copy">
+                <div class="welcome-inline-badge"><span></span> Secure digital workspace</div>
+                <h2 class="home-welcome-title">Welcome to Multi-Tool Pro</h2>
+                <p class="home-welcome-subtitle">Authentication, password generation, email creation, currency tools, spreadsheet editing, and test data workflows in one place.</p>
+                <div class="home-welcome-meter"></div>
+                <div class="home-welcome-meta">Loading premium toolkit experience</div>
+            </div>
+        </section>
+        <section id="tool-2fa" class="glass-panel browser-light p-4 pt-3 flex flex-col items-center gap-1.5 hidden-tool relative">
+            <h3 class="tool-section-title">2FA</h3>
             <div class="w-full max-w-[34rem] flex items-center gap-2">
                 <textarea id="otpSecretField" placeholder="ENTER 2FA SECRET" autocomplete="off" autocapitalize="off" spellcheck="false" tabindex="0" class="flex-1 px-4 rounded-[12px] border border-red-400/70 bg-[#141b37]/90 !border-red-400/70 text-left text-white font-mono"></textarea>
                 <button type="button" onclick="clear2FA()" class="inline-icon-btn shrink-0" style="width:22px;height:22px;background:transparent;" title="Clear 2FA"><svg fill="none" stroke="currentColor" class="text-red-400" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 7h12"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 7V5h6v2"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 10v6M15 10v6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 7l.6 11a1 1 0 001 .95h4.8a1 1 0 001-.95L16 7"></path></svg></button>
@@ -543,27 +1027,29 @@
             <div class="w-full max-w-[34rem] flex items-start justify-start">
                 <p id="otpError" class="min-h-[1rem] flex-1 text-left text-[0.68rem] text-red-400">Enter a valid 2FA secret</p>
             </div>
-            <div id="otpCodeWrap" class="w-full max-w-[34rem] flex flex-col items-center gap-2 pt-3 hidden-tool">
-                <p id="otpTitle" class="text-[0.9rem] font-black text-white/90">The current 2FA verification code is</p>
-                <div class="flex items-center gap-3">
-                    <div id="otpCodePanel" class="w-[11rem] h-[4.2rem] rounded-[16px] border border-white/70 bg-white/[0.04] flex items-center justify-center px-2">
+            <div id="otpCodeWrap" class="w-full max-w-[34rem] flex flex-col items-center gap-1.5 pt-2 hidden-tool">
+                <p id="otpTitle" class="text-[0.84rem] font-black text-white/90">The current 2FA verification code is</p>
+                <div class="flex items-center gap-2.5">
+                    <div id="otpCodePanel" class="w-[9rem] h-[3.25rem] rounded-[14px] border border-white/70 bg-white/[0.04] flex items-center justify-center px-2">
                         <div id="otpBox" class="w-full whitespace-nowrap text-center font-black text-white leading-none">------</div>
                     </div>
-                    <button type="button" onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper inline-icon-btn shrink-0" style="width:28px;height:28px;background:transparent;" title="Copy 2FA Code"><div class="copy-circle"></div><svg class="copy-svg text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
+                    <button type="button" onclick="copyAction(document.getElementById('otpBox').innerText, 'otp', this)" class="copy-wrapper inline-icon-btn shrink-0" style="width:24px;height:24px;background:transparent;" title="Copy 2FA Code"><div class="copy-circle"></div><svg class="copy-svg text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></button>
                 </div>
-                <p id="otpTimerWrap" class="shrink-0 text-[0.72rem] text-white/80">(<span id="timerText">30</span> seconds)</p>
+                <p id="otpTimerWrap" class="shrink-0 text-[0.68rem] text-white/80">(<span id="timerText">30</span> seconds)</p>
             </div>
             <div class="hidden"><div id="timerBar"></div></div>
-            <div id="otpHistoryList" class="w-full max-w-[17rem] p-1 flex flex-col items-center gap-1 text-[7px] uppercase font-black text-gray-500 text-center"><p>Copy History</p></div>
+            <div id="otpHistoryList" class="inline-history-list w-full max-w-[17rem] p-1 text-gray-500 text-center hidden-tool"></div>
         </section>
 
         <section id="tool-pass" class="glass-panel p-3 pt-2 flex flex-col items-center gap-2 hidden-tool relative">
+            <h3 class="tool-section-title">Password Generator</h3>
             <div class="w-full max-w-[17rem] flex items-center gap-2 bg-black/40 p-2 rounded-[14px] border border-white/5"><div id="passOutput" class="flex-1 min-w-0 text-[0.85rem] font-mono font-bold text-green-500 break-all text-center">Ready...</div><div onclick="copyAction(document.getElementById('passOutput').innerText, 'pass', this)" class="copy-wrapper inline-icon-btn" style="width:24px;height:24px;background:transparent;" title="Copy Password"><div class="copy-circle"></div><svg class="copy-svg text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg><svg class="check-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg></div></div>
-            <div class="w-full max-w-[17rem] flex items-center justify-center gap-3"><button type="button" onclick="genPass(true)" class="inline-icon-btn generate-pro" title="Generate Password" style="width:34px;height:34px;"><svg fill="none" stroke="currentColor" class="text-green-400" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v6h6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20 20v-6h-6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20 10A8 8 0 007 6l-3 4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 14a8 8 0 0013 4l3-4"></path></svg></button><input type="number" id="length" min="8" max="50" value="12" class="h-7 w-[3.3rem] px-1.5 rounded-md text-[10px] text-center font-mono"></div><input type="checkbox" id="upper" checked class="hidden" aria-hidden="true"><input type="checkbox" id="num" checked class="hidden" aria-hidden="true"><input type="checkbox" id="sym" checked class="hidden" aria-hidden="true"><div id="h-list-pass" class="w-full max-w-[17rem] p-1 flex flex-col items-center gap-1 text-[7px] uppercase font-black text-gray-500 text-center"><p>Copy History</p></div>
+            <div class="w-full max-w-[17rem] flex items-center justify-center gap-3"><button type="button" onclick="genPass(true)" class="inline-icon-btn generate-pro" title="Generate Password" style="width:34px;height:34px;"><svg fill="none" stroke="currentColor" class="text-green-400" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v6h6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20 20v-6h-6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M20 10A8 8 0 007 6l-3 4"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 14a8 8 0 0013 4l3-4"></path></svg></button><input type="number" id="length" min="8" max="50" value="12" class="h-7 w-[3.3rem] px-1.5 rounded-md text-[10px] text-center font-mono"></div><input type="checkbox" id="upper" checked class="hidden" aria-hidden="true"><input type="checkbox" id="num" checked class="hidden" aria-hidden="true"><input type="checkbox" id="sym" checked class="hidden" aria-hidden="true"><div id="h-list-pass" class="inline-history-list w-full max-w-[17rem] p-1 text-gray-500 text-center hidden-tool"></div>
         </section>
 
         <section id="tool-email" class="glass-panel p-2.5 pt-2 flex flex-col items-start gap-1.5 hidden-tool">
-            <div class="w-full max-w-[24rem] flex flex-nowrap items-end justify-start gap-2 overflow-hidden">
+            <h3 class="tool-section-title">Email Generator</h3>
+            <div class="w-full max-w-[24rem] flex flex-nowrap items-end justify-start gap-3 overflow-hidden">
                 <div class="flex flex-col gap-1">
                     <label class="text-[7px] font-black uppercase text-gray-500">Quantity</label>
                     <input type="number" id="eqty" value="10" min="1" max="100" class="h-8 w-[3.5rem] px-2 rounded-lg text-[11px] text-center">
@@ -581,7 +1067,7 @@
                     </select>
                 </div>
             </div>
-            <div class="w-full max-w-[24rem] flex justify-center pl-[3.5rem]">
+            <div class="w-full max-w-[24rem] flex justify-center pl-0">
                 <button onclick="generateEmails()" class="px-2.5 py-1 bg-orange-600 hover:bg-orange-500 text-white rounded-lg font-black uppercase text-[7px] active:scale-95 transition">Generate</button>
             </div>
             <div id="emailContainer" class="w-full max-w-[24rem] flex flex-col gap-1 mt-0.5"></div>
@@ -636,22 +1122,53 @@
             </div>
         </section>
         <section id="tool-excel" class="glass-panel p-3 flex flex-col items-center gap-3 hidden-tool">
-            <div class="w-full max-w-[68rem] flex flex-col gap-3">
-                <div class="flex flex-wrap items-center gap-2">
-                    <button type="button" onclick="createNewWorkbook()" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase text-[10px]">New</button>
-                    <button type="button" onclick="document.getElementById('excelFileInput').click()" class="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black uppercase text-[10px]">Open File</button>
-                    <button type="button" onclick="saveExcelWorkspace()" class="px-3 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-black uppercase text-[10px]">Save</button>
-                    <button type="button" onclick="restoreExcelWorkspace()" class="px-3 py-2 rounded-xl bg-violet-600 hover:bg-violet-500 text-white font-black uppercase text-[10px]">Restore</button>
-                    <button type="button" onclick="downloadWorkbook('xlsx')" class="px-3 py-2 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-black uppercase text-[10px]">Download XLSX</button>
-                    <button type="button" onclick="downloadWorkbook('csv')" class="px-3 py-2 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-black uppercase text-[10px]">Download CSV</button>
-                    <button type="button" onclick="addExcelSheet()" class="px-3 py-2 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-black uppercase text-[10px]">Add Sheet</button>
-                    <input id="excelFileInput" type="file" accept=".xlsx,.xls,.csv" class="hidden">
+            <h3 class="tool-section-title">Excel Editor</h3>
+            <div class="excel-shell">
+                <div class="excel-topbar">
+                    <div class="excel-toolbar-actions">
+                        <button type="button" onclick="createNewWorkbook()" class="excel-action-btn">New</button>
+                        <button type="button" onclick="document.getElementById('excelFileInput').click()" class="excel-action-btn">Open File</button>
+                        <button type="button" onclick="saveExcelWorkspace()" class="excel-action-btn">Save</button>
+                        <button type="button" onclick="restoreExcelWorkspace()" class="excel-action-btn">Restore</button>
+                        <button type="button" onclick="downloadWorkbook('xlsx')" class="excel-action-btn">Download XLSX</button>
+                        <button type="button" onclick="downloadWorkbook('csv')" class="excel-action-btn">Download CSV</button>
+                        <button type="button" onclick="addExcelSheet()" class="excel-action-btn">Add Sheet</button>
+                        <input id="excelFileInput" type="file" accept=".xlsx,.xls,.csv" class="hidden">
+                    </div>
+                    <div class="excel-toolbar-prefs">
+                        <select id="excelFontFamily" class="excel-pref-select" onchange="applyExcelFontFamily(this.value)">
+                            <option value="'Segoe UI', sans-serif">Segoe UI</option>
+                            <option value="Arial, sans-serif">Arial</option>
+                            <option value="Calibri, sans-serif">Calibri</option>
+                            <option value="Roboto, sans-serif">Roboto</option>
+                            <option value="Inter, sans-serif">Inter</option>
+                            <option value="'Times New Roman', serif">Times New Roman</option>
+                            <option value="Georgia, serif">Georgia</option>
+                            <option value="'Courier New', monospace">Courier New</option>
+                            <option value="Verdana, sans-serif">Verdana</option>
+                            <option value="Tahoma, sans-serif">Tahoma</option>
+                            <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                            <option value="Garamond, serif">Garamond</option>
+                        </select>
+                        <select id="excelFontSize" class="excel-pref-select" onchange="applyExcelFontSize(this.value)">
+                            <option value="10px">10</option>
+                            <option value="11px">11</option>
+                            <option value="12px">12</option>
+                            <option value="13px" selected>13</option>
+                            <option value="14px">14</option>
+                            <option value="16px">16</option>
+                            <option value="18px">18</option>
+                            <option value="20px">20</option>
+                            <option value="24px">24</option>
+                        </select>
+                        <button type="button" onclick="toggleExcelFullscreen()" class="excel-action-btn">Fullscreen</button>
+                    </div>
                 </div>
-                <div class="flex items-center justify-between gap-3 text-[9px] text-gray-500 uppercase">
+                <div class="excel-meta-bar">
                     <p id="excelStatus">Ready for Excel file upload and editing</p>
                     <p id="excelSheetMeta">Sheet1</p>
                 </div>
-                <div class="w-full h-[42rem] rounded-[14px] overflow-hidden border border-white/10 bg-black/30">
+                <div class="w-full h-[calc(100vh-16rem)] min-h-[44rem] rounded-[16px] overflow-hidden border border-white/10 bg-black/30">
                     <div id="excelEditorHost" class="w-full h-full"></div>
                 </div>
             </div>
@@ -688,11 +1205,33 @@
 
     <footer class="pro-footer w-full">
         <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Designed & Developed by <a href="https://github.com/bidhanbd" target="_blank" style="color:#3b82f6; text-decoration:none;">BIDHAN</a></p>
+        <div class="footer-socials">
+            <a class="footer-social-link facebook" href="https://www.facebook.com/Bidhan.Nilphamari" target="_blank" rel="noopener noreferrer" title="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.6 1.7-1.6H16V4.9c-.3 0-1.1-.1-2.1-.1-2 0-3.4 1.2-3.4 3.6V11H8v3h2.4v7h3.1z"></path>
+                </svg>
+            </a>
+            <a class="footer-social-link instagram" href="https://www.instagram.com/bidhan.nilphamari" target="_blank" rel="noopener noreferrer" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <rect x="4.2" y="4.2" width="15.6" height="15.6" rx="4.6" stroke="currentColor" stroke-width="2"></rect>
+                    <circle cx="12" cy="12" r="3.6" stroke="currentColor" stroke-width="2"></circle>
+                    <circle cx="17.1" cy="6.9" r="1.1" fill="currentColor"></circle>
+                </svg>
+            </a>
+        </div>
     </footer>
 
     <script>
         const { authenticator } = otplib;
-        let isS = localStorage.getItem('bidhan_s') !== 'off', h2fa = JSON.parse(localStorage.getItem('bidhan_2fa_v25') || '[]'), hPass = [];
+        let isS = localStorage.getItem('bidhan_s') !== 'off', h2fa = JSON.parse(localStorage.getItem('bidhan_2fa_v25') || '[]'), hPass = JSON.parse(localStorage.getItem('bidhan_pass_v25') || '[]');
+        function normalizeHistoryEntry(entry) {
+            if (!entry) return null;
+            if (typeof entry === 'string') return { value: entry, ts: Date.now() };
+            if (typeof entry === 'object' && typeof entry.value === 'string') return { value: entry.value, ts: Number(entry.ts) || Date.now() };
+            return null;
+        }
+        h2fa = h2fa.map(normalizeHistoryEntry).filter((entry) => entry && typeof entry.value === 'string' && entry.value.trim().length > 6).slice(0, 5);
+        hPass = hPass.map(normalizeHistoryEntry).filter(Boolean).slice(0, 5);
         const ding = new Audio('https://www.fesliyanstudios.com/play-mp3/387');
         ding.preload = 'auto';
         function playDing() {
@@ -755,7 +1294,20 @@
         function getCurrentView() {
             return localStorage.getItem('bidhan_active_tool_v1') || 'home';
         }
+        function resetHomeWelcome() {
+            const welcome = document.getElementById('homeWelcome');
+            if (!welcome) return;
+            welcome.classList.remove('hidden-tool');
+            const meter = welcome.querySelector('.home-welcome-meter');
+            if (meter) {
+                meter.style.animation = 'none';
+                void meter.offsetWidth;
+                meter.style.animation = '';
+            }
+        }
         function hideAllTools() {
+            const homeWelcome = document.getElementById('homeWelcome');
+            if (homeWelcome) homeWelcome.classList.add('hidden-tool');
             document.getElementById('tool-2fa').classList.add('hidden-tool');
             document.getElementById('tool-pass').classList.add('hidden-tool');
             document.getElementById('tool-email').classList.add('hidden-tool');
@@ -763,6 +1315,7 @@
             document.getElementById('tool-excel').classList.add('hidden-tool');
             document.getElementById('tool-fake').classList.add('hidden-tool');
             document.getElementById('mainContent').classList.remove('gmail-layout');
+            document.getElementById('mainContent').classList.remove('single-tool-layout');
         }
         function toggleMenu(event) {
             if (event) event.stopPropagation();
@@ -836,10 +1389,11 @@
             if (dropEl) dropEl.classList.add('menu-drop-link-active');
             updateMenuNotch(target);
         }
-        function showHome() { hideAllTools(); currentPrimaryNav = null; ['btn-menu', 'btn-gmail', 'btn-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-link-active'); }); ['drop-excel', 'drop-currency', 'drop-2fa', 'drop-pass', 'drop-email', 'drop-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-drop-link-active'); }); closeMenu(); saveCurrentView('home'); }
+        function showHome() { hideAllTools(); currentPrimaryNav = null; ['btn-menu', 'btn-gmail', 'btn-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-link-active'); }); ['drop-excel', 'drop-currency', 'drop-2fa', 'drop-pass', 'drop-email', 'drop-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-drop-link-active'); }); const homeWelcome = document.getElementById('homeWelcome'); if (homeWelcome) { homeWelcome.classList.remove('hidden-tool'); resetHomeWelcome(); } closeMenu(); saveCurrentView('home'); }
         function switchTool(t) {
             const showGmail = t === 'gmail';
             document.getElementById('mainContent').classList.toggle('gmail-layout', showGmail);
+            document.getElementById('mainContent').classList.toggle('single-tool-layout', !showGmail);
             document.getElementById('tool-2fa').classList.toggle('hidden-tool', !(showGmail || t === '2fa'));
             document.getElementById('tool-pass').classList.toggle('hidden-tool', !(showGmail || t === 'pass'));
             document.getElementById('tool-email').classList.toggle('hidden-tool', !(showGmail || t === 'email'));
@@ -1023,6 +1577,47 @@
         let excelEditor = null;
         let excelWorkbookName = 'workbook.xlsx';
         const excelStorageKey = 'bidhan_excel_workspace_v1';
+        const excelUiPrefsKey = 'bidhan_excel_ui_prefs_v1';
+        function applyExcelFontFamily(fontValue, silent = false) {
+            document.documentElement.style.setProperty('--excel-font-family', fontValue);
+            if (!silent) saveExcelUiPrefs();
+        }
+        function applyExcelFontSize(sizeValue, silent = false) {
+            document.documentElement.style.setProperty('--excel-font-size', sizeValue);
+            if (!silent) saveExcelUiPrefs();
+        }
+        function saveExcelUiPrefs() {
+            const payload = {
+                fontFamily: document.getElementById('excelFontFamily')?.value || "'Segoe UI', sans-serif",
+                fontSize: document.getElementById('excelFontSize')?.value || '13px'
+            };
+            localStorage.setItem(excelUiPrefsKey, JSON.stringify(payload));
+        }
+        function restoreExcelUiPrefs() {
+            const raw = localStorage.getItem(excelUiPrefsKey);
+            if (!raw) return;
+            try {
+                const parsed = JSON.parse(raw);
+                const fontEl = document.getElementById('excelFontFamily');
+                const sizeEl = document.getElementById('excelFontSize');
+                if (fontEl && parsed.fontFamily) {
+                    fontEl.value = parsed.fontFamily;
+                    applyExcelFontFamily(parsed.fontFamily, true);
+                }
+                if (sizeEl && parsed.fontSize) {
+                    sizeEl.value = parsed.fontSize;
+                    applyExcelFontSize(parsed.fontSize, true);
+                }
+            } catch (e) {}
+        }
+        function toggleExcelFullscreen() {
+            const excelSection = document.getElementById('tool-excel');
+            if (!excelSection) return;
+            excelSection.classList.toggle('excel-fullscreen');
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize'));
+            }, 80);
+        }
         function createEmptySheetData(name = 'Sheet1') {
             return {
                 name,
@@ -1171,6 +1766,7 @@
                 setExcelStatus('Excel editor library failed to load');
                 return;
             }
+            restoreExcelUiPrefs();
             excelEditor = x_spreadsheet('#excelEditorHost', {
                 mode: 'edit',
                 showToolbar: true,
@@ -1496,10 +2092,78 @@
                 `Longitude: ${document.getElementById('fakeLon').innerText}`
             ].join('\n');
             await copyAction(bundle, 'fake', btn);
-        }        async function copyAction(txt, type, btn) { if(!txt || txt === "------" || txt === "Ready...") return; try { await writeClipboardText(txt); playDing(); if(btn && btn.classList) btn.classList.add('copied'); if(type === 'email') { const card = btn && typeof btn.closest === 'function' ? btn.closest('.email-card') : null; if(card) card.classList.add('used'); } setTimeout(() => { if(btn && btn.classList) btn.classList.remove('copied'); }, 1500); if(type === 'pass' && hPass[0] !== txt) { hPass.unshift(txt); if(hPass.length > 5) hPass.pop(); renderPassHistory(); genPass(false); } if(type === 'otp') save2faCode(txt); } catch (e) { console.error('Copy failed:', e); } }
-        function save2faCode(code) { if(!code || code === '------' || code.length < 4) return; h2fa = h2fa.filter(i => i !== code); h2fa.unshift(code); if(h2fa.length > 5) h2fa = h2fa.slice(0, 5); localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa)); render2fa(); }
-        function render2fa() { document.getElementById('otpHistoryList').innerHTML = '<p>Copy History</p>' + (h2fa.length ? h2fa.slice(0, 5).map((code) => `<div class="inline-history-item"><span>${code}</span><button class="inline-history-copy" onclick="copyAction('${code}', 'otp', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
-        function renderPassHistory() { document.getElementById('h-list-pass').innerHTML = '<p>Copy History</p>' + (hPass.length ? hPass.slice(0, 5).map((p, i) => `<div class="inline-history-item"><span>${p}</span><button class="inline-history-copy" onclick="copyAction('${p}', 'pass', this.parentElement)">COPY</button></div>`).join('') : '<p class="inline-history-empty">No history yet</p>'); }
+        }
+        function savePassEntry(value) {
+            if (!value) return;
+            hPass = hPass.filter(item => item.value !== value);
+            hPass.unshift({ value, ts: Date.now() });
+            hPass = hPass.slice(0, 5);
+            localStorage.setItem('bidhan_pass_v25', JSON.stringify(hPass));
+            renderPassHistory();
+        }
+        function save2faKeyAfterCopy() {
+            const key = (document.getElementById('otpSecretField')?.value || '').trim();
+            if (!key || key.length < 5) return;
+            h2fa = h2fa.filter(item => item.value !== key);
+            h2fa.unshift({ value: key, ts: Date.now() });
+            h2fa = h2fa.slice(0, 5);
+            localStorage.setItem('bidhan_2fa_v25', JSON.stringify(h2fa));
+            render2fa();
+        }
+        function timeAgoLabel(ts) {
+            const diffMs = Math.max(0, Date.now() - (Number(ts) || Date.now()));
+            const secs = Math.floor(diffMs / 1000);
+            if (secs < 60) return `${Math.max(1, secs)} sec ago`;
+            const mins = Math.floor(diffMs / 60000);
+            if (mins === 1) return '1 min ago';
+            if (mins < 60) return `${mins} min ago`;
+            const hours = Math.floor(mins / 60);
+            if (hours === 1) return '1 hour ago';
+            if (hours < 24) return `${hours} hours ago`;
+            const days = Math.floor(hours / 24);
+            if (days === 1) return '1 day ago';
+            return `${days} days ago`;
+        }
+        function renderHistoryList(items, title = 'Copy History') {
+            if (!items.length) return '';
+            return `<p class="text-[10px] font-bold tracking-[0.02em] uppercase mb-1">${title}</p>` + items.slice(0, 5).map((item) => `<div class="inline-history-item"><span title="${item.value.replace(/"/g, '&quot;')}">${item.value}</span><small class="inline-history-time">${timeAgoLabel(item.ts)}</small></div>`).join('');
+        }
+        async function copyAction(txt, type, btn) {
+            if (!txt || txt === "------" || txt === "Ready..." ) return;
+            try {
+                await writeClipboardText(txt);
+                playDing();
+                if (btn && btn.classList) btn.classList.add('copied');
+                if (type === 'email') {
+                    const card = btn && typeof btn.closest === 'function' ? btn.closest('.email-card') : null;
+                    if (card) card.classList.add('used');
+                }
+                setTimeout(() => {
+                    if (btn && btn.classList) btn.classList.remove('copied');
+                }, 1500);
+                if (type === 'pass') {
+                    savePassEntry(txt);
+                    genPass(false);
+                }
+                if (type === 'otp') save2faKeyAfterCopy();
+            } catch (e) {
+                console.error('Copy failed:', e);
+            }
+        }
+        function render2fa() {
+            const el = document.getElementById('otpHistoryList');
+            if (!el) return;
+            const html = renderHistoryList(h2fa, 'Copy History');
+            el.innerHTML = html;
+            el.classList.toggle('hidden-tool', !h2fa.length);
+        }
+        function renderPassHistory() {
+            const el = document.getElementById('h-list-pass');
+            if (!el) return;
+            const html = renderHistoryList(hPass, 'Copy History');
+            el.innerHTML = html;
+            el.classList.toggle('hidden-tool', !hPass.length);
+        }
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function toggleSound() { isS = !isS; localStorage.setItem('bidhan_s', isS ? 'on' : 'off'); document.getElementById('sOn').style.color = isS ? '#3b82f6' : '#6b7280'; }
         function paste2FA() { const field = document.getElementById('otpSecretField'); if (field) field.focus(); }
@@ -1569,12 +2233,7 @@
             generateFakeDetails();
             initCurrencies();
             initExcelEditor();
-            const savedView = getCurrentView();
-            if (savedView && savedView !== 'home') {
-                switchTool(savedView);
-            } else {
-                showHome();
-            }
+            showHome();
         };
         window.addEventListener('resize', () => {
             updateDropdownNotch();
