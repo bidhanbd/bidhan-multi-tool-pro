@@ -319,6 +319,9 @@
         .main-tools.single-tool-layout #tool-currency {
             width: min(100%, 38rem);
         }
+        .main-tools.single-tool-layout #tool-duplicate {
+            width: min(100%, 52rem);
+        }
         .main-tools.single-tool-layout #tool-excel {
             width: min(calc(100vw - 56px), 96rem);
         }
@@ -437,7 +440,6 @@
         .main-tools.single-tool-layout .tool-section-title {
             text-align: center;
         }
-
         .main-tools.gmail-layout #tool-2fa,
         .main-tools.gmail-layout #tool-pass,
         .main-tools.gmail-layout #tool-email {
@@ -606,6 +608,216 @@
             font-size: 10px;
             text-transform: uppercase;
             color: #6b7280;
+        }
+        .duplicate-shell {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            max-width: 52rem;
+            margin: 0 auto;
+        }
+        .duplicate-top-card {
+            width: 100%;
+            padding: 16px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(24, 31, 61, 0.34);
+            box-shadow: 0 16px 34px rgba(9, 14, 38, 0.16);
+            backdrop-filter: blur(18px);
+            position: relative;
+            z-index: 1;
+        }
+        .duplicate-horizontal {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+            align-items: stretch;
+        }
+        .duplicate-box {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 16px 16px 14px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: rgba(24, 31, 61, 0.34);
+            box-shadow: 0 16px 34px rgba(9, 14, 38, 0.14);
+            backdrop-filter: blur(18px);
+        }
+        .duplicate-box-output {
+            min-height: 18rem;
+        }
+        .duplicate-box-head {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
+            text-align: center;
+        }
+        .duplicate-icon-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: #fff;
+            box-shadow: 0 10px 20px rgba(15,23,42,0.14);
+        }
+        .duplicate-icon-badge.green {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+        }
+        .duplicate-icon-badge.red {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+        }
+        .duplicate-box-title {
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #f8fbff;
+        }
+        .duplicate-pill-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .duplicate-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            min-height: 24px;
+            padding: 0 10px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 800;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+        .duplicate-pill.blue {
+            color: #93c5fd;
+            background: rgba(59,130,246,0.16);
+            border-color: rgba(59,130,246,0.22);
+        }
+        .duplicate-pill.green {
+            color: #86efac;
+            background: rgba(34,197,94,0.14);
+            border-color: rgba(34,197,94,0.22);
+        }
+        .duplicate-pill.red {
+            color: #fca5a5;
+            background: rgba(239,68,68,0.12);
+            border-color: rgba(239,68,68,0.22);
+        }
+        .duplicate-copy-btn {
+            width: 100%;
+            height: 32px;
+            padding: 0 12px;
+            border-radius: 11px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #eef2ff;
+            background: rgba(255,255,255,0.05) !important;
+            border: 1px solid rgba(255,255,255,0.14) !important;
+        }
+        .duplicate-copy-btn:disabled {
+            opacity: 0.45;
+            cursor: default;
+        }
+        .duplicate-copy-btn.copied {
+            color: #dcfce7;
+            background: rgba(34,197,94,0.18) !important;
+            border-color: rgba(34,197,94,0.34) !important;
+        }
+        .duplicate-run-btn {
+            min-width: 108px;
+            height: 34px;
+            padding: 0 14px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #fff !important;
+            background: linear-gradient(135deg, #22c55e, #14b8a6) !important;
+            border: 0 !important;
+            box-shadow: 0 10px 24px rgba(34,197,94,0.28);
+        }
+        .duplicate-clear-btn {
+            min-width: 98px;
+            height: 34px;
+            padding: 0 14px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #ef4444 !important;
+            background: rgba(255,255,255,0.05) !important;
+            border: 1px solid rgba(252,165,165,0.42) !important;
+        }
+        .duplicate-textarea {
+            width: 100%;
+            min-height: 100%;
+            resize: none;
+            padding: 14px 15px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.11) !important;
+            background: rgba(10, 15, 36, 0.3) !important;
+            color: #f8fbff !important;
+            font-size: 13px;
+            line-height: 1.6;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            pointer-events: auto !important;
+            position: relative;
+            z-index: 2;
+            cursor: text;
+        }
+        .duplicate-textarea.result {
+            min-height: 100%;
+        }
+        .duplicate-textarea::placeholder {
+            color: rgba(226,232,240,0.58);
+        }
+        .duplicate-action-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .duplicate-export-btn {
+            height: 30px;
+            border-radius: 9px;
+            font-size: 10px;
+            font-weight: 800;
+            color: #93c5fd !important;
+            background: rgba(255,255,255,0.04) !important;
+            border: 1px solid rgba(255,255,255,0.12) !important;
+        }
+        .duplicate-main-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 860px) {
+            .duplicate-horizontal {
+                grid-template-columns: 1fr;
+            }
+            .duplicate-box-output {
+                min-height: 12rem;
+            }
         }
         .pro-footer { margin-top: auto; padding: 34px 0 26px; width: 100%; text-align: center; border-top: 0; background: transparent; backdrop-filter: none; }
         .pro-footer p {
@@ -818,6 +1030,7 @@
                     <div class="menu-drop-col">
                         <button onclick="switchTool('currency')" id="drop-currency" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18"></path><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 7.5c0-1.9-2-3.5-4.5-3.5S7.5 5.6 7.5 7.5 9.5 11 12 11s4.5 1.6 4.5 3.5S14.5 18 12 18s-4.5-1.6-4.5-3.5"></path></svg><span class="menu-drop-title">Currency Converter</span></span><span class="menu-drop-desc">Global rate conversion</span></button>
                         <button onclick="switchTool('excel')" id="drop-excel" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M9 5v14"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 10h16"></path></svg><span class="menu-drop-title">Excel</span></span><span class="menu-drop-desc">Edit spreadsheet online</span></button>
+                        <button onclick="switchTool('duplicate')" id="drop-duplicate" class="menu-drop-link"><span class="menu-drop-head"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h10"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h10"></path><path stroke-linecap="round" stroke-linejoin="round" d="M8 17h6"></path><path stroke-linecap="round" stroke-linejoin="round" d="M4 7h.01M4 12h.01M4 17h.01"></path></svg><span class="menu-drop-title">Duplicate Checker</span></span><span class="menu-drop-desc">Check first-column email duplicates</span></button>
                     </div>
                 </div>
             </aside>
@@ -842,7 +1055,6 @@
     </header>
 
     <main id="mainContent" class="main-tools max-w-[64rem] w-full flex flex-col gap-1.5 mb-12 px-4 -mt-1">
-
         <section id="tool-2fa" class="glass-panel browser-light p-4 pt-3 flex flex-col items-center gap-1.5 hidden-tool relative">
             <h3 class="tool-section-title">2FA</h3>
             <div class="w-full max-w-[34rem] flex items-center gap-2">
@@ -896,6 +1108,53 @@
                 <button onclick="generateEmails()" class="px-2.5 py-1 bg-orange-600 hover:bg-orange-500 text-white rounded-lg font-black uppercase text-[7px] active:scale-95 transition">Generate</button>
             </div>
             <div id="emailContainer" class="w-full max-w-[24rem] flex flex-col gap-1 mt-0.5"></div>
+        </section>
+        <section id="tool-duplicate" class="glass-panel p-3.5 flex flex-col items-center gap-3 hidden-tool">
+            <h3 class="tool-section-title">Duplicate Checker</h3>
+            <div class="duplicate-shell">
+                <div class="duplicate-top-card" onclick="focusDuplicateInput()">
+                    <textarea id="duplicateInput" tabindex="0" autocomplete="off" autocapitalize="off" spellcheck="false" class="duplicate-textarea" style="min-height:120px;" placeholder="Enter gmail accounts for check"></textarea>
+                    <div class="mt-3 flex items-center justify-start">
+                        <span id="duplicateInputCount" class="duplicate-pill blue">Emails: 0</span>
+                    </div>
+                    <div class="duplicate-main-actions mt-3">
+                        <button type="button" class="duplicate-run-btn" onclick="processDuplicateChecker()">Start Check</button>
+                        <button type="button" class="duplicate-clear-btn" onclick="clearDuplicateChecker()">Clear Input</button>
+                    </div>
+                </div>
+                <div class="duplicate-horizontal">
+                    <div class="duplicate-box duplicate-box-output">
+                        <div class="duplicate-box-head">
+                            <div class="duplicate-icon-badge green">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-7.071 7.071a1 1 0 01-1.414 0L3.293 8.85a1 1 0 011.414-1.414l4.222 4.221 6.364-6.364a1 1 0 011.414 0z"/></svg>
+                            </div>
+                            <p class="duplicate-box-title">Duplicate List</p>
+                            <span id="duplicateMatchCount" class="duplicate-pill green">Duplicate: 0</span>
+                        </div>
+                        <textarea id="duplicateResult" class="duplicate-textarea result" readonly placeholder=""></textarea>
+                        <button type="button" id="duplicateCopyBtn" class="duplicate-copy-btn" onclick="copyDuplicateResult()" disabled>Copy All Duplicate Emails</button>
+                        <div class="duplicate-action-row">
+                            <button type="button" class="duplicate-export-btn" onclick="downloadDuplicateTxt()" disabled id="duplicateTxtBtn">TXT</button>
+                            <button type="button" class="duplicate-export-btn" onclick="downloadDuplicateExcel()" disabled id="duplicateExcelBtn">Excel</button>
+                        </div>
+                    </div>
+                    <div class="duplicate-box duplicate-box-output">
+                        <div class="duplicate-box-head">
+                            <div class="duplicate-icon-badge red">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M6.707 4.293a1 1 0 00-1.414 1.414L8.586 9l-3.293 3.293a1 1 0 101.414 1.414L10 10.414l3.293 3.293a1 1 0 001.414-1.414L11.414 9l3.293-3.293a1 1 0 00-1.414-1.414L10 7.586 6.707 4.293z"/></svg>
+                            </div>
+                            <p class="duplicate-box-title">Unique List</p>
+                            <span id="duplicateUniqueCount" class="duplicate-pill red">Unique: 0</span>
+                        </div>
+                        <textarea id="duplicateUnique" class="duplicate-textarea result" readonly placeholder=""></textarea>
+                        <button type="button" id="duplicateUniqueCopyBtn" class="duplicate-copy-btn" onclick="copyDuplicateUnique()" disabled>Copy All Unique Emails</button>
+                        <div class="duplicate-action-row">
+                            <button type="button" class="duplicate-export-btn" onclick="downloadUniqueTxt()" disabled id="duplicateUniqueTxtBtn">TXT</button>
+                            <button type="button" class="duplicate-export-btn" onclick="downloadUniqueExcel()" disabled id="duplicateUniqueExcelBtn">Excel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <section id="tool-currency" class="glass-panel p-3 flex flex-col items-center gap-2 hidden-tool">
             <div class="w-full max-w-[42rem] flex items-start gap-3">
@@ -1119,11 +1378,11 @@
         function getCurrentView() {
             return localStorage.getItem('bidhan_active_tool_v1') || 'home';
         }
-
         function hideAllTools() {
             document.getElementById('tool-2fa').classList.add('hidden-tool');
             document.getElementById('tool-pass').classList.add('hidden-tool');
             document.getElementById('tool-email').classList.add('hidden-tool');
+            document.getElementById('tool-duplicate').classList.add('hidden-tool');
             document.getElementById('tool-currency').classList.add('hidden-tool');
             document.getElementById('tool-excel').classList.add('hidden-tool');
             document.getElementById('tool-fake').classList.add('hidden-tool');
@@ -1191,7 +1450,7 @@
                 const el = document.getElementById(id);
                 if (el) el.classList.remove('menu-link-active');
             });
-            ['drop-excel', 'drop-currency', 'drop-2fa', 'drop-pass', 'drop-email', 'drop-fake'].forEach(id => {
+            ['drop-excel', 'drop-currency', 'drop-2fa', 'drop-pass', 'drop-email', 'drop-fake', 'drop-duplicate'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.classList.remove('menu-drop-link-active');
             });
@@ -1202,7 +1461,7 @@
             if (dropEl) dropEl.classList.add('menu-drop-link-active');
             updateMenuNotch(target);
         }
-        function showHome() { hideAllTools(); currentPrimaryNav = null; ['btn-menu', 'btn-gmail', 'btn-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-link-active'); }); ['drop-excel', 'drop-currency', 'drop-2fa', 'drop-pass', 'drop-email', 'drop-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-drop-link-active'); }); closeMenu(); saveCurrentView('home'); }
+        function showHome() { hideAllTools(); currentPrimaryNav = null; ['btn-menu', 'btn-gmail', 'btn-fake'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-link-active'); }); ['drop-excel', 'drop-currency', 'drop-2fa', 'drop-pass', 'drop-email', 'drop-fake', 'drop-duplicate'].forEach(id => { const el = document.getElementById(id); if (el) el.classList.remove('menu-drop-link-active'); }); closeMenu(); saveCurrentView('home'); }
         function switchTool(t) {
             const showGmail = t === 'gmail';
             document.getElementById('mainContent').classList.toggle('gmail-layout', showGmail);
@@ -1210,6 +1469,7 @@
             document.getElementById('tool-2fa').classList.toggle('hidden-tool', !(showGmail || t === '2fa'));
             document.getElementById('tool-pass').classList.toggle('hidden-tool', !(showGmail || t === 'pass'));
             document.getElementById('tool-email').classList.toggle('hidden-tool', !(showGmail || t === 'email'));
+            document.getElementById('tool-duplicate').classList.toggle('hidden-tool', t !== 'duplicate');
             document.getElementById('tool-currency').classList.toggle('hidden-tool', t !== 'currency');
             document.getElementById('tool-excel').classList.toggle('hidden-tool', t !== 'excel');
             document.getElementById('tool-fake').classList.toggle('hidden-tool', t !== 'fake');
@@ -1226,6 +1486,11 @@
                             secretInput.setSelectionRange(len, len);
                         }
                     }
+                }, 30);
+            }
+            if (t === 'duplicate') {
+                setTimeout(() => {
+                    focusDuplicateInput();
                 }, 30);
             }
         }
@@ -1977,6 +2242,163 @@
             el.innerHTML = html;
             el.classList.toggle('hidden-tool', !hPass.length);
         }
+        function extractDuplicateFirstColumn(line) {
+            const raw = String(line || '').replace(/\r/g, '').trim();
+            if (!raw) return '';
+            let firstColumn = raw;
+            if (firstColumn.includes('\t')) firstColumn = firstColumn.split('\t')[0];
+            else if (firstColumn.includes(',')) firstColumn = firstColumn.split(',')[0];
+            firstColumn = firstColumn.trim();
+            const emailMatch = firstColumn.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+            if (emailMatch) return emailMatch[0].trim();
+            return firstColumn.split(/\s+/)[0].trim();
+        }
+        function processDuplicateChecker() {
+            const inputEl = document.getElementById('duplicateInput');
+            const resultEl = document.getElementById('duplicateResult');
+            const uniqueEl = document.getElementById('duplicateUnique');
+            const copyBtn = document.getElementById('duplicateCopyBtn');
+            const uniqueCopyBtn = document.getElementById('duplicateUniqueCopyBtn');
+            const txtBtn = document.getElementById('duplicateTxtBtn');
+            const excelBtn = document.getElementById('duplicateExcelBtn');
+            const uniqueTxtBtn = document.getElementById('duplicateUniqueTxtBtn');
+            const uniqueExcelBtn = document.getElementById('duplicateUniqueExcelBtn');
+            const totalEl = document.getElementById('duplicateInputCount');
+            const dupCountEl = document.getElementById('duplicateMatchCount');
+            const uniqueCountEl = document.getElementById('duplicateUniqueCount');
+            if (!inputEl || !resultEl || !uniqueEl) return;
+            const lines = String(inputEl.value || '').split(/\n/);
+            const order = [];
+            const counts = new Map();
+            const displayMap = new Map();
+            let totalItems = 0;
+            lines.forEach((line) => {
+                const email = extractDuplicateFirstColumn(line);
+                if (!email) return;
+                const cleanEmail = email.trim();
+                if (!cleanEmail) return;
+                totalItems += 1;
+                const key = cleanEmail.toLowerCase();
+                if (!counts.has(key)) {
+                    counts.set(key, 0);
+                    displayMap.set(key, cleanEmail);
+                    order.push(key);
+                }
+                counts.set(key, counts.get(key) + 1);
+            });
+            const duplicateLines = [];
+            const uniqueLines = [];
+            order.forEach((key) => {
+                const value = displayMap.get(key) || key;
+                const total = counts.get(key) || 0;
+                uniqueLines.push(value);
+                if (total > 1) duplicateLines.push(`${value}\t${total}`);
+            });
+            resultEl.value = duplicateLines.join('\n');
+            uniqueEl.value = uniqueLines.join('\n');
+            copyBtn.disabled = duplicateLines.length === 0;
+            uniqueCopyBtn.disabled = uniqueLines.length === 0;
+            if (txtBtn) txtBtn.disabled = duplicateLines.length === 0;
+            if (excelBtn) excelBtn.disabled = duplicateLines.length === 0;
+            if (uniqueTxtBtn) uniqueTxtBtn.disabled = uniqueLines.length === 0;
+            if (uniqueExcelBtn) uniqueExcelBtn.disabled = uniqueLines.length === 0;
+            if (totalEl) totalEl.textContent = `Emails: ${totalItems}`;
+            if (dupCountEl) dupCountEl.textContent = `Duplicate: ${duplicateLines.length}`;
+            if (uniqueCountEl) uniqueCountEl.textContent = `Unique: ${uniqueLines.length}`;
+        }
+        function copyDuplicateResult() {
+            const el = document.getElementById('duplicateResult');
+            const btn = document.getElementById('duplicateCopyBtn');
+            if (!el || !el.value.trim()) return;
+            copyAction(el.value, 'duplicate', btn);
+        }
+        function copyDuplicateUnique() {
+            const el = document.getElementById('duplicateUnique');
+            const btn = document.getElementById('duplicateUniqueCopyBtn');
+            if (!el || !el.value.trim()) return;
+            copyAction(el.value, 'duplicate-unique', btn);
+        }
+        function focusDuplicateInput() {
+            const inputEl = document.getElementById('duplicateInput');
+            if (!inputEl) return;
+            inputEl.focus();
+            const len = inputEl.value.length;
+            if (typeof inputEl.setSelectionRange === 'function') {
+                inputEl.setSelectionRange(len, len);
+            }
+        }
+        function clearDuplicateChecker() {
+            const inputEl = document.getElementById('duplicateInput');
+            if (inputEl) inputEl.value = '';
+            processDuplicateChecker();
+            focusDuplicateInput();
+        }
+        function downloadDuplicateBlob(filename, content, mime) {
+            if (!content) return;
+            const blob = new Blob([content], { type: mime });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        }
+        function downloadDuplicateTxt() {
+            const value = document.getElementById('duplicateResult')?.value.trim();
+            if (!value) return;
+            downloadDuplicateBlob('duplicate-emails.txt', value, 'text/plain;charset=utf-8');
+        }
+        function downloadUniqueTxt() {
+            const value = document.getElementById('duplicateUnique')?.value.trim();
+            if (!value) return;
+            downloadDuplicateBlob('unique-emails.txt', value, 'text/plain;charset=utf-8');
+        }
+        function exportDuplicateExcel(lines, filename) {
+            if (!Array.isArray(lines) || !lines.length || !window.XLSX) return;
+            const rows = lines.map((line) => {
+                const parts = String(line).split('\t');
+                return parts.length > 1
+                    ? { Email: parts[0], Count: parts[1] }
+                    : { Email: parts[0] };
+            });
+            const ws = XLSX.utils.json_to_sheet(rows);
+            const emailWidth = Math.max(...rows.map((row) => String(row.Email || '').length), 5);
+            const countWidth = Math.max(...rows.map((row) => String(row.Count || '').length), 5);
+            ws['!cols'] = rows[0].Count !== undefined
+                ? [{ wch: emailWidth + 3 }, { wch: countWidth + 3 }]
+                : [{ wch: emailWidth + 3 }];
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+            XLSX.writeFile(wb, filename);
+        }
+        function downloadDuplicateExcel() {
+            const value = document.getElementById('duplicateResult')?.value.trim();
+            if (!value) return;
+            exportDuplicateExcel(value.split('\n').filter(Boolean), 'duplicate-emails.xlsx');
+        }
+        function downloadUniqueExcel() {
+            const value = document.getElementById('duplicateUnique')?.value.trim();
+            if (!value) return;
+            exportDuplicateExcel(value.split('\n').filter(Boolean), 'unique-emails.xlsx');
+        }
+        function initDuplicateChecker() {
+            const inputEl = document.getElementById('duplicateInput');
+            if (!inputEl || inputEl.dataset.bound === '1') return;
+            inputEl.dataset.bound = '1';
+            inputEl.addEventListener('input', processDuplicateChecker);
+            inputEl.addEventListener('keydown', (event) => {
+                event.stopPropagation();
+            });
+            inputEl.addEventListener('pointerdown', (event) => event.stopPropagation());
+            inputEl.addEventListener('mousedown', (event) => event.stopPropagation());
+            inputEl.addEventListener('click', () => focusDuplicateInput());
+            inputEl.addEventListener('paste', () => {
+                setTimeout(processDuplicateChecker, 0);
+            });
+            processDuplicateChecker();
+        }
         function toggleTheme() { document.body.classList.toggle('light-mode'); }
         function toggleSound() { isS = !isS; localStorage.setItem('bidhan_s', isS ? 'on' : 'off'); document.getElementById('sOn').style.color = isS ? '#3b82f6' : '#6b7280'; }
         function paste2FA() { const field = document.getElementById('otpSecretField'); if (field) field.focus(); }
@@ -2045,6 +2467,7 @@
             genPass(false);
             generateFakeDetails();
             initCurrencies();
+            initDuplicateChecker();
             initExcelEditor();
             showHome();
         };
@@ -2055,58 +2478,6 @@
             const wrap = document.querySelector('.menu-wrap');
             if (wrap && !wrap.contains(event.target)) closeMenu();
         });
-    </script>
-
-    <!-- WELCOME FLOAT CARD -->
-    <div id="welcomeFloat" style="
-        position:fixed;
-        bottom:36px;
-        left:50%;
-        transform:translateX(-50%) translateY(0);
-        z-index:9999;
-        pointer-events:none;
-        display:flex;
-        align-items:center;
-        gap:14px;
-        padding:14px 22px 14px 16px;
-        border-radius:18px;
-        background:rgba(20,28,64,0.82);
-        backdrop-filter:blur(22px);
-        -webkit-backdrop-filter:blur(22px);
-        border:1px solid rgba(255,255,255,0.13);
-        box-shadow:0 16px 48px rgba(9,14,38,0.42), inset 0 1px 0 rgba(255,255,255,0.07);
-        opacity:1;
-        transition:opacity 0.55s ease, transform 0.55s ease;
-        white-space:nowrap;
-    ">
-        <!-- shield icon -->
-        <div style="width:38px;height:42px;flex-shrink:0;background:linear-gradient(135deg,#2f457d,#33295c);clip-path:polygon(50% 0%,100% 15%,100% 85%,50% 100%,0% 85%,0% 15%);display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(96,165,250,0.32);">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffcc00" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        </div>
-        <!-- text -->
-        <div>
-            <div style="font-family:'Roboto',sans-serif;font-size:0.95rem;font-weight:900;letter-spacing:0.06em;text-transform:uppercase;color:#f8fbff;line-height:1.1;">
-                Multi-Tool <span style="color:#ffcc00;">Pro</span>
-            </div>
-            <div style="font-size:0.65rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgba(147,197,253,0.75);margin-top:3px;">Welcome back</div>
-        </div>
-        <!-- progress bar -->
-        <div style="position:absolute;bottom:0;left:14px;right:14px;height:2px;border-radius:999px;background:rgba(255,255,255,0.07);overflow:hidden;">
-            <div id="floatBar" style="height:100%;width:0%;background:linear-gradient(90deg,#60a5fa,#a78bfa,#f472b6);border-radius:999px;transition:width 2s linear;"></div>
-        </div>
-    </div>
-    <script>
-        (function(){
-            var card=document.getElementById('welcomeFloat');
-            var bar=document.getElementById('floatBar');
-            if(!card||!bar)return;
-            requestAnimationFrame(function(){requestAnimationFrame(function(){bar.style.width='100%';});});
-            setTimeout(function(){
-                card.style.opacity='0';
-                card.style.transform='translateX(-50%) translateY(16px)';
-                setTimeout(function(){if(card.parentNode)card.parentNode.removeChild(card);},600);
-            },2000);
-        })();
     </script>
 </body>
 </html>
