@@ -2394,7 +2394,20 @@
             inputEl.addEventListener('pointerdown', (event) => event.stopPropagation());
             inputEl.addEventListener('mousedown', (event) => event.stopPropagation());
             inputEl.addEventListener('click', () => focusDuplicateInput());
-            inputEl.addEventListener('paste', () => {
+            inputEl.addEventListener('paste', (event) => {
+                const pasted = event.clipboardData?.getData('text');
+                if (typeof pasted === 'string') {
+                    event.preventDefault();
+                    const start = inputEl.selectionStart ?? inputEl.value.length;
+                    const end = inputEl.selectionEnd ?? inputEl.value.length;
+                    inputEl.value = `${inputEl.value.slice(0, start)}${pasted}${inputEl.value.slice(end)}`;
+                    const nextPos = start + pasted.length;
+                    if (typeof inputEl.setSelectionRange === 'function') {
+                        inputEl.setSelectionRange(nextPos, nextPos);
+                    }
+                    processDuplicateChecker();
+                    return;
+                }
                 setTimeout(processDuplicateChecker, 0);
             });
             processDuplicateChecker();
