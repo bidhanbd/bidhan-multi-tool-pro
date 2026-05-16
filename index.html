@@ -303,7 +303,7 @@
             margin-top: 44px;
         }
         .main-tools.single-tool-layout {
-            margin-top: 42px;
+            margin-top: 26px;
             align-items: center;
         }
         .main-tools.single-tool-layout > section:not(.hidden-tool) {
@@ -648,26 +648,32 @@
             backdrop-filter: blur(18px);
         }
         .duplicate-box-output {
-            min-height: 18rem;
+            min-height: 17rem;
         }
         .duplicate-box-head {
             display: flex;
             align-items: center;
-            flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             gap: 10px;
-            text-align: center;
+            text-align: left;
+        }
+        .duplicate-head-right {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
         .duplicate-icon-badge {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+            width: 28px;
+            height: 28px;
+            border-radius: 9px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto;
             color: #fff;
-            box-shadow: 0 10px 20px rgba(15,23,42,0.14);
+            box-shadow: 0 8px 18px rgba(15,23,42,0.14);
+            flex-shrink: 0;
         }
         .duplicate-icon-badge.green {
             background: linear-gradient(135deg, #22c55e, #16a34a);
@@ -810,6 +816,11 @@
             justify-content: center;
             gap: 12px;
             flex-wrap: wrap;
+        }
+        .duplicate-single-action {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         @media (max-width: 860px) {
             .duplicate-horizontal {
@@ -1109,48 +1120,51 @@
             </div>
             <div id="emailContainer" class="w-full max-w-[24rem] flex flex-col gap-1 mt-0.5"></div>
         </section>
-        <section id="tool-duplicate" class="glass-panel p-3.5 flex flex-col items-center gap-3 hidden-tool">
-            <h3 class="tool-section-title">Duplicate Checker</h3>
+        <section id="tool-duplicate" class="glass-panel p-3.5 pt-5 flex flex-col items-center gap-3 hidden-tool">
+            <h3 class="tool-section-title mt-1 mb-0.5">Duplicate Checker</h3>
             <div class="duplicate-shell">
                 <div class="duplicate-top-card" onclick="focusDuplicateInput()">
                     <textarea id="duplicateInput" tabindex="0" autocomplete="off" autocapitalize="off" spellcheck="false" class="duplicate-textarea" style="min-height:120px;" placeholder="Enter gmail accounts for check"></textarea>
                     <div class="mt-3 flex items-center justify-start">
                         <span id="duplicateInputCount" class="duplicate-pill blue">Emails: 0</span>
                     </div>
-                    <div class="duplicate-main-actions mt-3">
-                        <button type="button" class="duplicate-run-btn" onclick="processDuplicateChecker()">Start Check</button>
+                    <div class="duplicate-single-action mt-3">
                         <button type="button" class="duplicate-clear-btn" onclick="clearDuplicateChecker()">Clear Input</button>
                     </div>
                 </div>
                 <div class="duplicate-horizontal">
                     <div class="duplicate-box duplicate-box-output">
                         <div class="duplicate-box-head">
-                            <div class="duplicate-icon-badge green">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-7.071 7.071a1 1 0 01-1.414 0L3.293 8.85a1 1 0 011.414-1.414l4.222 4.221 6.364-6.364a1 1 0 011.414 0z"/></svg>
-                            </div>
-                            <p class="duplicate-box-title">Duplicate List</p>
-                            <span id="duplicateMatchCount" class="duplicate-pill green">Duplicate: 0</span>
-                        </div>
-                        <textarea id="duplicateResult" class="duplicate-textarea result" readonly placeholder=""></textarea>
-                        <button type="button" id="duplicateCopyBtn" class="duplicate-copy-btn" onclick="copyDuplicateResult()" disabled>Copy All Duplicate Emails</button>
-                        <div class="duplicate-action-row">
-                            <button type="button" class="duplicate-export-btn" onclick="downloadDuplicateTxt()" disabled id="duplicateTxtBtn">TXT</button>
-                            <button type="button" class="duplicate-export-btn" onclick="downloadDuplicateExcel()" disabled id="duplicateExcelBtn">Excel</button>
-                        </div>
-                    </div>
-                    <div class="duplicate-box duplicate-box-output">
-                        <div class="duplicate-box-head">
-                            <div class="duplicate-icon-badge red">
-                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M6.707 4.293a1 1 0 00-1.414 1.414L8.586 9l-3.293 3.293a1 1 0 101.414 1.414L10 10.414l3.293 3.293a1 1 0 001.414-1.414L11.414 9l3.293-3.293a1 1 0 00-1.414-1.414L10 7.586 6.707 4.293z"/></svg>
-                            </div>
                             <p class="duplicate-box-title">Unique List</p>
-                            <span id="duplicateUniqueCount" class="duplicate-pill red">Unique: 0</span>
+                            <div class="duplicate-head-right">
+                                <span id="duplicateUniqueCount" class="duplicate-pill green">Unique: 0</span>
+                                <div class="duplicate-icon-badge green">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-7.071 7.071a1 1 0 01-1.414 0L3.293 8.85a1 1 0 011.414-1.414l4.222 4.221 6.364-6.364a1 1 0 011.414 0z"/></svg>
+                                </div>
+                            </div>
                         </div>
                         <textarea id="duplicateUnique" class="duplicate-textarea result" readonly placeholder=""></textarea>
                         <button type="button" id="duplicateUniqueCopyBtn" class="duplicate-copy-btn" onclick="copyDuplicateUnique()" disabled>Copy All Unique Emails</button>
                         <div class="duplicate-action-row">
                             <button type="button" class="duplicate-export-btn" onclick="downloadUniqueTxt()" disabled id="duplicateUniqueTxtBtn">TXT</button>
                             <button type="button" class="duplicate-export-btn" onclick="downloadUniqueExcel()" disabled id="duplicateUniqueExcelBtn">Excel</button>
+                        </div>
+                    </div>
+                    <div class="duplicate-box duplicate-box-output">
+                        <div class="duplicate-box-head">
+                            <p class="duplicate-box-title">Duplicate List</p>
+                            <div class="duplicate-head-right">
+                                <span id="duplicateMatchCount" class="duplicate-pill red">Duplicate: 0</span>
+                                <div class="duplicate-icon-badge red">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M6.707 4.293a1 1 0 00-1.414 1.414L8.586 9l-3.293 3.293a1 1 0 101.414 1.414L10 10.414l3.293 3.293a1 1 0 001.414-1.414L11.414 9l3.293-3.293a1 1 0 00-1.414-1.414L10 7.586 6.707 4.293z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea id="duplicateResult" class="duplicate-textarea result" readonly placeholder=""></textarea>
+                        <button type="button" id="duplicateCopyBtn" class="duplicate-copy-btn" onclick="copyDuplicateResult()" disabled>Copy All Duplicate Emails</button>
+                        <div class="duplicate-action-row">
+                            <button type="button" class="duplicate-export-btn" onclick="downloadDuplicateTxt()" disabled id="duplicateTxtBtn">TXT</button>
+                            <button type="button" class="duplicate-export-btn" onclick="downloadDuplicateExcel()" disabled id="duplicateExcelBtn">Excel</button>
                         </div>
                     </div>
                 </div>
@@ -2270,29 +2284,34 @@
             const lines = String(inputEl.value || '').split(/\n/);
             const order = [];
             const counts = new Map();
-            const displayMap = new Map();
+            const lineGroups = new Map();
             let totalItems = 0;
             lines.forEach((line) => {
                 const email = extractDuplicateFirstColumn(line);
                 if (!email) return;
+                const originalLine = String(line || '').replace(/\r/g, '').trim();
                 const cleanEmail = email.trim();
                 if (!cleanEmail) return;
                 totalItems += 1;
                 const key = cleanEmail.toLowerCase();
                 if (!counts.has(key)) {
                     counts.set(key, 0);
-                    displayMap.set(key, cleanEmail);
+                    lineGroups.set(key, []);
                     order.push(key);
                 }
                 counts.set(key, counts.get(key) + 1);
+                lineGroups.get(key).push(originalLine);
             });
             const duplicateLines = [];
             const uniqueLines = [];
             order.forEach((key) => {
-                const value = displayMap.get(key) || key;
                 const total = counts.get(key) || 0;
-                uniqueLines.push(value);
-                if (total > 1) duplicateLines.push(`${value}\t${total}`);
+                const rows = lineGroups.get(key) || [];
+                if (total > 1) {
+                    rows.forEach((row) => duplicateLines.push(`${row}\t${total}`));
+                } else if (rows[0]) {
+                    uniqueLines.push(rows[0]);
+                }
             });
             resultEl.value = duplicateLines.join('\n');
             uniqueEl.value = uniqueLines.join('\n');
@@ -2357,18 +2376,13 @@
         }
         function exportDuplicateExcel(lines, filename) {
             if (!Array.isArray(lines) || !lines.length || !window.XLSX) return;
-            const rows = lines.map((line) => {
-                const parts = String(line).split('\t');
-                return parts.length > 1
-                    ? { Email: parts[0], Count: parts[1] }
-                    : { Email: parts[0] };
+            const matrix = lines.map((line) => String(line).split('\t'));
+            const ws = XLSX.utils.aoa_to_sheet(matrix);
+            const colCount = Math.max(...matrix.map((row) => row.length), 1);
+            ws['!cols'] = Array.from({ length: colCount }, (_, index) => {
+                const maxLen = Math.max(...matrix.map((row) => String(row[index] || '').length), 4);
+                return { wch: maxLen + 3 };
             });
-            const ws = XLSX.utils.json_to_sheet(rows);
-            const emailWidth = Math.max(...rows.map((row) => String(row.Email || '').length), 5);
-            const countWidth = Math.max(...rows.map((row) => String(row.Count || '').length), 5);
-            ws['!cols'] = rows[0].Count !== undefined
-                ? [{ wch: emailWidth + 3 }, { wch: countWidth + 3 }]
-                : [{ wch: emailWidth + 3 }];
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
             XLSX.writeFile(wb, filename);
